@@ -13,16 +13,21 @@ namespace TextFileChallenge
     public partial class ChallengeForm : Form
     {
         BindingList<UserModel> users = new BindingList<UserModel>();
+        Csv csv;
 
-        public ChallengeForm(IEnumerable<UserModel> records)
+        public ChallengeForm(Csv csvObj)
         {
+            csv = csvObj;
+
             InitializeComponent();
-            InitializeUsers(records);
+            InitializeUsers();
             WireUpDropDown();
         }
 
-        private void InitializeUsers(IEnumerable<UserModel> records)
+        private void InitializeUsers()
         {
+            IEnumerable<UserModel> records = csv.GetRecords();
+
             foreach (var record in records)
             {
                 users.Add(record);
@@ -84,6 +89,11 @@ namespace TextFileChallenge
                 e.Cancel = false;
                 errorProviderNameText.SetError(lastNameText, "");
             }
+        }
+
+        private void SaveListButton_Click(object sender, EventArgs e)
+        {
+            csv.SaveToCsv(users);
         }
     }
 }

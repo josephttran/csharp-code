@@ -19,9 +19,8 @@ namespace TextFileChallenge
 
             string fileName = @"..\..\StandardDataSet.csv";
             Csv csv = new Csv(fileName);
-            IEnumerable<UserModel> records = csv.GetRecords();
 
-            Application.Run(new ChallengeForm(records));
+            Application.Run(new ChallengeForm(csv));
         }
     }
 }
