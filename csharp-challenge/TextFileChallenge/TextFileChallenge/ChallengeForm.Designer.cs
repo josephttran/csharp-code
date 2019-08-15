@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.headerLabel = new System.Windows.Forms.Label();
             this.usersListBox = new System.Windows.Forms.ListBox();
             this.firstNameLabel = new System.Windows.Forms.Label();
@@ -40,7 +41,9 @@
             this.isAliveCheckbox = new System.Windows.Forms.CheckBox();
             this.addUserButton = new System.Windows.Forms.Button();
             this.saveListButton = new System.Windows.Forms.Button();
+            this.errorProviderNameText = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.agePicker)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderNameText)).BeginInit();
             this.SuspendLayout();
             // 
             // headerLabel
@@ -77,6 +80,7 @@
             this.firstNameText.Name = "firstNameText";
             this.firstNameText.Size = new System.Drawing.Size(236, 35);
             this.firstNameText.TabIndex = 3;
+            this.firstNameText.Validating += new System.ComponentModel.CancelEventHandler(this.FirstNameText_Validating);
             // 
             // lastNameText
             // 
@@ -84,6 +88,7 @@
             this.lastNameText.Name = "lastNameText";
             this.lastNameText.Size = new System.Drawing.Size(236, 35);
             this.lastNameText.TabIndex = 5;
+            this.lastNameText.Validating += new System.ComponentModel.CancelEventHandler(this.LastNameText_Validating);
             // 
             // lastNameLabel
             // 
@@ -147,6 +152,10 @@
             this.saveListButton.Text = "Save List";
             this.saveListButton.UseVisualStyleBackColor = true;
             // 
+            // errorProviderNameText
+            // 
+            this.errorProviderNameText.ContainerControl = this;
+            // 
             // ChallengeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
@@ -170,6 +179,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Text File Challenge by Tim Corey";
             ((System.ComponentModel.ISupportInitialize)(this.agePicker)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderNameText)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -189,6 +199,7 @@
         private System.Windows.Forms.CheckBox isAliveCheckbox;
         private System.Windows.Forms.Button addUserButton;
         private System.Windows.Forms.Button saveListButton;
+        private System.Windows.Forms.ErrorProvider errorProviderNameText;
     }
 }
 

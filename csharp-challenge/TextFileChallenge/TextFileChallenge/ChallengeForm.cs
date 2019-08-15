@@ -37,14 +37,53 @@ namespace TextFileChallenge
 
         private void AddUserButton_Click(object sender, EventArgs e)
         {
-            UserModel newUser = new UserModel
+            if (ValidateChildren(ValidationConstraints.Enabled))
             {
-                FirstName = firstNameText.Text,
-                LastName = lastNameText.Text,
-                Age = Decimal.ToInt32(agePicker.Value),
-                IsAlive = isAliveCheckbox.Checked
-            };
-            users.Add(newUser);
+                UserModel newUser = new UserModel
+                {
+                    FirstName = firstNameText.Text,
+                    LastName = lastNameText.Text,
+                    Age = Decimal.ToInt32(agePicker.Value),
+                    IsAlive = isAliveCheckbox.Checked
+                };
+                users.Add(newUser);
+            }
+        }
+
+        private void FirstNameText_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(firstNameText.Text))
+            {
+                e.Cancel = true;
+                firstNameText.Focus();
+                errorProviderNameText.SetError(firstNameText, "First name should not be left blank!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProviderNameText.SetError(firstNameText, "");
+            }
+        }
+
+        private void LastNameText_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(lastNameText.Text))
+            {
+                e.Cancel = true;
+                lastNameText.Focus();
+                errorProviderNameText.SetError(lastNameText, "Last name should not be left blank!");
+            }
+            else if (lastNameText.Text.Contains(" "))
+            {
+                e.Cancel = true;
+                lastNameText.Focus();
+                errorProviderNameText.SetError(lastNameText, "Last name should not contain space!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProviderNameText.SetError(lastNameText, "");
+            }
         }
     }
 }
