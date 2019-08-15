@@ -46,20 +46,20 @@
             // headerLabel
             // 
             this.headerLabel.AutoSize = true;
-            this.headerLabel.Font = new System.Drawing.Font("Open Sans", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headerLabel.Location = new System.Drawing.Point(26, 28);
             this.headerLabel.Name = "headerLabel";
-            this.headerLabel.Size = new System.Drawing.Size(443, 65);
+            this.headerLabel.Size = new System.Drawing.Size(436, 55);
             this.headerLabel.TabIndex = 0;
             this.headerLabel.Text = "Text File Challenge";
             // 
             // usersListBox
             // 
             this.usersListBox.FormattingEnabled = true;
-            this.usersListBox.ItemHeight = 33;
+            this.usersListBox.ItemHeight = 29;
             this.usersListBox.Location = new System.Drawing.Point(465, 119);
             this.usersListBox.Name = "usersListBox";
-            this.usersListBox.Size = new System.Drawing.Size(405, 400);
+            this.usersListBox.Size = new System.Drawing.Size(405, 381);
             this.usersListBox.TabIndex = 1;
             // 
             // firstNameLabel
@@ -67,7 +67,7 @@
             this.firstNameLabel.AutoSize = true;
             this.firstNameLabel.Location = new System.Drawing.Point(34, 119);
             this.firstNameLabel.Name = "firstNameLabel";
-            this.firstNameLabel.Size = new System.Drawing.Size(140, 33);
+            this.firstNameLabel.Size = new System.Drawing.Size(137, 29);
             this.firstNameLabel.TabIndex = 2;
             this.firstNameLabel.Text = "First Name:";
             // 
@@ -75,14 +75,14 @@
             // 
             this.firstNameText.Location = new System.Drawing.Point(188, 116);
             this.firstNameText.Name = "firstNameText";
-            this.firstNameText.Size = new System.Drawing.Size(236, 40);
+            this.firstNameText.Size = new System.Drawing.Size(236, 35);
             this.firstNameText.TabIndex = 3;
             // 
             // lastNameText
             // 
             this.lastNameText.Location = new System.Drawing.Point(188, 181);
             this.lastNameText.Name = "lastNameText";
-            this.lastNameText.Size = new System.Drawing.Size(236, 40);
+            this.lastNameText.Size = new System.Drawing.Size(236, 35);
             this.lastNameText.TabIndex = 5;
             // 
             // lastNameLabel
@@ -90,7 +90,7 @@
             this.lastNameLabel.AutoSize = true;
             this.lastNameLabel.Location = new System.Drawing.Point(34, 184);
             this.lastNameLabel.Name = "lastNameLabel";
-            this.lastNameLabel.Size = new System.Drawing.Size(137, 33);
+            this.lastNameLabel.Size = new System.Drawing.Size(134, 29);
             this.lastNameLabel.TabIndex = 4;
             this.lastNameLabel.Text = "Last Name:";
             // 
@@ -99,7 +99,7 @@
             this.ageLabel.AutoSize = true;
             this.ageLabel.Location = new System.Drawing.Point(34, 250);
             this.ageLabel.Name = "ageLabel";
-            this.ageLabel.Size = new System.Drawing.Size(62, 33);
+            this.ageLabel.Size = new System.Drawing.Size(62, 29);
             this.ageLabel.TabIndex = 6;
             this.ageLabel.Text = "Age:";
             // 
@@ -107,7 +107,7 @@
             // 
             this.agePicker.Location = new System.Drawing.Point(188, 248);
             this.agePicker.Name = "agePicker";
-            this.agePicker.Size = new System.Drawing.Size(89, 40);
+            this.agePicker.Size = new System.Drawing.Size(89, 35);
             this.agePicker.TabIndex = 7;
             // 
             // isAliveLabel
@@ -115,7 +115,7 @@
             this.isAliveLabel.AutoSize = true;
             this.isAliveLabel.Location = new System.Drawing.Point(34, 314);
             this.isAliveLabel.Name = "isAliveLabel";
-            this.isAliveLabel.Size = new System.Drawing.Size(97, 33);
+            this.isAliveLabel.Size = new System.Drawing.Size(95, 29);
             this.isAliveLabel.TabIndex = 8;
             this.isAliveLabel.Text = "Is Alive:";
             // 
@@ -136,6 +136,7 @@
             this.addUserButton.TabIndex = 10;
             this.addUserButton.Text = "Add User";
             this.addUserButton.UseVisualStyleBackColor = true;
+            this.addUserButton.Click += new System.EventHandler(this.AddUserButton_Click);
             // 
             // saveListButton
             // 
@@ -148,7 +149,7 @@
             // 
             // ChallengeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 33F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 549);
             this.Controls.Add(this.saveListButton);
@@ -163,7 +164,7 @@
             this.Controls.Add(this.firstNameLabel);
             this.Controls.Add(this.usersListBox);
             this.Controls.Add(this.headerLabel);
-            this.Font = new System.Drawing.Font("Open Sans", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.Name = "ChallengeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

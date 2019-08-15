@@ -34,5 +34,17 @@ namespace TextFileChallenge
             usersListBox.DataSource = users;
             usersListBox.DisplayMember = nameof(UserModel.DisplayText);
         }
+
+        private void AddUserButton_Click(object sender, EventArgs e)
+        {
+            UserModel newUser = new UserModel
+            {
+                FirstName = firstNameText.Text,
+                LastName = lastNameText.Text,
+                Age = Decimal.ToInt32(agePicker.Value),
+                IsAlive = isAliveCheckbox.Checked
+            };
+            users.Add(newUser);
+        }
     }
 }
