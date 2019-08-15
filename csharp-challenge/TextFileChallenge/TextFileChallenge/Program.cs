@@ -17,7 +17,7 @@ namespace TextFileChallenge
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            string fileName = @"..\..\StandardDataSet.csv";
+            string fileName = @"..\..\AdvancedDataSet.csv";
             Csv csv = new Csv(fileName);
 
             Application.Run(new ChallengeForm(csv));

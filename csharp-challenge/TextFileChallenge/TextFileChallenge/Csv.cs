@@ -55,7 +55,21 @@ namespace TextFileChallenge
                 {
                     foreach (string column in headerRow)
                     {
-                        csvWriter.WriteField(user.GetType().GetProperty(column).GetValue(user));
+                        if (column == "IsAlive")
+                        {
+                            if (user.GetType().GetProperty(column).GetValue(user).ToString() == "False")
+                            {
+                                csvWriter.WriteField(0);
+                            }
+                            else
+                            {
+                                csvWriter.WriteField(1);
+                            }
+                        }
+                        else
+                        {
+                            csvWriter.WriteField(user.GetType().GetProperty(column).GetValue(user));
+                        }
                     }
                     csvWriter.NextRecord();
                 }
