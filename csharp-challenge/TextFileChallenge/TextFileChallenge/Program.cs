@@ -16,7 +16,12 @@ namespace TextFileChallenge
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ChallengeForm());
+
+            string fileName = @"..\..\StandardDataSet.csv";
+            Csv csv = new Csv(fileName);
+            IEnumerable<UserModel> records = csv.GetRecords();
+
+            Application.Run(new ChallengeForm(records));
         }
     }
 }

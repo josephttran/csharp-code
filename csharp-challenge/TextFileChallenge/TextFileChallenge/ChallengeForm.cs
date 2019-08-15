@@ -14,11 +14,19 @@ namespace TextFileChallenge
     {
         BindingList<UserModel> users = new BindingList<UserModel>();
 
-        public ChallengeForm()
+        public ChallengeForm(IEnumerable<UserModel> records)
         {
             InitializeComponent();
-
+            InitializeUsers(records);
             WireUpDropDown();
+        }
+
+        private void InitializeUsers(IEnumerable<UserModel> records)
+        {
+            foreach (var record in records)
+            {
+                users.Add(record);
+            }
         }
 
         private void WireUpDropDown()
