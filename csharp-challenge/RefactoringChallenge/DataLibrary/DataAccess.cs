@@ -19,13 +19,16 @@ namespace DataLibrary
             Conn = new SqlConnection(ConnectionString);
         }
 
-        public List<T> GetRecords<T>()
+        public List<T> GetRecords<T>(object filterObj = null)
         {
-            return Conn.Query<T>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
-        }
-        public List<T> GetFilteredRecords<T>(object filterObj)
-        {
-            return Conn.Query<T>("spSystemUser_GetFiltered", filterObj, commandType: CommandType.StoredProcedure).ToList();
+            if (filterObj == null)
+            {
+                return Conn.Query<T>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
+            }
+            else
+            {
+                return Conn.Query<T>("spSystemUser_GetFiltered", filterObj, commandType: CommandType.StoredProcedure).ToList();
+            }
         }
 
         public void CreateRecord(Object firstLastName)

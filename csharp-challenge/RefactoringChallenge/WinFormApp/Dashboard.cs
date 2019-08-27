@@ -54,7 +54,7 @@ namespace WinFormApp
                 Filter = filterUsersText.Text
             };
 
-            var records = DataAccess.GetFilteredRecords<SystemUserModel>(p);
+            var records = DataAccess.GetRecords<SystemUserModel>(p);
 
             users.Clear();
             records.ForEach(x => users.Add(x));
