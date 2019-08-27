@@ -16,6 +16,7 @@ namespace WinFormApp
     public partial class Dashboard : Form
     {
         BindingList<SystemUserModel> users = new BindingList<SystemUserModel>();
+        IDbConnection Cnn { get; set; }
 
         public Dashboard()
         {
@@ -26,56 +27,52 @@ namespace WinFormApp
 
             string connectionString = ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;
 
-            using (IDbConnection cnn = new SqlConnection(connectionString))
-            {
-                var records = cnn.Query<SystemUserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
+            Cnn = new SqlConnection(connectionString);
 
-                users.Clear();
-                records.ForEach(x => users.Add(x));
-            }
+            SetUsersFromRecords();
         }
 
-        private void createUserButton_Click(object sender, EventArgs e)
+        ~Dashboard()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;
-
-            using (IDbConnection cnn = new SqlConnection(connectionString))
-            {
-                var p = new
-                {
-                    FirstName = firstNameText.Text,
-                    LastName = lastNameText.Text
-                };
-
-                cnn.Execute("dbo.spSystemUser_Create", p, commandType: CommandType.StoredProcedure);
-
-                firstNameText.Text = "";
-                lastNameText.Text = "";
-                firstNameText.Focus();
-
-                var records = cnn.Query<SystemUserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
-
-                users.Clear();
-                records.ForEach(x => users.Add(x));
-            }
+            Cnn.Dispose();
         }
 
-        private void applyFilterButton_Click(object sender, EventArgs e)
+        private void SetUsersFromRecords()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;
+            var records = Cnn.Query<SystemUserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
 
-            using (IDbConnection cnn = new SqlConnection(connectionString))
+            users.Clear();
+            records.ForEach(x => users.Add(x));
+        }
+
+        private void CreateUserButton_Click(object sender, EventArgs e)
+        {
+            var p = new
             {
-                var p = new
-                {
-                    Filter = filterUsersText.Text
-                };
+                FirstName = firstNameText.Text,
+                LastName = lastNameText.Text
+            };
 
-                var records = cnn.Query<SystemUserModel>("spSystemUser_GetFiltered", p, commandType: CommandType.StoredProcedure).ToList();
+            Cnn.Execute("dbo.spSystemUser_Create", p, commandType: CommandType.StoredProcedure);
 
-                users.Clear();
-                records.ForEach(x => users.Add(x));
-            }
+            firstNameText.Text = "";
+            lastNameText.Text = "";
+            firstNameText.Focus();
+
+            SetUsersFromRecords();
+        }
+
+        private void ApplyFilterButton_Click(object sender, EventArgs e)
+        {
+            var p = new
+            {
+                Filter = filterUsersText.Text
+            };
+
+            var records = Cnn.Query<SystemUserModel>("spSystemUser_GetFiltered", p, commandType: CommandType.StoredProcedure).ToList();
+
+            users.Clear();
+            records.ForEach(x => users.Add(x));
         }
     }
 }

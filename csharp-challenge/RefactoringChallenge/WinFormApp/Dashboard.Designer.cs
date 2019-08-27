@@ -80,7 +80,7 @@
             this.createUserButton.TabIndex = 5;
             this.createUserButton.Text = "Create User";
             this.createUserButton.UseVisualStyleBackColor = true;
-            this.createUserButton.Click += new System.EventHandler(this.createUserButton_Click);
+            this.createUserButton.Click += new System.EventHandler(this.CreateUserButton_Click);
             // 
             // createUserLabel
             // 
@@ -143,7 +143,7 @@
             this.applyFilterButton.TabIndex = 5;
             this.applyFilterButton.Text = "Apply Filter";
             this.applyFilterButton.UseVisualStyleBackColor = true;
-            this.applyFilterButton.Click += new System.EventHandler(this.applyFilterButton_Click);
+            this.applyFilterButton.Click += new System.EventHandler(this.ApplyFilterButton_Click);
             // 
             // filterUsersLabel
             // 
