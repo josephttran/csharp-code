@@ -23,6 +23,11 @@ namespace DataLibrary
         {
             return Conn.Query<T>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
         }
+        public List<T> GetFilteredRecords<T>(object filterObj)
+        {
+            return Conn.Query<T>("spSystemUser_GetFiltered", filterObj, commandType: CommandType.StoredProcedure).ToList();
+        }
+
         public void CreateRecord(Object firstLastName)
         {
             Conn.Execute("dbo.spSystemUser_Create", firstLastName, commandType: CommandType.StoredProcedure);

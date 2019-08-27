@@ -1,22 +1,14 @@
-﻿using Dapper;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataLibrary;
 
 namespace WinFormApp
 {
     public partial class Dashboard : Form
     {
         BindingList<SystemUserModel> users = new BindingList<SystemUserModel>();
-        IDbConnection Cnn { get; set; }
+        DataAccess DataAccess { get; set; }
 
         public Dashboard()
         {
@@ -25,21 +17,14 @@ namespace WinFormApp
             userDisplayList.DataSource = users;
             userDisplayList.DisplayMember = "FullName";
 
-            string connectionString = ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;
-
-            Cnn = new SqlConnection(connectionString);
+            DataAccess = new DataAccess();
 
             SetUsersFromRecords();
         }
 
-        ~Dashboard()
-        {
-            Cnn.Dispose();
-        }
-
         private void SetUsersFromRecords()
         {
-            var records = Cnn.Query<SystemUserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
+            var records = DataAccess.GetRecords<SystemUserModel>();
 
             users.Clear();
             records.ForEach(x => users.Add(x));
@@ -53,7 +38,7 @@ namespace WinFormApp
                 LastName = lastNameText.Text
             };
 
-            Cnn.Execute("dbo.spSystemUser_Create", p, commandType: CommandType.StoredProcedure);
+            DataAccess.CreateRecord(p);
 
             firstNameText.Text = "";
             lastNameText.Text = "";
@@ -69,7 +54,7 @@ namespace WinFormApp
                 Filter = filterUsersText.Text
             };
 
-            var records = Cnn.Query<SystemUserModel>("spSystemUser_GetFiltered", p, commandType: CommandType.StoredProcedure).ToList();
+            var records = DataAccess.GetFilteredRecords<SystemUserModel>(p);
 
             users.Clear();
             records.ForEach(x => users.Add(x));
