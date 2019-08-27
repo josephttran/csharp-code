@@ -16,6 +16,7 @@ namespace ConsoleApp
         {
             string actionToTake = "";
             string connectionString = ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;
+            IDbConnection cnn = new SqlConnection(connectionString);
 
             do
             {
@@ -25,38 +26,44 @@ namespace ConsoleApp
                 switch (actionToTake.ToLower())
                 {
                     case "display":
-                        using (IDbConnection cnn = new SqlConnection(connectionString))
-                        {
-                            var records = cnn.Query<UserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
-
-                            Console.WriteLine();
-                            records.ForEach(x => Console.WriteLine($"{ x.FirstName } { x.LastName }"));
-                        }
-                        Console.WriteLine();
+                        Display();
                         break;
                     case "add":
-                        Console.Write("What is the first name: ");
-                        string firstName = Console.ReadLine();
-
-                        Console.Write("What is the last name: ");
-                        string lastName = Console.ReadLine();
-
-                        using (IDbConnection cnn = new SqlConnection(connectionString))
-                        {
-                            var p = new
-                            {
-                                FirstName = firstName,
-                                LastName = lastName
-                            };
-
-                            cnn.Execute("dbo.spSystemUser_Create", p, commandType: CommandType.StoredProcedure);
-                        }
-                        Console.WriteLine();
+                        object firstLastName = getName();
+                        Add(firstLastName);
                         break;
                     default:
                         break;
                 }
             } while (actionToTake.ToLower() != "quit");
+
+            cnn.Dispose();
+
+            object getName()
+            {
+                Console.Write("What is the first name: ");
+                string firstName = Console.ReadLine();
+
+                Console.Write("What is the last name: ");
+                string lastName = Console.ReadLine();
+
+                return new { FirstName = firstName, LastName = lastName };
+            }
+
+            void Display()
+            {
+                var records = cnn.Query<UserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
+
+                Console.WriteLine();
+                records.ForEach(x => Console.WriteLine($"{ x.FirstName } { x.LastName }"));
+                Console.WriteLine();
+            }
+
+            void Add(object firstLastName)
+            {
+                cnn.Execute("dbo.spSystemUser_Create", firstLastName, commandType: CommandType.StoredProcedure);
+                Console.WriteLine();
+            }
         }
     }
 }
