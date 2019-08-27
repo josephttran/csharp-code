@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
+using DataLibrary;
 
 namespace ConsoleApp
 {
@@ -15,8 +8,8 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             string actionToTake = "";
-            string connectionString = ConfigurationManager.ConnectionStrings["DapperDemoDB"].ConnectionString;
-            IDbConnection cnn = new SqlConnection(connectionString);
+
+            DataAccess dataAccess = new DataAccess();
 
             do
             {
@@ -31,13 +24,12 @@ namespace ConsoleApp
                     case "add":
                         object firstLastName = getName();
                         Add(firstLastName);
+                        Console.WriteLine();
                         break;
                     default:
                         break;
                 }
             } while (actionToTake.ToLower() != "quit");
-
-            cnn.Dispose();
 
             object getName()
             {
@@ -52,7 +44,7 @@ namespace ConsoleApp
 
             void Display()
             {
-                var records = cnn.Query<UserModel>("spSystemUser_Get", commandType: CommandType.StoredProcedure).ToList();
+                var records = dataAccess.GetRecords<UserModel>();
 
                 Console.WriteLine();
                 records.ForEach(x => Console.WriteLine($"{ x.FirstName } { x.LastName }"));
@@ -61,8 +53,7 @@ namespace ConsoleApp
 
             void Add(object firstLastName)
             {
-                cnn.Execute("dbo.spSystemUser_Create", firstLastName, commandType: CommandType.StoredProcedure);
-                Console.WriteLine();
+                dataAccess.CreateRecord(firstLastName);
             }
         }
     }
