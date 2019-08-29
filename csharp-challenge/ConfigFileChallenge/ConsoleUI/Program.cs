@@ -23,35 +23,78 @@ namespace ConsoleUI
 
         static void ReadConnectionString(string name)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings[name].ConnectionString;
-            Console.WriteLine($"Connection string for { name }: { connectionString }");
+            try
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings[name].ConnectionString;
+                Console.WriteLine($"Connection string for { name }: { connectionString }");
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error reading connection setting");
+            }
         }
 
         static void ReadAppSetting(string key)
         {
-            string appSetting = ConfigurationManager.AppSettings[key];
-            Console.WriteLine($"App setting value for { key }: { appSetting }");
+            try
+            {
+                string appSetting = ConfigurationManager.AppSettings[key];
+                Console.WriteLine($"App setting value for { key }: { appSetting }");
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error reading app setting");
+            }
         }
 
         static void ReadAllConnectionStrings()
         {
-            ConnectionStringSettingsCollection connectionStrings = ConfigurationManager.ConnectionStrings;
-
-            Console.WriteLine("\nCollection of connection string:");
-            foreach (ConnectionStringSettings str in connectionStrings)
+            try
             {
-                Console.WriteLine($"Name = { str.Name }, connection string = { str }");
+                ConnectionStringSettingsCollection connectionStrings = ConfigurationManager.ConnectionStrings;
+
+                if (connectionStrings.Count == 0)
+                {
+                    Console.WriteLine("Connection strings is empty.");
+                }
+                else
+                {
+                    Console.WriteLine("\nCollection of connection string:");
+                    foreach (ConnectionStringSettings str in connectionStrings)
+                    {
+                        Console.WriteLine($"Name = { str.Name }, connection string = { str }");
+
+                    }
+                }
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error reading connection settings");
             }
         }
 
         static void ReadAllAppSettings()
         {
-            NameValueCollection appSetting = ConfigurationManager.AppSettings;
-
-            Console.WriteLine("\nCollection of app setting:");
-            foreach (string key in appSetting.AllKeys)
+            try
             {
-                Console.WriteLine($"Key = { key }, Value = { appSetting[key] }");
+                NameValueCollection appSettings = ConfigurationManager.AppSettings;
+
+                if (appSettings.Count == 0)
+                {
+                    Console.WriteLine("AppSettings is empty.");
+                }
+                else
+                {
+                    Console.WriteLine("\nCollection of app setting:");
+                    foreach (string key in appSettings.AllKeys)
+                    {
+                        Console.WriteLine($"Key = { key }, Value = { appSettings[key] }");
+                    }
+                }
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error reading app settings");
             }
         }
     }
