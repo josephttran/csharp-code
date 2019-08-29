@@ -18,6 +18,9 @@ namespace ConsoleUI
             ReadAllConnectionStrings();
             ReadAllAppSettings();
 
+            AddAppSetting("NewSetting", DateTime.Now.ToLongDateString());
+            ReadAllAppSettings();
+
             Console.ReadLine();
         }
 
@@ -95,6 +98,27 @@ namespace ConsoleUI
             catch (ConfigurationErrorsException)
             {
                 Console.WriteLine("Error reading app settings");
+            }
+        }
+
+        static void AddAppSetting(string key, string value)
+        {
+            try
+            {
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+                KeyValueConfigurationCollection settings = config.AppSettings.Settings;
+
+                if (settings[key] == null)
+                {
+                    settings.Add(key, value);
+                }
+                config.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(config.AppSettings.SectionInformation.Name);
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error writing app settings");
             }
         }
     }
