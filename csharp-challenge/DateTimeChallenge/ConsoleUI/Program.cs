@@ -13,26 +13,73 @@ namespace ConsoleUI
 
             DisplayNumDaySinceDate(dateTime, dateFormat);
 
-            Console.Write("\nGive me a time: ");
             DateTime time = GetTimeInput();
-            DisplayHourMinuteSinceTime(time);
+            string timeFormat = GetTimeFormat();
+
+            DisplayHourMinuteSinceNow(time, timeFormat);
 
             Console.ReadLine();
         }
 
+        static string GetTimeFormat()
+        {
+            TimeFormatPrompt();
+            int choice = GetTimeFormatChoice();
+
+            while (choice != 1 && choice != 2)
+            {
+                TimeFormatPrompt();
+                choice = GetTimeFormatChoice();
+            }
+
+            if (choice == 2)
+            {
+                return "H:mm";
+            }
+
+            return "h:mm";
+
+            void TimeFormatPrompt()
+            {
+                Console.WriteLine("\nWhat time format you want to use: ");
+                Console.WriteLine("1) h:mm");
+                Console.WriteLine("2) H:mm");
+                Console.Write("Enter choice: ");
+            }
+
+            int GetTimeFormatChoice()
+            {
+                string input = Console.ReadLine();
+
+                if (Int32.TryParse(input, out int number))
+                {
+                    return number;
+                }
+
+                return -1;
+            }
+        }
+
         static DateTime GetTimeInput()
         {
-            DateTime time = new DateTime();
+            Console.Write("\nGive me a time: ");
             string timeString = Console.ReadLine();
+            bool isTimeStringValid = false;
+            DateTime time = new DateTime();
 
-            if (DateTime.TryParse(timeString, out DateTime timeValue))
+            while (!isTimeStringValid)
             {
-                time = timeValue;
-            }
-            else
-            {
-                Console.WriteLine($"Error: '{ timeString }' is not a valid time input.");
-                Console.WriteLine($"The time is set to { time.ToShortTimeString() }.");
+                if (DateTime.TryParse(timeString, out DateTime timeValue))
+                {
+                    time = timeValue;
+                    isTimeStringValid = true;
+                }
+                else
+                {
+                    Console.WriteLine($"Error: '{ timeString }' is not a valid time input.");
+                    Console.Write("\nGive me a time: ");
+                    timeString = Console.ReadLine();
+                }
             }
 
             return time;
@@ -124,11 +171,33 @@ namespace ConsoleUI
                 $"since { date.ToString(dateFormat) }");
         }
 
-        static void DisplayHourMinuteSinceTime(DateTime time)
+        static void DisplayHourMinuteSinceNow(DateTime dateTime, string timeFormat)
         {
-            Console.WriteLine(
-                $"{ time.ToShortTimeString() } was { DateTime.Now.Subtract(time).Hours } hours " +
-                $"and { DateTime.Now.Subtract(time).Minutes } minutes ago");
+            int hour = DateTime.Now.Subtract(dateTime).Hours;
+            int minute = DateTime.Now.Subtract(dateTime).Minutes;
+
+            if (DateTime.Now.CompareTo(dateTime) < 0)
+            {
+                if (minute < 0)
+                {
+                    hour += 23;
+                    minute += 60;
+                }
+                else
+                {
+                    hour += 24;
+                    minute *= -1;
+                }
+            }
+
+            if (timeFormat == "h:mm")
+            {
+                Console.WriteLine($"\n{ dateTime.ToShortTimeString() } was { hour } hours and { minute } minutes ago");
+            }
+            else
+            {
+                Console.WriteLine($"\n{ dateTime.ToString(timeFormat) } was { hour } hours and { minute } minutes ago");
+            }
         }
 
         static DateTime CreateFormatDate(string dateString, string dateFormat)
