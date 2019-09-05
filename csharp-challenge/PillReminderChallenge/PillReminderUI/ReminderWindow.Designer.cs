@@ -39,19 +39,19 @@
             // allPillsListBox
             // 
             this.allPillsListBox.FormattingEnabled = true;
-            this.allPillsListBox.ItemHeight = 33;
+            this.allPillsListBox.ItemHeight = 29;
             this.allPillsListBox.Location = new System.Drawing.Point(480, 116);
             this.allPillsListBox.Name = "allPillsListBox";
-            this.allPillsListBox.Size = new System.Drawing.Size(310, 301);
+            this.allPillsListBox.Size = new System.Drawing.Size(310, 294);
             this.allPillsListBox.TabIndex = 0;
             // 
             // pillsToTakeListBox
             // 
             this.pillsToTakeListBox.FormattingEnabled = true;
-            this.pillsToTakeListBox.ItemHeight = 33;
+            this.pillsToTakeListBox.ItemHeight = 29;
             this.pillsToTakeListBox.Location = new System.Drawing.Point(59, 116);
             this.pillsToTakeListBox.Name = "pillsToTakeListBox";
-            this.pillsToTakeListBox.Size = new System.Drawing.Size(310, 301);
+            this.pillsToTakeListBox.Size = new System.Drawing.Size(310, 294);
             this.pillsToTakeListBox.TabIndex = 0;
             // 
             // pillsToTakeLabel
@@ -59,7 +59,7 @@
             this.pillsToTakeLabel.AutoSize = true;
             this.pillsToTakeLabel.Location = new System.Drawing.Point(53, 80);
             this.pillsToTakeLabel.Name = "pillsToTakeLabel";
-            this.pillsToTakeLabel.Size = new System.Drawing.Size(149, 33);
+            this.pillsToTakeLabel.Size = new System.Drawing.Size(156, 29);
             this.pillsToTakeLabel.TabIndex = 1;
             this.pillsToTakeLabel.Text = "Pills To Take";
             // 
@@ -68,7 +68,7 @@
             this.allPillsLabel.AutoSize = true;
             this.allPillsLabel.Location = new System.Drawing.Point(474, 80);
             this.allPillsLabel.Name = "allPillsLabel";
-            this.allPillsLabel.Size = new System.Drawing.Size(181, 33);
+            this.allPillsLabel.Size = new System.Drawing.Size(174, 29);
             this.allPillsLabel.TabIndex = 1;
             this.allPillsLabel.Text = "Medication List";
             // 
@@ -80,6 +80,7 @@
             this.refreshPillsToTake.TabIndex = 2;
             this.refreshPillsToTake.Text = "refresh";
             this.refreshPillsToTake.UseVisualStyleBackColor = true;
+            this.refreshPillsToTake.Click += new System.EventHandler(this.RefreshPillsToTake_Click);
             // 
             // takePill
             // 
@@ -92,7 +93,7 @@
             // 
             // ReminderWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 33F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(831, 530);
             this.Controls.Add(this.takePill);
@@ -101,7 +102,7 @@
             this.Controls.Add(this.pillsToTakeLabel);
             this.Controls.Add(this.pillsToTakeListBox);
             this.Controls.Add(this.allPillsListBox);
-            this.Font = new System.Drawing.Font("Open Sans", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.Name = "ReminderWindow";
             this.Text = "Pill Reminder Challenge by Tim Corey";

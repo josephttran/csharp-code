@@ -13,6 +13,7 @@ namespace PillReminderUI
     public partial class ReminderWindow : Form
     {
         BindingList<PillModel> medications = new BindingList<PillModel>();
+        BindingList<PillModel> pillsToTake = new BindingList<PillModel>();
 
         public ReminderWindow()
         {
@@ -21,6 +22,35 @@ namespace PillReminderUI
             allPillsListBox.DisplayMember = "PillInfo";
 
             PopulateDummyData();
+            ShowPillsToTake();
+        }
+
+        private List<PillModel> SortMedications(List<PillModel> list)
+        {
+            IEnumerable<PillModel> newList = from PillModel pillModel in list
+                                             orderby pillModel.TimeToTake
+                                             select pillModel;
+
+            return newList.ToList<PillModel>();
+        }
+
+        private void ShowPillsToTake()
+        {
+            pillsToTakeListBox.DataSource = pillsToTake;
+            pillsToTakeListBox.DisplayMember = "PillInfo";
+        }
+
+        private void RefreshPillsToTake_Click(object sender, EventArgs e)
+        {
+            List<PillModel> filteredMedications = FilterMedications(medications.ToList());
+            List<PillModel> filteredSortedMedications = SortMedications(filteredMedications);
+
+            pillsToTake.Clear();
+
+            foreach (PillModel medication in filteredSortedMedications)
+            {
+                pillsToTake.Add(medication);
+            }
         }
 
         private void PopulateDummyData()
@@ -30,6 +60,10 @@ namespace PillReminderUI
             medications.Add(new PillModel { PillName = "The red ones", TimeToTake = DateTime.Parse("11:45 pm") });
             medications.Add(new PillModel { PillName = "The oval one", TimeToTake = DateTime.Parse("0:27 am") });
             medications.Add(new PillModel { PillName = "The round ones", TimeToTake = DateTime.Parse("6:15 pm") });
+        }
+        private List<PillModel> FilterMedications(List<PillModel> list)
+        {
+            return list.Where(pillModel => pillModel.LastTaken < DateTime.Today && pillModel.TimeToTake < DateTime.Now).ToList<PillModel>();
         }
     }
 }
