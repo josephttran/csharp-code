@@ -90,6 +90,7 @@
             this.takePill.TabIndex = 2;
             this.takePill.Text = "Take Pill";
             this.takePill.UseVisualStyleBackColor = true;
+            this.takePill.Click += new System.EventHandler(this.TakePill_Click);
             // 
             // ReminderWindow
             // 

@@ -25,6 +25,16 @@ namespace PillReminderUI
             ShowPillsToTake();
         }
 
+        private void TakePill_Click(object sender, EventArgs e)
+        {
+            PillModel selectedPill = (PillModel) pillsToTakeListBox.SelectedItem;
+
+            if (selectedPill != null)
+            {
+                selectedPill.LastTaken = DateTime.Now;
+            }
+        }
+
         private List<PillModel> SortMedications(List<PillModel> list)
         {
             IEnumerable<PillModel> newList = from PillModel pillModel in list
