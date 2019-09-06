@@ -12,6 +12,7 @@ namespace PillReminderUI
 {
     public partial class ReminderWindow : Form
     {
+        Timer pillTimer;
         BindingList<PillModel> medications = new BindingList<PillModel>();
         BindingList<PillModel> pillsToTake = new BindingList<PillModel>();
 
@@ -20,9 +21,11 @@ namespace PillReminderUI
             InitializeComponent();
             allPillsListBox.DataSource = medications;
             allPillsListBox.DisplayMember = "PillInfo";
+            pillsToTakeListBox.DataSource = pillsToTake;
+            pillsToTakeListBox.DisplayMember = "PillInfo";
 
             PopulateDummyData();
-            ShowPillsToTake();
+            InitializeTimer();
         }
 
         private void TakePill_Click(object sender, EventArgs e)
@@ -44,13 +47,7 @@ namespace PillReminderUI
             return newList.ToList<PillModel>();
         }
 
-        private void ShowPillsToTake()
-        {
-            pillsToTakeListBox.DataSource = pillsToTake;
-            pillsToTakeListBox.DisplayMember = "PillInfo";
-        }
-
-        private void RefreshPillsToTake_Click(object sender, EventArgs e)
+        private void DisplayPillsToTake()
         {
             List<PillModel> filteredMedications = FilterMedications(medications.ToList());
             List<PillModel> filteredSortedMedications = SortMedications(filteredMedications);
@@ -63,6 +60,11 @@ namespace PillReminderUI
             }
         }
 
+        private void DisplayPillsToTakeTick(object sender, EventArgs e)
+        {
+            DisplayPillsToTake();
+        }
+
         private void PopulateDummyData()
         {
             medications.Add(new PillModel { PillName = "The white one", TimeToTake = DateTime.ParseExact("0:15 am", "h:mm tt", null, System.Globalization.DateTimeStyles.AssumeLocal) });
@@ -71,9 +73,18 @@ namespace PillReminderUI
             medications.Add(new PillModel { PillName = "The oval one", TimeToTake = DateTime.Parse("0:27 am") });
             medications.Add(new PillModel { PillName = "The round ones", TimeToTake = DateTime.Parse("6:15 pm") });
         }
+
         private List<PillModel> FilterMedications(List<PillModel> list)
         {
             return list.Where(pillModel => pillModel.LastTaken < DateTime.Today && pillModel.TimeToTake < DateTime.Now).ToList<PillModel>();
+        }
+
+        private void InitializeTimer()
+        {
+            pillTimer = new Timer();
+            pillTimer.Tick += new EventHandler(DisplayPillsToTakeTick);
+            pillTimer.Interval = 4000;
+            pillTimer.Start();
         }
     }
 }

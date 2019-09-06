@@ -80,7 +80,6 @@
             this.refreshPillsToTake.TabIndex = 2;
             this.refreshPillsToTake.Text = "refresh";
             this.refreshPillsToTake.UseVisualStyleBackColor = true;
-            this.refreshPillsToTake.Click += new System.EventHandler(this.RefreshPillsToTake_Click);
             // 
             // takePill
             // 
