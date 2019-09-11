@@ -32,6 +32,16 @@ Click publish
 Copy files from bin\Release\Publish into website physical path
 You can now browse to your website
 
+**To use different database for production**
+Edit profile
+1. Connection tab
+    - publish method: web deploy
+    - fill in Server, Site name, and Destination URL
+2. Settings tab
+    - Enter connection string for ApplicationDbContext (defaultConnection)
+SQL Server 2017 connection string
+`Data Source=TheServer\SQL2017;Initial Catalog=TutorialDB;Persist Security Info=True;User ID=username;Password=mypassword`
+
 ## Deploy to Azure
 In solution explorer, right click project and click publish
 Create new Azure App Service
