@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Text;
+using ActionMethod;
 
 namespace ConsoleUI
 {
@@ -8,89 +8,30 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            string text = "AddMe";
-            long concatenateTime = 0;
-            long stringBuilderTime = 0;
-            int concateRepetitionNumber = 500;
-            int appendRepetitionNumber = 500;
+            int[] stringRepetitionNumbers = new int[] { 500, 5000, 50000 };
+            int[] numberRepetitionNumbers = new int[] { 500000, 5000000 };
+            string text = "newtext";
+            double doubleNumber = 0.01;
+            decimal decimalNumber = 0.01M;
 
-            concatenateTime = GetConcatenatePerformanceTime(concateRepetitionNumber, text);
-            PrintConcatenatePerformance(concateRepetitionNumber, concatenateTime);
-
-            concateRepetitionNumber = 5000;
-            concatenateTime = GetConcatenatePerformanceTime(concateRepetitionNumber, text);
-            PrintConcatenatePerformance(concateRepetitionNumber, concatenateTime);
-
-            concateRepetitionNumber = 50000;
-            concatenateTime = GetConcatenatePerformanceTime(concateRepetitionNumber, text);
-            PrintConcatenatePerformance(concateRepetitionNumber, concatenateTime);
-
-            stringBuilderTime = GetStringBuilderPerformanceTime(appendRepetitionNumber, text);
-            PrintStringBuilderPerformance(appendRepetitionNumber, stringBuilderTime);
-
-            appendRepetitionNumber = 5000;
-            stringBuilderTime = GetStringBuilderPerformanceTime(appendRepetitionNumber, text);
-            PrintStringBuilderPerformance(appendRepetitionNumber, stringBuilderTime);
-
-            appendRepetitionNumber = 50000;
-            stringBuilderTime = GetStringBuilderPerformanceTime(appendRepetitionNumber, text);
-            PrintStringBuilderPerformance(appendRepetitionNumber, stringBuilderTime);
+            PrintMethodPerformance<string>("String Concatenate", PerformanceEvaluation.UseStringConcatenate, stringRepetitionNumbers, text);
+            PrintMethodPerformance<string>("String Builder", PerformanceEvaluation.UseStringBuilder, stringRepetitionNumbers, text);
+            PrintMethodPerformance<double>("Double", PerformanceEvaluation.UseDouble, numberRepetitionNumbers, doubleNumber);
+            PrintMethodPerformance<decimal>("Decimal", PerformanceEvaluation.UseDecimal, numberRepetitionNumbers, decimalNumber);
         }
 
-        static StringBuilder AppendText(int repetitionNumber, string text)
+        static public void PrintMethodPerformance<T>(string description, Action<int, T> function, int[] repetitionList, T addOrAppend)
         {
-            StringBuilder stringBuilder = new StringBuilder();
-
-            for (int i = 0; i < repetitionNumber; i++)
+            foreach (int repetitionNumber in repetitionList)
             {
-                stringBuilder.Append(text);
+                Stopwatch stopWatch = new Stopwatch();
+
+                stopWatch.Start();
+                function(repetitionNumber, addOrAppend);
+                stopWatch.Stop();
+
+                Console.WriteLine($"{ description } { repetitionNumber } rep: { stopWatch.ElapsedMilliseconds } ms");
             }
-
-            return stringBuilder;
-        }
-
-        static string ConcatenateText(int repetitionNumber, string text)
-        {
-            string newString = "";
-
-            for (int i = 0; i < repetitionNumber; i++)
-            {
-                newString = string.Concat(newString, text);
-            }
-
-            return newString;
-        }
-
-        static long GetConcatenatePerformanceTime(int repetitionNumber, string text)
-        {
-            Stopwatch stopWatch = new Stopwatch();
-
-            stopWatch.Start();
-            ConcatenateText(repetitionNumber, text);
-            stopWatch.Stop();
-
-            return stopWatch.ElapsedMilliseconds;
-        }
-
-        static long GetStringBuilderPerformanceTime(int repetitionNumber, string text)
-        {
-            Stopwatch stopWatch = new Stopwatch();
-
-            stopWatch.Start();
-            AppendText(repetitionNumber, text);
-            stopWatch.Stop();
-
-            return stopWatch.ElapsedMilliseconds;
-        }
-
-        static void PrintConcatenatePerformance(int repetitionNumber, long stopWatchMilliseconds)
-        {
-            Console.WriteLine($"Append Text { repetitionNumber } rep: { stopWatchMilliseconds } ms");
-        }
-
-        static void PrintStringBuilderPerformance(int repetitionNumber, long stopWatchMilliseconds)
-        {
-            Console.WriteLine($"String builder { repetitionNumber } rep: { stopWatchMilliseconds } ms");
         }
     }
 }
