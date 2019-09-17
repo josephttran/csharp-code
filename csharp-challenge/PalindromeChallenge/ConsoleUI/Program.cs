@@ -10,7 +10,7 @@ namespace ConsoleUI
             string myString = "ra c22.rea ER%&$22car";
             int number = 12321;
             double myDouble = 12.321;
-            bool isStringPalindrome = IsPalindrome(myString);
+            bool isStringPalindrome = IsPalindrome(CleanString(myString));
             bool isNumberPalindrome = IsPalindrome(number);
             bool isDoublePalindrome = IsPalindrome(myDouble);
 
@@ -31,8 +31,6 @@ namespace ConsoleUI
 
         static public bool IsPalindrome(string myString)
         {
-            myString = CleanString(myString);
-
             for (int index = 0; index < myString.Length / 2; index++)
             {
                 if (myString[index] != myString[myString.Length - 1 - index])
@@ -80,7 +78,14 @@ namespace ConsoleUI
         {
             if (isPalindrome)
             {
-                Console.WriteLine($"{ input } is a palindrome");
+                if (input is string)
+                {
+                    Console.WriteLine($"{ input } is a palindrome when special characters removed");
+                }
+                else
+                {
+                    Console.WriteLine($"{ input } is a palindrome");
+                }
             }
             else
             {
