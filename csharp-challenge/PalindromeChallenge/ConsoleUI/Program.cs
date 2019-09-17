@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace ConsoleUI
 {
@@ -6,7 +7,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            string str = "racecar";
+            string str = "ra c22.rea ER%&$22car";
             int number = 12321;
 
             if (IsPalindrome(str))
@@ -28,8 +29,20 @@ namespace ConsoleUI
             }
         }
 
+        /* Remove space and special characters from string then convert to lowercase */
+        static public string CleanString(string str)
+        {
+            string pattern = @"\W";
+
+            str = Regex.Replace(str, pattern, String.Empty).ToLower();
+
+            return str;
+        }
+
         static public bool IsPalindrome(string str)
         {
+            str = CleanString(str);
+
             for (int index = 0; index < str.Length / 2; index++)
             {
                 if (str[index] != str[str.Length - 1 - index])
