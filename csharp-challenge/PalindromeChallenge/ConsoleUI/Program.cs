@@ -7,55 +7,35 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            string str = "ra c22.rea ER%&$22car";
+            string myString = "ra c22.rea ER%&$22car";
             int number = 12321;
             double myDouble = 12.321;
+            bool isStringPalindrome = IsPalindrome(myString);
+            bool isNumberPalindrome = IsPalindrome(number);
+            bool isDoublePalindrome = IsPalindrome(myDouble);
 
-            if (IsPalindrome(str))
-            {
-                Console.WriteLine($"{ str } is a palindrome");
-            }
-            else
-            {
-                Console.WriteLine($"{ str } is not a palindrome");
-            }
-
-            if (IsPalindrome(number))
-            {
-                Console.WriteLine($"{ number } is a palindrome");
-            }
-            else
-            {
-                Console.WriteLine($"{ number } is not a palindrome");
-            }
-
-            if (IsPalindrome(myDouble))
-            {
-                Console.WriteLine($"{ myDouble } is a palindrome");
-            }
-            else
-            {
-                Console.WriteLine($"{ myDouble } is not a palindrome");
-            }
+            PrintIsPalindrome(myString, isStringPalindrome);
+            PrintIsPalindrome(number, isNumberPalindrome);
+            PrintIsPalindrome(myDouble, isDoublePalindrome);
         }
 
         /* Remove space and special characters from string then convert to lowercase */
-        static public string CleanString(string str)
+        static public string CleanString(string myString)
         {
             string pattern = @"\W";
 
-            str = Regex.Replace(str, pattern, String.Empty).ToLower();
+            myString = Regex.Replace(myString, pattern, String.Empty).ToLower();
 
-            return str;
+            return myString;
         }
 
-        static public bool IsPalindrome(string str)
+        static public bool IsPalindrome(string myString)
         {
-            str = CleanString(str);
+            myString = CleanString(myString);
 
-            for (int index = 0; index < str.Length / 2; index++)
+            for (int index = 0; index < myString.Length / 2; index++)
             {
-                if (str[index] != str[str.Length - 1 - index])
+                if (myString[index] != myString[myString.Length - 1 - index])
                 {
                     return false;
                 }
@@ -66,11 +46,11 @@ namespace ConsoleUI
 
         static public bool IsPalindrome(int number)
         {
-            string str = number.ToString();
+            string myString = number.ToString();
 
-            for (int index = 0; index < str.Length / 2; index++)
+            for (int index = 0; index < myString.Length / 2; index++)
             {
-                if (str[index] != str[str.Length - 1 - index])
+                if (myString[index] != myString[myString.Length - 1 - index])
                 {
                     return false;
                 }
@@ -81,19 +61,31 @@ namespace ConsoleUI
 
         static public bool IsPalindrome(double myDouble)
         {
-            string str = myDouble.ToString().ToLower();
+            string myString = myDouble.ToString().ToLower();
 
-            str = Regex.Replace(str, @".", String.Empty);
+            myString = Regex.Replace(myString, @".", String.Empty);
 
-            for (int index = 0; index < str.Length / 2; index++)
+            for (int index = 0; index < myString.Length / 2; index++)
             {
-                if (str[index] != str[str.Length - 1 - index])
+                if (myString[index] != myString[myString.Length - 1 - index])
                 {
                     return false;
                 }
             }
 
             return true;
+        }
+
+        static void PrintIsPalindrome<T>(T input, bool isPalindrome)
+        {
+            if (isPalindrome)
+            {
+                Console.WriteLine($"{ input } is a palindrome");
+            }
+            else
+            {
+                Console.WriteLine($"{ input } is not a palindrome");
+            }
         }
     }
 }
