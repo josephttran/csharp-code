@@ -24,8 +24,8 @@ namespace ConsoleUI
                     List<int> primeFactors = GetPrimeFactorList(inputNumber);
 
                     Console.WriteLine($"{ inputNumber } is Not a prime number");
-                    PrintFactors("Factors", inputNumber, factors);
-                    PrintFactors("Prime factors", inputNumber, primeFactors);
+                    PrintFactors("factors", inputNumber, factors);
+                    PrintFactors("prime factors", inputNumber, primeFactors);
                     PrintLargestPrimeFactor(primeFactors);
                 }
 
@@ -108,7 +108,7 @@ namespace ConsoleUI
         {
             if (factors.Count != 0)
             {
-                Console.Write($"{ description } of { inputNumber }: ");
+                Console.Write($"The number { inputNumber } has { factors.Count } unique { description }: ");
                 Console.WriteLine(String.Join(", ", factors));
             }
         }
