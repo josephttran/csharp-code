@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ConsoleUI
 {
@@ -25,6 +26,7 @@ namespace ConsoleUI
                     Console.WriteLine($"{ inputNumber } is Not a prime number");
                     PrintFactors("Factors", inputNumber, factors);
                     PrintFactors("Prime factors", inputNumber, primeFactors);
+                    PrintLargestPrimeFactor(primeFactors);
                 }
 
                 Console.Write("\nEnter a number: ");
@@ -108,6 +110,14 @@ namespace ConsoleUI
             {
                 Console.Write($"{ description } of { inputNumber }: ");
                 Console.WriteLine(String.Join(", ", factors));
+            }
+        }
+
+        static void PrintLargestPrimeFactor(List<int> primeFactors)
+        {
+            if (primeFactors.Count != 0)
+            {
+                Console.WriteLine($"The largest prime factor in the list is { primeFactors.Max() }");
             }
         }
     }
