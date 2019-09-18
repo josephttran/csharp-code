@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleUI
 {
@@ -18,7 +19,12 @@ namespace ConsoleUI
                 }
                 else
                 {
+                    List<int> factors = GetFactorList(inputNumber);
+                    List<int> primeFactors = GetPrimeFactorList(inputNumber);
+
                     Console.WriteLine($"{ inputNumber } is Not a prime number");
+                    PrintFactors("Factors", inputNumber, factors);
+                    PrintFactors("Prime factors", inputNumber, primeFactors);
                 }
 
                 Console.Write("\nEnter a number: ");
@@ -51,6 +57,58 @@ namespace ConsoleUI
             }
 
             return true;
+        }
+
+        static List<int> GetFactorList(int inputNumber)
+        {
+            List<int> factorList = new List<int>();
+
+            if (inputNumber <= 3)
+            {
+                return factorList;
+            }
+
+            for (int number = 2; number <= inputNumber / 2; number++)
+            {
+                if (inputNumber % number == 0)
+                {
+                    factorList.Add(number);
+                }
+            }
+
+            return factorList;
+        }
+
+        static List<int> GetPrimeFactorList(int inputNumber)
+        {
+            List<int> primeFactorList = new List<int>();
+
+            if (inputNumber <= 3)
+            {
+                return primeFactorList;
+            }
+
+            for (int number = 2; number <= inputNumber / 2; number++)
+            {
+                if (inputNumber % number == 0)
+                {
+                    if (IsPrime(number))
+                    {
+                        primeFactorList.Add(number);
+                    }
+                }
+            }
+
+            return primeFactorList;
+        }
+
+        static void PrintFactors(string description, int inputNumber, List<int> factors)
+        {
+            if (factors.Count != 0)
+            {
+                Console.Write($"{ description } of { inputNumber }: ");
+                Console.WriteLine(String.Join(", ", factors));
+            }
         }
     }
 }
