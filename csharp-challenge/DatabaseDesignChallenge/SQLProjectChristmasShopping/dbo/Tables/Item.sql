@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Item]
+(
+	[ItemId] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Cost] DECIMAL(8, 2) NOT NULL
+)
