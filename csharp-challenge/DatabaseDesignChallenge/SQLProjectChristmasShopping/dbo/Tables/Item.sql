@@ -1,5 +1,6 @@
 ﻿CREATE TABLE [dbo].[Item]
 (
 	[ItemId] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [Cost] DECIMAL(8, 2) NOT NULL
+    [Cost] DECIMAL(8, 2) NOT NULL, 
+    [Name] NVARCHAR(50) NOT NULL
 )
