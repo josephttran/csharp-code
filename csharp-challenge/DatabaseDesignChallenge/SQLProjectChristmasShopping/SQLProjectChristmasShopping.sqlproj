@@ -60,7 +60,8 @@
     <Folder Include="dbo\Tables" />
     <Folder Include="dbo\Views" />
     <Folder Include="dbo\Procedures" />
-    <Folder Include="publish" />
+    <Folder Include="PublishProfile" />
+    <Folder Include="PostDeployScript" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Person.sql" />
@@ -72,6 +73,9 @@
     <RefactorLog Include="SQLProjectChristmasShopping.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="publish\SQLProjectChristmasShopping.publish.xml" />
+    <None Include="PublishProfile\SQLProjectChristmasShopping.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeployScript\Script.PostDeployment.sql" />
   </ItemGroup>
 </Project>
