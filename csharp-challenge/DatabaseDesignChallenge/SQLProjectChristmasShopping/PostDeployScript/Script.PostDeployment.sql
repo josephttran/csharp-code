@@ -32,7 +32,7 @@ END
 
 IF NOT EXISTS (SELECT 1 FROM dbo.Item)
 BEGIN
-  INSERT INTO dbo.Item (Name, Cost)
+  INSERT INTO dbo.Item ([GiftName], Cost)
   VALUES ('Healing Stone Mug', 24.95), 
   ('Green Herbal Tea Kit', 40.00), 
   ('Bubble Tea Kit', 35.00), 
