@@ -21,12 +21,13 @@ END
 
 IF NOT EXISTS (SELECT 1 FROM dbo.Person)
 BEGIN
-  INSERT INTO dbo.Person (FirstName, LastName, Age, AddressID)
-  VALUES ('J', 'T', 22, 1),
-  ('Alice', 'Wonder', 14, 1),
-  ('Bob', 'Key', 14, 1),
-  ('Eve', 'Shadow', 10, 3),
-  ('Midnight', 'Sun', 22, 2);
+  INSERT INTO dbo.Person (FirstName, LastName, Age, AddressID, Budget)
+  VALUES ('J', 'T', 22, 1, 100),
+  ('Alice', 'Wonder', 14, 1, 50),
+  ('Bob', 'Key', 14, 1, 50),
+  ('Eve', 'Shadow', 10, 3, 50),
+  ('Midnight', 'Sun', 22, 2, 100),
+  ('Fast', 'Light', 22, 2, 100);
 END
 
 IF NOT EXISTS (SELECT 1 FROM dbo.Item)

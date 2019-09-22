@@ -5,5 +5,6 @@
     [LastName] NVARCHAR(50) NOT NULL, 
     [Age] TINYINT NULL, 
     [AddressId] INT NULL, 
+    [Budget] DECIMAL(8, 2) NULL, 
     CONSTRAINT [FK_Person_Address] FOREIGN KEY ([AddressId]) REFERENCES [Address]([AddressId]) ON DELETE SET NULL
 )
