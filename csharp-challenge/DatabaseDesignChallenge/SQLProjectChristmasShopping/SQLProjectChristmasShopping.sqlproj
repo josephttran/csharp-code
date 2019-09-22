@@ -70,6 +70,7 @@
     <Build Include="dbo\Tables\PersonItem.sql" />
     <Build Include="dbo\Views\PersonGiftBudget.sql" />
     <Build Include="dbo\Views\FullPersonItem.sql" />
+    <Build Include="dbo\Procedures\spCapturePurchase.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SQLProjectChristmasShopping.refactorlog" />
