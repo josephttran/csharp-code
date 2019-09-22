@@ -68,8 +68,8 @@
     <Build Include="dbo\Tables\Address.sql" />
     <Build Include="dbo\Tables\Item.sql" />
     <Build Include="dbo\Tables\PersonItem.sql" />
-    <Build Include="dbo\Views\PersonBudget.sql" />
-    <Build Include="dbo\Procedures\Procedure1.sql" />
+    <Build Include="dbo\Views\PersonGiftBudget.sql" />
+    <Build Include="dbo\Views\FullPersonItem.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SQLProjectChristmasShopping.refactorlog" />
