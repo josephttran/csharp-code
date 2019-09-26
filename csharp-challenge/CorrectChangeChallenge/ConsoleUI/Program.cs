@@ -11,11 +11,12 @@ namespace ConsoleUI
             Dictionary<string, decimal> coins = new Dictionary<string, decimal>()
             {
                 { "quarter", 0.25m },
-                { "dime", 0.10m },
                 { "nickel", 0.05m },
-                { "penny", 0.01m }
+                { "penny", 0.01m },
+                { "dime", 0.10m },
             };
-
+            coins = coins.OrderByDescending(keyValuePair => keyValuePair.Value)
+                         .ToDictionary(keyValuePair => keyValuePair.Key, keyValuePair => keyValuePair.Value);
             string formatSpecifier = "C";
             decimal amountOwe = 0.10m;
             decimal amountPaid = 1.20m;
