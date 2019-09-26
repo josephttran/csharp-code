@@ -18,11 +18,22 @@ namespace ConsoleUI
 
             string formatSpecifier = "C";
             decimal amountOwe = 0.10m;
-            decimal amountPaid = 1.00m;
+            decimal amountPaid = 1.20m;
             decimal changeAmount = CalculateChangeAmount(amountOwe, amountPaid);
-            Dictionary<string, int> change = GetChangeInCoin(coins, changeAmount);
 
-            PrintChangeInfo(formatSpecifier, amountOwe, amountPaid, changeAmount, change);
+            if (changeAmount < 0)
+            {
+                Console.WriteLine("You have under paid!");
+            }
+            else if (changeAmount == 0)
+            {
+                Console.WriteLine("Exact amount paid. Nothing is due.");
+            }
+            else
+            {
+                Dictionary<string, int> change = GetChangeInCoin(coins, changeAmount);
+                PrintChangeInfo(formatSpecifier, amountOwe, amountPaid, changeAmount, change);
+            }
         }
 
         static decimal CalculateChangeAmount(decimal amountDue, decimal amountPaid)
