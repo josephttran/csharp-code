@@ -8,18 +8,23 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            Dictionary<string, decimal> coins = new Dictionary<string, decimal>()
+            Dictionary<string, decimal> currency = new Dictionary<string, decimal>()
             {
                 { "quarter", 0.25m },
                 { "nickel", 0.05m },
                 { "penny", 0.01m },
                 { "dime", 0.10m },
+                { "one dollar", 1.00m },
+                { "five dollar", 5.00m },
+                { "ten dollar", 10.00m },
+                { "twenty dollar", 20.00m },
+                { "fifty dollar", 50.00m },
             };
-            coins = coins.OrderByDescending(keyValuePair => keyValuePair.Value)
+            currency = currency.OrderByDescending(keyValuePair => keyValuePair.Value)
                          .ToDictionary(keyValuePair => keyValuePair.Key, keyValuePair => keyValuePair.Value);
             string formatSpecifier = "C";
-            decimal amountOwe = 0.10m;
-            decimal amountPaid = 1.20m;
+            decimal amountOwe = 100.11m;
+            decimal amountPaid = 200.00m;
             decimal changeAmount = CalculateChangeAmount(amountOwe, amountPaid);
 
             if (changeAmount < 0)
@@ -32,7 +37,7 @@ namespace ConsoleUI
             }
             else
             {
-                Dictionary<string, int> change = GetChangeInCoin(coins, changeAmount);
+                Dictionary<string, int> change = GetChangeInCoin(currency, changeAmount);
                 PrintChangeInfo(formatSpecifier, amountOwe, amountPaid, changeAmount, change);
             }
         }
@@ -42,11 +47,11 @@ namespace ConsoleUI
             return decimal.Subtract(amountPaid, amountDue);
         }
 
-        static Dictionary<string, int> GetChangeInCoin(Dictionary<string, decimal> coins, decimal changeAmount)
+        static Dictionary<string, int> GetChangeInCoin(Dictionary<string, decimal> currency, decimal changeAmount)
         {
             Dictionary<string, int> change = new Dictionary<string, int>();
 
-            foreach (KeyValuePair<string, decimal> coin in coins)
+            foreach (KeyValuePair<string, decimal> coin in currency)
             {
                 while (coin.Value <= changeAmount)
                 {
