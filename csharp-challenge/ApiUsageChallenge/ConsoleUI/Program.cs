@@ -22,11 +22,11 @@ namespace ConsoleUI
             int id = -1;
             bool valid = false;
 
-            Console.Write("Enter an ID: ");
-            string userInput = Console.ReadLine();
-
             while (!valid)
             {
+                Console.Write("\nEnter an ID: ");
+                string userInput = Console.ReadLine();
+
                 if (int.TryParse(userInput, out int inputID))
                 {
                     valid = true;
@@ -35,8 +35,6 @@ namespace ConsoleUI
                 else
                 {
                     Console.WriteLine("Error: Please enter a number!");
-                    Console.Write("\nEnter an ID: ");
-                    userInput = Console.ReadLine();
                 }
             }
 
