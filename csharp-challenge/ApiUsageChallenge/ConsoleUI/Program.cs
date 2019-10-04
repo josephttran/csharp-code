@@ -10,11 +10,30 @@ namespace ConsoleUI
     {
         static async Task Main(string[] args)
         {
-            var starWarsPeopleServices = new StarWarsPeopleServices();
-            int personId = GetIdFromInput();
-            StarWarsPerson starWarsPerson = await starWarsPeopleServices.GetStarWarsPerson(personId);
+            bool quit = false;
 
-            starWarsPeopleServices.ShowPrettyJson(starWarsPerson);
+            while (!quit)
+            {
+                Console.Write("\nFind a Stars War person (yes, no)? ");
+                string userInput = Console.ReadLine();
+
+                if (userInput.ToLower() == "yes")
+                {
+                    var starWarsPeopleServices = new StarWarsPeopleServices();
+                    int personId = GetIdFromInput();
+                    StarWarsPerson starWarsPerson = await starWarsPeopleServices.GetStarWarsPerson(personId);
+
+                    starWarsPeopleServices.ShowPrettyJson(starWarsPerson);
+                }
+                else if (userInput.ToLower() == "no")
+                {
+                    quit = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid answer!");
+                }
+            }
         }
 
         static int GetIdFromInput()
