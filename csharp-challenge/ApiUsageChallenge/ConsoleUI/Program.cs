@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using APIHelperLibrary.StarWars.Model;
@@ -22,8 +23,10 @@ namespace ConsoleUI
                     var starWarsPeopleServices = new StarWarsPeopleServices();
                     int personId = GetIdFromInput();
                     StarWarsPerson starWarsPerson = await starWarsPeopleServices.GetStarWarsPerson(personId);
+                    string json = starWarsPeopleServices.GetSerializePerson(starWarsPerson);
 
-                    starWarsPeopleServices.ShowPrettyJson(starWarsPerson);
+                    StarWarsPrinter.ShowPrettyFilteredJson(json);
+                    // StarWarsPrinter.ShowPrettyFullJson(json);
                 }
                 else if (userInput.ToLower() == "no")
                 {

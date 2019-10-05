@@ -37,12 +37,11 @@ namespace APIHelperLibrary.StarWars.Services
             return starWarPerson;
         }
 
-        public void ShowPrettyJson(StarWarsPerson starWarsPerson)
+        public string GetSerializePerson(StarWarsPerson starWarsPerson)
         {
-            var jsonOption = new JsonSerializerOptions { WriteIndented = true };
-            var json = JsonSerializer.Serialize(starWarsPerson, jsonOption);
-            Console.WriteLine();
-            Console.WriteLine(json);
+            JsonSerializerOptions jsonOption = new JsonSerializerOptions { WriteIndented = true };
+
+            return JsonSerializer.Serialize(starWarsPerson, jsonOption);
         }
     }
 }
