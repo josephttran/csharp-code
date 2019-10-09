@@ -48,6 +48,7 @@ is a valid word."
 
         static void PrintStringInfo(string myString)
         {
+            Console.WriteLine($"Total words: { StringHelper.WordCount(myString) }");
             Console.WriteLine($"Total Charactors: { StringHelper.CharacterCount(myString) }");
             Console.WriteLine($"Total Charactors minus spaces and line return: { StringHelper.CharacterMinusSpaceLineReturnCount(myString) }");
         }

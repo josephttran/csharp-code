@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Text.RegularExpressions;
 
 namespace StringHelperLibrary
 {
@@ -37,6 +39,31 @@ namespace StringHelperLibrary
             }
 
             return count;
+        }
+
+        public static string[] GetWords(string myString)
+        {
+            MatchCollection matches = Regex.Matches(myString, @"(\w+)");
+            string[] myStrings = new string[matches.Count];
+
+            IEnumerator matchesEnumerator = matches.GetEnumerator();
+
+            int index = 0;
+
+            while (matchesEnumerator.MoveNext())
+            {
+                myStrings.SetValue(matchesEnumerator.Current.ToString(), index);
+                index++;
+            }
+
+            return myStrings;
+        }
+
+        public static int WordCount(string myString)
+        {
+            MatchCollection matchCollection = Regex.Matches(myString, @"(\w+)");
+
+            return matchCollection.Count;
         }
     }
 }

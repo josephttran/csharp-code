@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using StringHelperLibrary;
+using System;
 using System.Collections.Generic;
 
 namespace StringHelperTests
@@ -38,6 +39,15 @@ is a valid word."
             }
         }
 
+        static IEnumerable<TestCaseData> WordCountTestData
+        {
+            get
+            {
+                yield return new TestCaseData(tests[0]).Returns(14);
+                yield return new TestCaseData(tests[1]).Returns(45);
+            }
+        }
+
         [TestCaseSource(typeof(Tests), "CharacterCountTestData")]
         public int TestCharacterCount(string myString)
         {
@@ -48,6 +58,34 @@ is a valid word."
         public static int TestCharacterMinusSpaceLineReturnCount(string myString)
         {
             return StringHelper.CharacterMinusSpaceLineReturnCount(myString);
+        }
+
+        [TestCaseSource(typeof(Tests), "WordCountTestData")]
+        public int TestWordCount(string myString)
+        {
+            return StringHelper.WordCount(myString);
+        }
+
+        [Test]
+        public void TestPrintWords()
+        {
+            string[] myStrings = StringHelper.GetWords(tests[0]);
+
+            foreach (string s in myStrings)
+            {
+                Console.WriteLine(s);
+            }
+        }
+
+        [Test]
+        public void TestPrintWordsTwo()
+        {
+            string[] myStrings = StringHelper.GetWords(tests[1]);
+
+            foreach (string s in myStrings)
+            {
+                Console.WriteLine(s);
+            }
         }
     }
 }
