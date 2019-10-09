@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleUI", "ConsoleUI\ConsoleUI.csproj", "{B1A93F57-7885-4D59-8C64-6383D2717912}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StringHelperLibraryTests", "StringHelperTests\StringHelperLibraryTests.csproj", "{5246334C-950B-405E-8187-755176B4CDA7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StringHelperLibrary", "StringHelperLibrary\StringHelperLibrary.csproj", "{A0B2C8EA-07FA-4EB3-B00B-822720E7E28D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{B1A93F57-7885-4D59-8C64-6383D2717912}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1A93F57-7885-4D59-8C64-6383D2717912}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1A93F57-7885-4D59-8C64-6383D2717912}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5246334C-950B-405E-8187-755176B4CDA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5246334C-950B-405E-8187-755176B4CDA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5246334C-950B-405E-8187-755176B4CDA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5246334C-950B-405E-8187-755176B4CDA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0B2C8EA-07FA-4EB3-B00B-822720E7E28D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0B2C8EA-07FA-4EB3-B00B-822720E7E28D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0B2C8EA-07FA-4EB3-B00B-822720E7E28D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0B2C8EA-07FA-4EB3-B00B-822720E7E28D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

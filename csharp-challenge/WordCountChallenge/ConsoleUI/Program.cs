@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StringHelperLibrary;
 
 namespace ConsoleUI
 {
@@ -40,8 +37,19 @@ is a valid word."
 
         static void Main(string[] args)
         {
+            Console.WriteLine("First string test[0] Values: ");
+            PrintStringInfo(tests[0]);
+
+            Console.WriteLine("\nSecond string test[1] Values: ");
+            PrintStringInfo(tests[1]);
 
             Console.ReadLine();
+        }
+
+        static void PrintStringInfo(string myString)
+        {
+            Console.WriteLine($"Total Charactors: { StringHelper.CharacterCount(myString) }");
+            Console.WriteLine($"Total Charactors minus spaces and line return: { StringHelper.CharacterMinusSpaceLineReturnCount(myString) }");
         }
     }
 }

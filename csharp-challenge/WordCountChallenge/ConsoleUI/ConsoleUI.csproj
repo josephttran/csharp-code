@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StringHelperLibrary\StringHelperLibrary.csproj">
+      <Project>{a0b2c8ea-07fa-4eb3-b00b-822720e7e28d}</Project>
+      <Name>StringHelperLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
