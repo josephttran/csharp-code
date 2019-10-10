@@ -2,6 +2,7 @@ using NUnit.Framework;
 using StringHelperLibrary;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StringHelperTests
 {
@@ -86,6 +87,28 @@ is a valid word."
             {
                 Console.WriteLine(s);
             }
+        }
+
+        [Test]
+        public void TestMaxWordFrequency()
+        {
+            Dictionary<string, int> wordAmountPairs = StringHelper.GetEachWordAmount(tests[0]);
+            int valueMax = wordAmountPairs.Values.Max();
+            string valueMaxKey = wordAmountPairs.Where(kv => kv.Value == valueMax).Max(kv => kv.Key);
+
+            StringAssert.AreEqualIgnoringCase("The", valueMaxKey);
+            Assert.AreEqual(valueMax, 2);
+        }
+
+        [Test]
+        public void TestMaxWordFrequencyTwo()
+        {
+            Dictionary<string, int> wordAmountPairs = StringHelper.GetEachWordAmount(tests[1]);
+            int valueMax = wordAmountPairs.Values.Max();
+            string valueMaxKey = wordAmountPairs.Where(kv => kv.Value == valueMax).Max(kv => kv.Key);
+
+            StringAssert.AreEqualIgnoringCase("The", valueMaxKey);
+            Assert.AreEqual(valueMax, 6);
         }
     }
 }

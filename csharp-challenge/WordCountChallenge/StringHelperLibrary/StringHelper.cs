@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace StringHelperLibrary
@@ -64,6 +65,27 @@ namespace StringHelperLibrary
             MatchCollection matchCollection = Regex.Matches(myString, @"(\w+)");
 
             return matchCollection.Count;
+        }
+
+        public static Dictionary<string, int> GetEachWordAmount(string myString)
+        {
+            MatchCollection matches = Regex.Matches(myString.ToLower(), @"(\w+)");
+            Dictionary<string, int> wordAmountPairs = new Dictionary<string, int>();
+            IEnumerator matchesEnumerator = matches.GetEnumerator();
+
+            while (matchesEnumerator.MoveNext())
+            {
+                if (!wordAmountPairs.ContainsKey(matchesEnumerator.Current.ToString()))
+                {
+                    wordAmountPairs.Add(matchesEnumerator.Current.ToString(), 1);
+                }
+                else
+                {
+                    wordAmountPairs[matchesEnumerator.Current.ToString()]++;
+                }
+            }
+
+            return wordAmountPairs;
         }
     }
 }

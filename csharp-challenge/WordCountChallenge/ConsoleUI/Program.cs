@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using StringHelperLibrary;
 
 namespace ConsoleUI
@@ -37,20 +39,32 @@ is a valid word."
 
         static void Main(string[] args)
         {
+            (string, int) wordAmountTestZero = GetMaxWordAmountPair(StringHelper.GetEachWordAmount(tests[0]));
+            (string, int) wordAmountTestOne = GetMaxWordAmountPair(StringHelper.GetEachWordAmount(tests[1]));
+
             Console.WriteLine("First string test[0] Values: ");
-            PrintStringInfo(tests[0]);
+            PrintStringInfo(tests[0], wordAmountTestZero);
 
             Console.WriteLine("\nSecond string test[1] Values: ");
-            PrintStringInfo(tests[1]);
+            PrintStringInfo(tests[1], wordAmountTestOne);
 
             Console.ReadLine();
         }
 
-        static void PrintStringInfo(string myString)
+        static void PrintStringInfo(string myString, (string, int) wordAmountPair)
         {
             Console.WriteLine($"Total words: { StringHelper.WordCount(myString) }");
             Console.WriteLine($"Total Charactors: { StringHelper.CharacterCount(myString) }");
             Console.WriteLine($"Total Charactors minus spaces and line return: { StringHelper.CharacterMinusSpaceLineReturnCount(myString) }");
+            Console.WriteLine($"Most use words: { wordAmountPair.Item1  } ({ wordAmountPair.Item2 } times)");
+        }
+
+        static (string, int) GetMaxWordAmountPair(Dictionary<string, int> wordAmountPairs)
+        {
+            int valueMax = wordAmountPairs.Values.Max();
+            string valueMaxKey = wordAmountPairs.Where(kv => kv.Value == valueMax).Max(kv => kv.Key);
+
+            return (valueMaxKey, valueMax);
         }
     }
 }
