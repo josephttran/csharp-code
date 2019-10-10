@@ -39,35 +39,35 @@ is a valid word."
 
         static void Main(string[] args)
         {
-            (string, int) wordAmountTestZero = GetMaxAmountPair(StringHelper.GetEachWordAmount(tests[0]));
-            (string, int) wordAmountTestOne = GetMaxAmountPair(StringHelper.GetEachWordAmount(tests[1]));
-            (string, int) characterAmountTestZero = GetMaxAmountPair(StringHelper.GetEachAlphaCharacterAmount(tests[0]));
-            (string, int) characterAmountTestOne = GetMaxAmountPair(StringHelper.GetEachAlphaCharacterAmount(tests[1]));
+            VerbatimString verbatimString = new VerbatimString(tests[0]);
+            VerbatimString verbatimStringTwo = new VerbatimString(tests[1]);
+
+            InitilizeVerbatim(verbatimString);
+            InitilizeVerbatim(verbatimStringTwo);
 
             Console.WriteLine("First string test[0] Values: ");
-            PrintStringInfo(tests[0], wordAmountTestZero, characterAmountTestZero);
+            verbatimString.DisplayDetails();
 
             Console.WriteLine("\nSecond string test[1] Values: ");
-            PrintStringInfo(tests[1], wordAmountTestOne, characterAmountTestOne);
-
+            verbatimStringTwo.DisplayDetails();
             Console.ReadLine();
         }
 
-        static void PrintStringInfo(string myString, (string, int) wordAmountPair, (string, int) characterAmountPair)
+        static void InitilizeVerbatim(VerbatimString verbatimString)
         {
-            Console.WriteLine($"Total words: { StringHelper.WordCount(myString) }");
-            Console.WriteLine($"Total Characters: { StringHelper.CharacterCount(myString) }");
-            Console.WriteLine($"Total Characters minus spaces and line return: { StringHelper.CharacterMinusSpaceLineReturnCount(myString) }");
-            Console.WriteLine($"Most used word: { wordAmountPair.Item1  } ({ wordAmountPair.Item2 } times)");
-            Console.WriteLine($"Most used character: { characterAmountPair.Item1  } ({ characterAmountPair.Item2 } times)");
-        }
+            verbatimString.WordCount = StringHelper.WordCount(verbatimString.MyString);
+            verbatimString.CharacterCount = StringHelper.CharacterCount(verbatimString.MyString);
+            verbatimString.CharacterMinusSpaceLineCount = StringHelper.CharacterMinusSpaceLineReturnCount(verbatimString.MyString);
+            verbatimString.MostWordAmount = GetMaxAmountPair(StringHelper.GetEachWordAmount(verbatimString.MyString));
+            verbatimString.MostAlphaCharacterAmount = GetMaxAmountPair(StringHelper.GetEachAlphaCharacterAmount(verbatimString.MyString));
 
-        static (string, int) GetMaxAmountPair(Dictionary<string, int> wordAmountPairs)
-        {
-            int valueMax = wordAmountPairs.Values.Max();
-            string valueMaxKey = wordAmountPairs.Where(kv => kv.Value == valueMax).Max(kv => kv.Key);
+            (string, int) GetMaxAmountPair(Dictionary<string, int> wordAmountPairs)
+            {
+                int valueMax = wordAmountPairs.Values.Max();
+                string valueMaxKey = wordAmountPairs.Where(kv => kv.Value == valueMax).Max(kv => kv.Key);
 
-            return (valueMaxKey, valueMax);
+                return (valueMaxKey, valueMax);
+            }
         }
     }
 }
