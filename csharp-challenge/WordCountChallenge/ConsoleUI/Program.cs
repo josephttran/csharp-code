@@ -39,27 +39,30 @@ is a valid word."
 
         static void Main(string[] args)
         {
-            (string, int) wordAmountTestZero = GetMaxWordAmountPair(StringHelper.GetEachWordAmount(tests[0]));
-            (string, int) wordAmountTestOne = GetMaxWordAmountPair(StringHelper.GetEachWordAmount(tests[1]));
+            (string, int) wordAmountTestZero = GetMaxAmountPair(StringHelper.GetEachWordAmount(tests[0]));
+            (string, int) wordAmountTestOne = GetMaxAmountPair(StringHelper.GetEachWordAmount(tests[1]));
+            (string, int) characterAmountTestZero = GetMaxAmountPair(StringHelper.GetEachAlphaCharacterAmount(tests[0]));
+            (string, int) characterAmountTestOne = GetMaxAmountPair(StringHelper.GetEachAlphaCharacterAmount(tests[1]));
 
             Console.WriteLine("First string test[0] Values: ");
-            PrintStringInfo(tests[0], wordAmountTestZero);
+            PrintStringInfo(tests[0], wordAmountTestZero, characterAmountTestZero);
 
             Console.WriteLine("\nSecond string test[1] Values: ");
-            PrintStringInfo(tests[1], wordAmountTestOne);
+            PrintStringInfo(tests[1], wordAmountTestOne, characterAmountTestOne);
 
             Console.ReadLine();
         }
 
-        static void PrintStringInfo(string myString, (string, int) wordAmountPair)
+        static void PrintStringInfo(string myString, (string, int) wordAmountPair, (string, int) characterAmountPair)
         {
             Console.WriteLine($"Total words: { StringHelper.WordCount(myString) }");
-            Console.WriteLine($"Total Charactors: { StringHelper.CharacterCount(myString) }");
-            Console.WriteLine($"Total Charactors minus spaces and line return: { StringHelper.CharacterMinusSpaceLineReturnCount(myString) }");
-            Console.WriteLine($"Most use words: { wordAmountPair.Item1  } ({ wordAmountPair.Item2 } times)");
+            Console.WriteLine($"Total Characters: { StringHelper.CharacterCount(myString) }");
+            Console.WriteLine($"Total Characters minus spaces and line return: { StringHelper.CharacterMinusSpaceLineReturnCount(myString) }");
+            Console.WriteLine($"Most used word: { wordAmountPair.Item1  } ({ wordAmountPair.Item2 } times)");
+            Console.WriteLine($"Most used character: { characterAmountPair.Item1  } ({ characterAmountPair.Item2 } times)");
         }
 
-        static (string, int) GetMaxWordAmountPair(Dictionary<string, int> wordAmountPairs)
+        static (string, int) GetMaxAmountPair(Dictionary<string, int> wordAmountPairs)
         {
             int valueMax = wordAmountPairs.Values.Max();
             string valueMaxKey = wordAmountPairs.Where(kv => kv.Value == valueMax).Max(kv => kv.Key);

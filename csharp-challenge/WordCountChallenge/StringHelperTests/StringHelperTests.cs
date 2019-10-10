@@ -110,5 +110,27 @@ is a valid word."
             StringAssert.AreEqualIgnoringCase("The", valueMaxKey);
             Assert.AreEqual(valueMax, 6);
         }
+
+        [Test]
+        public void TestMaxCharacterFrequencyOne()
+        {
+            Dictionary<string, int> characterAmountPairs = StringHelper.GetEachAlphaCharacterAmount(tests[0]);
+            int valueMax = characterAmountPairs.Values.Max();
+            string valueMaxKey = characterAmountPairs.Where(kv => kv.Value == valueMax).Max(kv => kv.Key);
+
+            StringAssert.AreEqualIgnoringCase("E", valueMaxKey);
+            Assert.AreEqual(valueMax, 10);
+        }
+
+        [Test]
+        public void TestMaxCharacterFrequencyTwo()
+        {
+            Dictionary<string, int> characterAmountPairs = StringHelper.GetEachAlphaCharacterAmount(tests[1]);
+            int valueMax = characterAmountPairs.Values.Max();
+            string valueMaxKey = characterAmountPairs.Where(kv => kv.Value == valueMax).Max(kv => kv.Key);
+
+            StringAssert.AreEqualIgnoringCase("T", valueMaxKey);
+            Assert.AreEqual(valueMax, 24);
+        }
     }
 }

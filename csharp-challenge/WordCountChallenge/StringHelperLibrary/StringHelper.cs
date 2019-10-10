@@ -87,5 +87,27 @@ namespace StringHelperLibrary
 
             return wordAmountPairs;
         }
+
+        public static Dictionary<string, int> GetEachAlphaCharacterAmount(string myString)
+        {
+            Dictionary<string, int> alphaCharacterAmount = new Dictionary<string, int>();
+
+            foreach (char character in myString.ToLower())
+            {
+                if (char.IsLetter(character))
+                {
+                    if (!alphaCharacterAmount.ContainsKey(character.ToString()))
+                    {
+                        alphaCharacterAmount.Add(character.ToString(), 1);
+                    }
+                    else
+                    {
+                        alphaCharacterAmount[character.ToString()]++;
+                    }
+                }
+            }
+
+            return alphaCharacterAmount;
+        }
     }
 }
