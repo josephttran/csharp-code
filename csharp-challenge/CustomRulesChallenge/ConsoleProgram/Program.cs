@@ -14,7 +14,7 @@ namespace ConsoleProgram
                 LastName = "Corey",
                 PostalCode = "18423"
             };
-            
+
             Person personTwo = new Person
             {
                 FirstName = "Toggle",
@@ -22,11 +22,31 @@ namespace ConsoleProgram
                 PostalCode = "45423"
             };
 
-            ApplyRules(personOne);
-            ApplyRules(personTwo);
+            Company companyOne = new Company
+            {
+                Name = "Loopers",
+                PostalCode = "08423"
+            };
+
+            Company companyTwo = new Company
+            {
+                Name = "LoopersCorey",
+                PostalCode = "84656"
+            };
+
+            ApplyRules<Person>(Rules, personOne);
+            ApplyRules<Person>(Rules, personTwo);
+
+            ApplyRules<Company>(Rules, companyOne);
+            ApplyRules<Company>(Rules, companyTwo);
         }
 
-        static void ApplyRules(Person person)
+        static void ApplyRules<T>(Action<T> function, T obj)
+        {
+            function(obj);
+        }
+
+        static void Rules(Person person)
         {
             Console.WriteLine($"\n{ person.FirstName } { person.LastName }: ");
 
@@ -46,6 +66,28 @@ namespace ConsoleProgram
             if (person.PostalCode.StartsWith("18"))
             {
                 Console.WriteLine("In the same general area as Tim");
+            }
+        }
+
+        static void Rules(Company company)
+        {
+            Console.WriteLine($"\n{ company.Name }: ");
+
+            if (company.Name.ToLower().Contains("corey"))
+            {
+                if ((company.Name.ToLower() == "iamtimcorey"))
+                {
+                    Console.WriteLine("Tim's Company");
+                }
+                else
+                {
+                    Console.WriteLine("A company owned by a Corey");
+                }
+            };
+
+            if (company.PostalCode.StartsWith("08"))
+            {
+                Console.WriteLine("A company in New Jersey");
             }
         }
     }
