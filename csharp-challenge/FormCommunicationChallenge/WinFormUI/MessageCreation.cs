@@ -30,7 +30,16 @@ namespace WinFormUI
                 {
                     if (control is TextBox)
                     {
-                        (control as TextBox).AppendText($" { NameMessage.Name }: { NameMessage.Message }");
+                        if (this.Owner.Name == "Dashboard")
+                        {
+                            (control as TextBox).AppendText($"{ NameMessage.Message } ");
+                        }
+
+                        if (this.Owner.Name == "SubDashboard")
+                        {
+                            (control as TextBox).AppendText($"{ NameMessage.Name }: { NameMessage.Message } ");
+                        }
+
                         (control as TextBox).AppendText(Environment.NewLine);
                     }
                 }
