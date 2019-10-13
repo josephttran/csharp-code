@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.nameText = new System.Windows.Forms.TextBox();
             this.messageText = new System.Windows.Forms.TextBox();
             this.nameLabel = new System.Windows.Forms.Label();
             this.messageLabel = new System.Windows.Forms.Label();
             this.createMessage = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // nameText
@@ -41,6 +44,7 @@
             this.nameText.Name = "nameText";
             this.nameText.Size = new System.Drawing.Size(262, 35);
             this.nameText.TabIndex = 0;
+            this.nameText.Validating += new System.ComponentModel.CancelEventHandler(this.NameText_Validating);
             // 
             // messageText
             // 
@@ -48,6 +52,7 @@
             this.messageText.Name = "messageText";
             this.messageText.Size = new System.Drawing.Size(262, 35);
             this.messageText.TabIndex = 0;
+            this.messageText.Validating += new System.ComponentModel.CancelEventHandler(this.MessageText_Validating);
             // 
             // nameLabel
             // 
@@ -75,6 +80,11 @@
             this.createMessage.TabIndex = 2;
             this.createMessage.Text = "Create";
             this.createMessage.UseVisualStyleBackColor = true;
+            this.createMessage.Click += new System.EventHandler(this.CreateMessage_Click);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // MessageCreation
             // 
@@ -87,9 +97,10 @@
             this.Controls.Add(this.messageText);
             this.Controls.Add(this.nameText);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.Margin = new System.Windows.Forms.Padding(7);
             this.Name = "MessageCreation";
             this.Text = "MessageCreation for Weekly Challenge by Tim Corey";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -102,5 +113,6 @@
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.Label messageLabel;
         private System.Windows.Forms.Button createMessage;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

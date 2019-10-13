@@ -21,7 +21,7 @@ namespace WinFormUI
         {
             using (MessageCreation messageCreation = new MessageCreation())
             {
-                messageCreation.ShowDialog();
+                messageCreation.ShowDialog(this);
             };
         }
 
@@ -32,6 +32,7 @@ namespace WinFormUI
             if (subDashboardForm == null)
             {
                 SubDashboard subDashboard = new SubDashboard();
+
                 subDashboard.Show();
             }
         }

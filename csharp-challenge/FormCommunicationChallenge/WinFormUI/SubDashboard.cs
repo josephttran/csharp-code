@@ -21,7 +21,7 @@ namespace WinFormUI
         {
             using (MessageCreation messageCreation = new MessageCreation())
             {
-                messageCreation.ShowDialog();
+                messageCreation.ShowDialog(this);
             };
         }
     }
