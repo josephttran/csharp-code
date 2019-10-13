@@ -22,7 +22,8 @@ namespace WinFormUI
 
             MessageMediator = new MessageMediatorDashboard
             {
-                Dashboard = this
+                Dashboard = this,
+                RequireName = false
             };
         }
 
@@ -45,9 +46,9 @@ namespace WinFormUI
             }
         }
 
-        public void AppendMessageToTextBox(MessageModel messageModel)
+        public void AppendMessageToTextBox()
         {
-            messageText.AppendText($"{ messageModel.Name } ");
+            messageText.AppendText($"{ MessageMediator.MessageModel.Message } ");
         }
     }
 }

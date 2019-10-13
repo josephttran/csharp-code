@@ -9,6 +9,7 @@ namespace WinFormUI.Mediator
     public interface IMessageMediator
     {
         MessageModel MessageModel { get; set; }
+        bool RequireName { get; set; }
 
         void SendMessage();
     }

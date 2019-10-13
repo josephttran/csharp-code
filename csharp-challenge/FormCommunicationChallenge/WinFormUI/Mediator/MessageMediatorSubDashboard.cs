@@ -10,10 +10,11 @@ namespace WinFormUI.Mediator
     {
         public MessageModel MessageModel { get; set; }
         public SubDashboard SubDashboard { get; set; }
+        public bool RequireName { get; set; }
 
         public void SendMessage()
         {
-            SubDashboard.AppendNameAndMessageToTextBox(MessageModel);
+            SubDashboard.AppendNameAndMessageToTextBox();
         }
     }
 }

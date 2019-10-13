@@ -37,17 +37,20 @@ namespace WinFormUI
 
         private void NameText_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(nameText.Text))
+            if (MessageMediator.RequireName)
             {
-                e.Cancel = true;
-                nameText.Focus();
-                errorProvider.SetError(nameText, "Name should not be left blank!");
-            }
-            else
-            {
-                e.Cancel = false;
-                errorProvider.SetError(nameText, "");
-                NameMessage.Name = nameText.Text;
+                if (string.IsNullOrWhiteSpace(nameText.Text))
+                {
+                    e.Cancel = true;
+                    nameText.Focus();
+                    errorProvider.SetError(nameText, "Name should not be left blank!");
+                }
+                else
+                {
+                    e.Cancel = false;
+                    errorProvider.SetError(nameText, "");
+                    NameMessage.Name = nameText.Text;
+                }
             }
         }
 
