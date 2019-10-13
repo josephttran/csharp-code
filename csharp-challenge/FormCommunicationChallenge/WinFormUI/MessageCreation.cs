@@ -27,9 +27,12 @@ namespace WinFormUI
                 {
                     if (control is TextBox)
                     {
-                        (control as TextBox).Text += $" { nameText.Text }: { messageText.Text }";
+                        (control as TextBox).AppendText($" { nameText.Text }: { messageText.Text }");
+                        (control as TextBox).AppendText(Environment.NewLine);
                     }
                 }
+
+                this.Close();
             }
         }
 
