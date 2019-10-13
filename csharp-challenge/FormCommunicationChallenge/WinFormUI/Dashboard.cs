@@ -19,8 +19,10 @@ namespace WinFormUI
 
         private void LaunchMessage_Click(object sender, EventArgs e)
         {
-            MessageCreation messageCreation = new MessageCreation();
-            messageCreation.ShowDialog();
+            using (MessageCreation messageCreation = new MessageCreation())
+            {
+                messageCreation.ShowDialog();
+            };
         }
 
         private void LaunchSubDashboard_Click(object sender, EventArgs e)
