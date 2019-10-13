@@ -41,6 +41,7 @@
             this.launchMessage.TabIndex = 0;
             this.launchMessage.Text = "Open Message Creation";
             this.launchMessage.UseVisualStyleBackColor = true;
+            this.launchMessage.Click += new System.EventHandler(this.LaunchMessage_Click);
             // 
             // launchSubDashboard
             // 
@@ -50,6 +51,7 @@
             this.launchSubDashboard.TabIndex = 0;
             this.launchSubDashboard.Text = "Open Sub-Dashboard";
             this.launchSubDashboard.UseVisualStyleBackColor = true;
+            this.launchSubDashboard.Click += new System.EventHandler(this.LaunchSubDashboard_Click);
             // 
             // messageText
             // 
@@ -67,7 +69,7 @@
             this.Controls.Add(this.launchSubDashboard);
             this.Controls.Add(this.launchMessage);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.Margin = new System.Windows.Forms.Padding(7);
             this.Name = "Dashboard";
             this.Text = "Dashboard for Weekly Challenge by Tim Corey";
             this.ResumeLayout(false);

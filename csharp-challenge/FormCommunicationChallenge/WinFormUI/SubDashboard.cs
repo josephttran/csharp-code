@@ -16,5 +16,11 @@ namespace WinFormUI
         {
             InitializeComponent();
         }
+
+        private void LaunchMessage_Click(object sender, EventArgs e)
+        {
+            MessageCreation messageCreation = new MessageCreation();
+            messageCreation.ShowDialog();
+        }
     }
 }
