@@ -52,6 +52,9 @@
     <Compile Include="Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mediator\IMessageMediator.cs" />
+    <Compile Include="Mediator\MessageMediatorDashboard.cs" />
+    <Compile Include="Mediator\MessageMediatorSubDashboard.cs" />
     <Compile Include="MessageCreation.cs">
       <SubType>Form</SubType>
     </Compile>

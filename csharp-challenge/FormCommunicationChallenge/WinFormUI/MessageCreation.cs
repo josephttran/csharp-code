@@ -8,15 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using WinFormUI.Mediator;
+
 namespace WinFormUI
 {
     public partial class MessageCreation : Form
     {
-        private MessageModel NameMessage { get; set; }
+        private IMessageMediator MessageMediator { get; set; }
+        MessageModel NameMessage { get; set; }
 
-        public MessageCreation()
+        public MessageCreation(IMessageMediator messageMediator)
         {
             InitializeComponent();
+
+            MessageMediator = messageMediator;
             NameMessage = new MessageModel();
         }
 
@@ -24,26 +29,8 @@ namespace WinFormUI
         {
             if (ValidateChildren(ValidationConstraints.Enabled))
             {
-                Control.ControlCollection parentControls = this.Owner.Controls;
-
-                foreach (Control control in parentControls)
-                {
-                    if (control is TextBox)
-                    {
-                        if (this.Owner.Name == "Dashboard")
-                        {
-                            (control as TextBox).AppendText($"{ NameMessage.Message } ");
-                        }
-
-                        if (this.Owner.Name == "SubDashboard")
-                        {
-                            (control as TextBox).AppendText($"{ NameMessage.Name }: { NameMessage.Message } ");
-                        }
-
-                        (control as TextBox).AppendText(Environment.NewLine);
-                    }
-                }
-
+                MessageMediator.MessageModel = NameMessage;
+                MessageMediator.SendMessage();
                 this.Close();
             }
         }
