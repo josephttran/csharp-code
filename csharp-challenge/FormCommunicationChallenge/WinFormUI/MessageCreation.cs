@@ -12,9 +12,12 @@ namespace WinFormUI
 {
     public partial class MessageCreation : Form
     {
+        private MessageModel NameMessage { get; set; }
+
         public MessageCreation()
         {
             InitializeComponent();
+            NameMessage = new MessageModel();
         }
 
         private void CreateMessage_Click(object sender, EventArgs e)
@@ -27,7 +30,7 @@ namespace WinFormUI
                 {
                     if (control is TextBox)
                     {
-                        (control as TextBox).AppendText($" { nameText.Text }: { messageText.Text }");
+                        (control as TextBox).AppendText($" { NameMessage.Name }: { NameMessage.Message }");
                         (control as TextBox).AppendText(Environment.NewLine);
                     }
                 }
@@ -48,6 +51,7 @@ namespace WinFormUI
             {
                 e.Cancel = false;
                 errorProvider.SetError(nameText, "");
+                NameMessage.Name = nameText.Text;
             }
         }
 
@@ -63,6 +67,7 @@ namespace WinFormUI
             {
                 e.Cancel = false;
                 errorProvider.SetError(messageText, "");
+                NameMessage.Message = messageText.Text;
             }
         }
     }
