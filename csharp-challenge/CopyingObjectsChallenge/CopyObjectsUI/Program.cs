@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 
 namespace CopyObjectsUI
@@ -61,6 +63,13 @@ namespace CopyObjectsUI
             thirdPerson.FirstName = newName;
             SetPersonStreetAddress(thirdPerson, newAddress);
             ComparePerson(firstPerson, thirdPerson);
+
+
+            // Creates a another PersonModel object
+            CopyPersonMethodThree(firstPerson, out PersonModel fourthPerson);
+            fourthPerson.FirstName = newName;
+            SetPersonStreetAddress(fourthPerson, newAddress);
+            ComparePerson(firstPerson, fourthPerson);
 
             Console.ReadKey();
         }
@@ -122,6 +131,33 @@ namespace CopyObjectsUI
             }).ToList();
         }
 
+        static void CopyPersonMethodThree(PersonModel firstPerson, out PersonModel secondPerson)
+        {
+            MemoryStream stream = new MemoryStream();
+            BinaryFormatter formatter = new BinaryFormatter();
+
+            try
+            {
+                formatter.Serialize(stream, firstPerson);
+            }
+            catch (SerializationException exception)
+            {
+                Console.WriteLine($"Failed to deserialize: { exception.Message}");
+                throw;
+            }
+
+            try
+            {
+                stream.Position = 0;
+                secondPerson = (PersonModel) formatter.Deserialize(stream);
+            }
+            catch (SerializationException exception)
+            {
+                Console.WriteLine($"Failed to Serialize: { exception.Message }");
+                throw;
+            }
+        }
+
         static void SetPersonStreetAddress(PersonModel person, string newAddress)
         {
             foreach (AddressModel address in person.Addresses)
@@ -142,6 +178,7 @@ namespace CopyObjectsUI
         }
     }
 
+    [Serializable]
     public class PersonModel
     {
         public string FirstName { get; set; }
@@ -150,6 +187,7 @@ namespace CopyObjectsUI
         public List<AddressModel> Addresses { get; set; } = new List<AddressModel>();
     }
 
+    [Serializable]
     public class AddressModel
     {
         public string StreetAddress { get; set; }
