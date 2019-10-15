@@ -53,6 +53,15 @@ namespace CopyObjectsUI
             // Ensure that the following statements are true
             ComparePerson(firstPerson, secondPerson);
 
+
+            // Creates a another PersonModel object
+            PersonModel thirdPerson = new PersonModel();
+
+            CopyPersonMethodTwo(firstPerson, ref thirdPerson);
+            thirdPerson.FirstName = newName;
+            SetPersonStreetAddress(thirdPerson, newAddress);
+            ComparePerson(firstPerson, thirdPerson);
+
             Console.ReadKey();
         }
 
@@ -93,6 +102,26 @@ namespace CopyObjectsUI
             }
         }
 
+        static void CopyPersonMethodTwo(PersonModel firstPerson, ref PersonModel secondPerson)
+        {
+            List<AddressModel> addresses = new List<AddressModel>();
+
+            secondPerson = new PersonModel
+            {
+                FirstName = firstPerson.FirstName,
+                LastName = firstPerson.LastName,
+                DateOfBirth = firstPerson.DateOfBirth,
+            };
+
+            secondPerson.Addresses = firstPerson.Addresses.Select(person => new AddressModel
+            {
+                StreetAddress = person.StreetAddress,
+                State = person.State,
+                City = person.City,
+                ZipCode = person.ZipCode
+            }).ToList();
+        }
+
         static void SetPersonStreetAddress(PersonModel person, string newAddress)
         {
             foreach (AddressModel address in person.Addresses)
@@ -103,7 +132,7 @@ namespace CopyObjectsUI
 
         static void ComparePerson(PersonModel firstPerson, PersonModel secondPerson)
         {
-            Console.WriteLine($"{ firstPerson.FirstName } != { secondPerson.FirstName }");
+            Console.WriteLine($"\n{ firstPerson.FirstName } != { secondPerson.FirstName }");
             Console.WriteLine($"{ firstPerson.LastName } == { secondPerson.LastName }");
             Console.WriteLine($"{ firstPerson.DateOfBirth.ToShortDateString() } == { secondPerson.DateOfBirth.ToShortDateString() }");
             Console.WriteLine($"{ firstPerson.Addresses[0].StreetAddress } != { secondPerson.Addresses[0].StreetAddress }");
