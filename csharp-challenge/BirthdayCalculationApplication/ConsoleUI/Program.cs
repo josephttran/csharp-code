@@ -28,12 +28,14 @@ namespace ConsoleUI
         static void RunBirthday()
         {
             DateTime birthday = GetBirthdate();
-            Person person = new Person(birthday);
+            int ageInYears = AgeHelper.CalculateAgeInYears(birthday);
+            int ageInMonths = AgeHelper.CalculateAgeInMonths(birthday);
+            int ageInDays = AgeHelper.CalculateAgeInDays(birthday);
 
             Console.WriteLine($"Date of birth is { birthday.ToShortDateString() }");
-            Console.WriteLine($"The user is { person.AgeInYears } years old");
-            Console.WriteLine($"The user is { person.AgeInMonths } months old");
-            Console.WriteLine($"The user is { person.AgeInDays } days old");
+            Console.WriteLine($"The user is { ageInYears } years old");
+            Console.WriteLine($"The user is { ageInMonths } months old");
+            Console.WriteLine($"The user is { ageInDays } days old");
         }
 
         static DateTime GetBirthdate()
