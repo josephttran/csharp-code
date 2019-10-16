@@ -31,11 +31,14 @@ namespace ConsoleUI
             int ageInYears = AgeHelper.CalculateAgeInYears(birthday);
             int ageInMonths = AgeHelper.CalculateAgeInMonths(birthday);
             int ageInDays = AgeHelper.CalculateAgeInDays(birthday);
+            int nextBirthdayInMonths = BirthdayHelper.CalcluateNextBirthday(birthday);
 
             Console.WriteLine($"Date of birth is { birthday.ToShortDateString() }");
             Console.WriteLine($"The user is { ageInYears } years old");
             Console.WriteLine($"The user is { ageInMonths } months old");
             Console.WriteLine($"The user is { ageInDays } days old");
+
+            Console.WriteLine($"The next birthday is in { nextBirthdayInMonths } months");
         }
 
         static DateTime GetBirthdate()

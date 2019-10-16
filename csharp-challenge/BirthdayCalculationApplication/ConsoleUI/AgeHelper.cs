@@ -2,22 +2,22 @@
 
 namespace ConsoleUI
 {
-    public static class AgeHelper
+    static class AgeHelper
     {
-        public static int CalculateAgeInDays(DateTime Birthday)
+        public static int CalculateAgeInDays(DateTime birthday)
         {
-            return Convert.ToInt32(DateTime.Now.Subtract(Birthday).TotalDays);
+            return Convert.ToInt32(DateTime.Now.Subtract(birthday).TotalDays);
         }
 
-        public static int CalculateAgeInMonths(DateTime Birthday)
+        public static int CalculateAgeInMonths(DateTime birthday)
         {
             DateTime dateNow = DateTime.Now;
-            DateTime tempDate = Birthday;
+            DateTime tempDate = birthday;
             int months = 0;
 
-            if (Birthday.Year == dateNow.Year)
+            if (birthday.Year == dateNow.Year)
             {
-                return dateNow.Month - Birthday.Month;
+                return dateNow.Month - birthday.Month;
             }
 
             while (!(tempDate.Year == dateNow.Year && tempDate.Month == dateNow.Month))
@@ -34,9 +34,9 @@ namespace ConsoleUI
             return months;
         }
 
-        public static int CalculateAgeInYears(DateTime Birthday)
+        public static int CalculateAgeInYears(DateTime birthday)
         {
-            return Convert.ToInt32(DateTime.Now.Subtract(Birthday).TotalDays) / 365;
+            return Convert.ToInt32(DateTime.Now.Subtract(birthday).TotalDays) / 365;
         }
     }
 }
