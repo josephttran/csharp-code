@@ -30,7 +30,7 @@ namespace ConsoleUI
             DateTime birthday = GetBirthdate();
             Person person = new Person(birthday);
 
-            Console.WriteLine(birthday.ToString());
+            Console.WriteLine($"Date of birth is { birthday.ToShortDateString() }");
             Console.WriteLine($"The user is { person.AgeInYears } years old");
             Console.WriteLine($"The user is { person.AgeInMonths } months old");
             Console.WriteLine($"The user is { person.AgeInDays } days old");
