@@ -27,5 +27,33 @@ namespace ConsoleUI
 
             return months;
         }
+
+        public static int CalcluateWeekendsUntilNextBirthday(DateTime birthday)
+        {
+            int weekends = 0;
+            DateTime nextBirthDay;
+            DateTime tempDate = DateTime.Now;
+
+            if (birthday.Month < DateTime.Now.Month || birthday.Month == DateTime.Now.Month && birthday.Day <= DateTime.Now.Day)
+            {
+                nextBirthDay = new DateTime(DateTime.Now.Year + 1, birthday.Month, birthday.Day);
+            }
+            else
+            {
+                nextBirthDay = new DateTime(DateTime.Now.Year, birthday.Month, birthday.Day);
+            }
+
+            while (tempDate <= nextBirthDay)
+            {
+                tempDate = tempDate.AddDays(1);
+
+                if (tempDate.DayOfWeek.ToString().ToLower() == "saturday")
+                {
+                    weekends++;
+                }
+            }
+
+            return weekends;
+        }
     }
 }

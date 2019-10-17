@@ -32,6 +32,7 @@ namespace ConsoleUI
             int ageInMonths = AgeHelper.CalculateAgeInMonths(birthday);
             int ageInDays = AgeHelper.CalculateAgeInDays(birthday);
             int nextBirthdayInMonths = BirthdayHelper.CalcluateNextBirthday(birthday);
+            int nextBirthdayInWeekends = BirthdayHelper.CalcluateWeekendsUntilNextBirthday(birthday);
 
             Console.WriteLine($"Date of birth is { birthday.ToShortDateString() }");
             Console.WriteLine($"The user is { ageInYears } years old");
@@ -39,6 +40,7 @@ namespace ConsoleUI
             Console.WriteLine($"The user is { ageInDays } days old");
 
             Console.WriteLine($"The next birthday is in { nextBirthdayInMonths } months");
+            Console.WriteLine($"The next birthday is in { nextBirthdayInWeekends } weekends");
         }
 
         static DateTime GetBirthdate()
