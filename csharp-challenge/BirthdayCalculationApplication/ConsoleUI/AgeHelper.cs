@@ -6,7 +6,7 @@ namespace ConsoleUI
     {
         public static int CalculateAgeInDays(DateTime birthday)
         {
-            return Convert.ToInt32(DateTime.Now.Subtract(birthday).TotalDays);
+            return Convert.ToInt32(DateTime.Now.Subtract(birthday).TotalDays - 1);
         }
 
         public static int CalculateAgeInMonths(DateTime birthday)
@@ -36,7 +36,7 @@ namespace ConsoleUI
 
         public static int CalculateAgeInYears(DateTime birthday)
         {
-            return Convert.ToInt32(DateTime.Now.Subtract(birthday).TotalDays) / 365;
+            return Convert.ToInt32(DateTime.Now.Subtract(birthday).TotalDays - 1) / 365;
         }
     }
 }
