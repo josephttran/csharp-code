@@ -8,11 +8,11 @@ namespace ConsoleUI
         {
             int months;
 
-            if (birthday.Month == DateTime.Now.Month && birthday.Day >= DateTime.Now.Day)
+            if (birthday.Month == DateTime.Now.Month && birthday.Day <= DateTime.Now.Day)
             {
                 months = 12;
             }
-            else if (birthday.Month == DateTime.Now.Month && birthday.Day < DateTime.Now.Day)
+            else if (birthday.Month == DateTime.Now.Month && birthday.Day > DateTime.Now.Day)
             {
                 months = 0;
             }
