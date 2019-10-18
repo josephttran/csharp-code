@@ -8,8 +8,12 @@ namespace FileManagementConsoleUI
     {
         static void Main(string[] args)
         {
-            string sourceDirectoryPath = @"..\..\..\Folder1";
-            string targetDirectoryPath = @"..\..\..\Folder2";
+            Console.Write("Enter source directory path: ");
+            string sourceDirectoryPath = Console.ReadLine();
+            Console.Write("Enter target directory path: ");
+            string targetDirectoryPath = Console.ReadLine();
+
+            int structureChoice = GetFileStructureChoice();
 
             DirectoryInfo root = new DirectoryInfo(sourceDirectoryPath);
             List<DirectoryInfo> directories = new List<DirectoryInfo>();
@@ -17,9 +21,53 @@ namespace FileManagementConsoleUI
 
             TraverseSubDirectories(root, directories, filesPath);
 
-            //CopyAllSubFoldersAndFiles(sourceDirectoryPath, targetDirectoryPath, directories, filesPath);
-            CopyAllFilesFlatten(sourceDirectoryPath, targetDirectoryPath, filesPath);
+            switch (structureChoice)
+            {
+                case 1:
+                    CopyAllSubFoldersAndFiles(sourceDirectoryPath, targetDirectoryPath, directories, filesPath);
+                    break;
+                case 2:
+                    CopyAllFilesFlatten(sourceDirectoryPath, targetDirectoryPath, filesPath);
+                    break;
+                default:
+                    break;
+            }
         }
+
+        static int GetFileStructureChoice()
+        {
+            bool valid = false;
+            int choice = 0;
+
+            while (!valid)
+            {
+                Console.WriteLine("\nSelect a file structure for copied files");
+                Console.WriteLine("1) Tree");
+                Console.WriteLine("2) Flatten");
+                Console.Write("Your choice: ");
+                string choiceString = Console.ReadLine();
+
+                if (Int32.TryParse(choiceString, out int result))
+                {
+                    if (result == 1 || result == 2)
+                    {
+                        choice = result;
+                        valid = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid choice!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice!");
+                }
+            }
+
+            return choice;
+        }
+
 
         static void CopyAllFiles(string source, string target)
         {
