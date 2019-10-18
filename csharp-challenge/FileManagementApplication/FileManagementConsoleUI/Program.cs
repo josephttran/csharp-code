@@ -11,8 +11,13 @@ namespace FileManagementConsoleUI
             string sourceDirectoryPath = @"..\..\..\Folder1";
             string targetDirectoryPath = @"..\..\..\Folder2";
 
-            //CopyAllFiles(sourceDirectoryPath, targetDirectoryPath);
-            CopyAllSubFoldersAndFiles(sourceDirectoryPath, targetDirectoryPath);
+            DirectoryInfo root = new DirectoryInfo(sourceDirectoryPath);
+            List<DirectoryInfo> directories = new List<DirectoryInfo>();
+            List<FileInfo> filesPath = new List<FileInfo>();
+
+            TraverseSubDirectories(root, directories, filesPath);
+
+            CopyAllSubFoldersAndFiles(sourceDirectoryPath, targetDirectoryPath, directories, filesPath);
         }
 
         static void CopyAllFiles(string source, string target)
@@ -45,14 +50,8 @@ namespace FileManagementConsoleUI
             }
         }
 
-        static void CopyAllSubFoldersAndFiles(string source, string target)
+        static void CopyAllSubFoldersAndFiles(string source, string target, List<DirectoryInfo> directories, List<FileInfo> filesPath)
         {
-            DirectoryInfo root = new DirectoryInfo(source);
-            List<DirectoryInfo> directories = new List<DirectoryInfo>();
-            List<FileInfo> filesPath = new List<FileInfo>();
-
-            TraverseSubDirectories(root, directories, filesPath);
-
             // Create directories for copy files
             if (directories != null)
             {
@@ -87,6 +86,7 @@ namespace FileManagementConsoleUI
                 }
             }
         }
+
 
         // Recursive get all sub directories and files
         static void TraverseSubDirectories(DirectoryInfo root, List<DirectoryInfo> directories, List<FileInfo> filesPath)
