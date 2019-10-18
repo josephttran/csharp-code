@@ -17,7 +17,8 @@ namespace FileManagementConsoleUI
 
             TraverseSubDirectories(root, directories, filesPath);
 
-            CopyAllSubFoldersAndFiles(sourceDirectoryPath, targetDirectoryPath, directories, filesPath);
+            //CopyAllSubFoldersAndFiles(sourceDirectoryPath, targetDirectoryPath, directories, filesPath);
+            CopyAllFilesFlatten(sourceDirectoryPath, targetDirectoryPath, filesPath);
         }
 
         static void CopyAllFiles(string source, string target)
@@ -47,6 +48,27 @@ namespace FileManagementConsoleUI
             catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
+            }
+        }
+        static void CopyAllFilesFlatten(string source, string target, List<FileInfo> filesPath)
+        {
+            // Copy files
+            if (filesPath != null)
+            {
+                foreach (var file in filesPath)
+                {
+                    string sourceDirectoryPath = Path.GetFullPath(source);
+                    string fileName = file.FullName.Substring(sourceDirectoryPath.Length + 1);
+                    string targetFileName = fileName.Replace("\\", "_");
+
+                    string sourceFilePath = Path.Combine(source, fileName);
+                    string targetFilePath = Path.Combine(target, targetFileName);
+
+                    if (!File.Exists(targetFilePath))
+                    {
+                        File.Copy(sourceFilePath, targetFilePath);
+                    }
+                }
             }
         }
 
@@ -86,7 +108,6 @@ namespace FileManagementConsoleUI
                 }
             }
         }
-
 
         // Recursive get all sub directories and files
         static void TraverseSubDirectories(DirectoryInfo root, List<DirectoryInfo> directories, List<FileInfo> filesPath)
