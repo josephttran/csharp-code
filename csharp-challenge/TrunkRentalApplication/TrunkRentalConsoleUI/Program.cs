@@ -1,4 +1,5 @@
 ﻿using System;
+using RentalCostLibrary;
 
 namespace TrunkRentalConsoleUI
 {
@@ -9,7 +10,8 @@ namespace TrunkRentalConsoleUI
             Rent rent = new Rent
             {
                 AdditionalCostPerHours = 50.00m,
-                FirstCostPerNumberMinutes = (25.00m, 10),
+                FirstCostPerNumberMinutes = (25.00m, 60),
+                MinutesConsideredAnHour = 10
             };
 
             (int totalHours, int minutes) firstRental = (1, 5);
@@ -17,39 +19,39 @@ namespace TrunkRentalConsoleUI
             (int totalHours, int minutes) thirdRental = (4, 0);
             (int totalHours, int minutes) fourthRental = (4, 15);
 
-            decimal OneHourFiveMinutesCost = CalculateRentalCost(rent, firstRental);
-            decimal OneHourFifteenMinutesCost = CalculateRentalCost(rent, secondRental);
-            decimal FourHoursCost = CalculateRentalCost(rent, thirdRental);
-            decimal FourHoursFifteenMinutesCost = CalculateRentalCost(rent, fourthRental);
+            decimal OneHourFiveMinutesCost = RentCost.CalculateRentalCost(rent, firstRental);
+            decimal OneHourFifteenMinutesCost = RentCost.CalculateRentalCost(rent, secondRental);
+            decimal FourHoursCost = RentCost.CalculateRentalCost(rent, thirdRental);
+            decimal FourHoursFifteenMinutesCost = RentCost.CalculateRentalCost(rent, fourthRental);
 
+            Console.WriteLine("Rent One");
             DisplayRentalCost(firstRental, OneHourFiveMinutesCost);
             DisplayRentalCost(secondRental, OneHourFifteenMinutesCost);
             DisplayRentalCost(thirdRental, FourHoursCost);
             DisplayRentalCost(fourthRental, FourHoursFifteenMinutesCost);
-        }
 
-        static decimal CalculateRentalCost(Rent rent, in (int totalHours, int minutes) Rental)
-        {
-            decimal totalCost = 0.00m;
-            int totalMinutes = Rental.totalHours * 60 + Rental.minutes;
-
-            if (totalMinutes < rent.FirstCostPerNumberMinutes.minutes)
+            Rent rentTwo = new Rent
             {
-                return totalCost;
-            }
+                AdditionalCostPerHours = 50.00m,
+                FirstCostPerNumberMinutes = (5.00m, 20),
+                MinutesConsideredAnHour = 10
+            };
 
-            if (totalMinutes > rent.FirstCostPerNumberMinutes.minutes &&
-                totalMinutes <= rent.FirstCostPerNumberMinutes.minutes + 60)
-            {
-                return rent.FirstCostPerNumberMinutes.cost;
-            }
-            else
-            {
-                int totalHours = Rental.totalHours + (Rental.minutes > 10 ? 1 : 0);
-                totalCost = rent.FirstCostPerNumberMinutes.cost + ((totalHours - 1) * rent.AdditionalCostPerHours);
-            }
+            (int totalHours, int minutes) firstRentalTwo = (0, 30);
+            (int totalHours, int minutes) secondRentalTwo = (0, 31);
+            (int totalHours, int minutes) thirdRentalTwo = (1, 30);
+            (int totalHours, int minutes) fourthRentalTwo = (1, 31);
 
-            return totalCost;
+            decimal ThirtyMinuteMinutesCostTwo = RentCost.CalculateRentalCost(rentTwo, firstRentalTwo);
+            decimal ThirtyMinuteOneMinutesCostTwo = RentCost.CalculateRentalCost(rentTwo, secondRentalTwo);
+            decimal OneHourThirtyMinuteCostTwo = RentCost.CalculateRentalCost(rentTwo, thirdRentalTwo);
+            decimal OneHourThirtyOneMinuteCostTwo = RentCost.CalculateRentalCost(rentTwo, fourthRentalTwo);
+
+            Console.WriteLine("\nRent Two");
+            DisplayRentalCost(firstRentalTwo, ThirtyMinuteMinutesCostTwo);
+            DisplayRentalCost(secondRentalTwo, ThirtyMinuteOneMinutesCostTwo);
+            DisplayRentalCost(thirdRentalTwo, OneHourThirtyMinuteCostTwo);
+            DisplayRentalCost(fourthRentalTwo, OneHourThirtyOneMinuteCostTwo);
         }
 
         static void DisplayRentalCost((int hours, int minutes) rental, decimal cost)

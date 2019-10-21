@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrunkRentalConsoleUI", "TrunkRentalConsoleUI\TrunkRentalConsoleUI.csproj", "{BFA6F329-AE55-4DCB-A51E-42B54F41199F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrunkRentalConsoleUI", "TrunkRentalConsoleUI\TrunkRentalConsoleUI.csproj", "{BFA6F329-AE55-4DCB-A51E-42B54F41199F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentalCostTests", "RentalCostTests\RentalCostTests.csproj", "{E29EF4A0-E2FA-4CD8-A5D4-9E2E3667A143}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentalCostLibrary", "RentalCostLibrary\RentalCostLibrary.csproj", "{3D97E07A-E1F9-4208-9018-C8DEECC58CF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{BFA6F329-AE55-4DCB-A51E-42B54F41199F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFA6F329-AE55-4DCB-A51E-42B54F41199F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFA6F329-AE55-4DCB-A51E-42B54F41199F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E29EF4A0-E2FA-4CD8-A5D4-9E2E3667A143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E29EF4A0-E2FA-4CD8-A5D4-9E2E3667A143}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E29EF4A0-E2FA-4CD8-A5D4-9E2E3667A143}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E29EF4A0-E2FA-4CD8-A5D4-9E2E3667A143}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D97E07A-E1F9-4208-9018-C8DEECC58CF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D97E07A-E1F9-4208-9018-C8DEECC58CF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D97E07A-E1F9-4208-9018-C8DEECC58CF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D97E07A-E1F9-4208-9018-C8DEECC58CF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
