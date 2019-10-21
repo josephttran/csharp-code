@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
+
 using RentalCostLibrary;
 
 namespace RentalCostTests
@@ -35,6 +37,57 @@ namespace RentalCostTests
             };
 
             Assert.AreEqual(expected, RentCost.CalculateRentalCost(rent, (hours, minutes)));
+        }
+
+        [Test]
+        public void TestBonusSameDayRentalCost()
+        {
+            TimeSpan businessOpen = new TimeSpan(9, 0, 0);
+            DateTime rentalPickupDate = new DateTime(2019, 10, 18, 9, 0, 0);
+            DateTime rentalReturnDate = new DateTime(2019, 10, 18, 12, 0, 0);
+
+            Rent rent = new Rent
+            {
+                AdditionalCostPerHours = 50.00m,
+                FirstCostPerNumberMinutes = (5.00m, 20),
+                MinutesConsideredAnHour = 10
+            };
+
+            Assert.AreEqual(155, RentCost.BonusCalculateRentalCost(rent, businessOpen, rentalPickupDate, rentalReturnDate));
+        }
+
+        [Test]
+        public void TestBonusWeekdayRentalCost()
+        {
+            TimeSpan businessOpen = new TimeSpan(9, 0, 0);
+            DateTime rentalPickupDate = new DateTime(2019, 10, 21, 9, 0, 0);
+            DateTime rentalReturnDate = new DateTime(2019, 10, 24, 12, 0, 0);
+
+            Rent rent = new Rent
+            {
+                AdditionalCostPerHours = 50.00m,
+                FirstCostPerNumberMinutes = (5.00m, 20),
+                MinutesConsideredAnHour = 10
+            };
+
+            Assert.AreEqual(1350, RentCost.BonusCalculateRentalCost(rent, businessOpen, rentalPickupDate, rentalReturnDate));
+        }
+
+        [Test]
+        public void TestBonusRentalCostWithWeekend()
+        {
+            TimeSpan businessOpen = new TimeSpan(9, 0, 0);
+            DateTime rentalPickupDate = new DateTime(2019, 10, 18, 9, 0, 0);
+            DateTime rentalReturnDate = new DateTime(2019, 10, 24, 12, 0, 0);
+
+            Rent rent = new Rent
+            {
+                AdditionalCostPerHours = 50.00m,
+                FirstCostPerNumberMinutes = (5.00m, 20),
+                MinutesConsideredAnHour = 10
+            };
+
+            Assert.AreEqual(2150, RentCost.BonusCalculateRentalCost(rent, businessOpen, rentalPickupDate, rentalReturnDate));
         }
     }
 }

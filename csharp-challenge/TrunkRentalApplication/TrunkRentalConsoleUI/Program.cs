@@ -1,4 +1,5 @@
 ﻿using System;
+
 using RentalCostLibrary;
 
 namespace TrunkRentalConsoleUI
@@ -52,11 +53,26 @@ namespace TrunkRentalConsoleUI
             DisplayRentalCost(secondRentalTwo, ThirtyMinuteOneMinutesCostTwo);
             DisplayRentalCost(thirdRentalTwo, OneHourThirtyMinuteCostTwo);
             DisplayRentalCost(fourthRentalTwo, OneHourThirtyOneMinuteCostTwo);
+
+            // Bonus
+            TimeSpan businessOpen = new TimeSpan(9, 0, 0);
+            DateTime rentalPickupDate = new DateTime(2019, 10, 18, 9, 0, 0);
+            DateTime rentalReturnDate = new DateTime(2019, 10, 24, 12, 0, 0);
+
+            decimal rentalCost = RentCost.BonusCalculateRentalCost(rentTwo, businessOpen, rentalPickupDate, rentalReturnDate);
+
+            Console.WriteLine("\nRent bonus rules");
+            DisplayBonusRentalCost(rentalPickupDate, rentalReturnDate, rentalCost);
         }
 
         static void DisplayRentalCost((int hours, int minutes) rental, decimal cost)
         {
             Console.WriteLine($"The rental cost for { rental.hours } hour { rental.minutes } minutes is: { cost }");
+        }
+
+        static void DisplayBonusRentalCost(DateTime rentalPickupDate, DateTime rentalReturnDate, decimal rentalCost)
+        {
+            Console.WriteLine($"The rental cost from { rentalPickupDate } to { rentalReturnDate } is { rentalCost }");
         }
     }
 }
