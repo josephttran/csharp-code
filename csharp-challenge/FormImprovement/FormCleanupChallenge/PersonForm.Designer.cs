@@ -1,6 +1,6 @@
 ﻿namespace FormCleanupChallenge
 {
-    partial class Form1
+    partial class PersonForm
     {
         /// <summary>
         /// Required designer variable.
@@ -41,14 +41,14 @@
             this.headerLabel.TabIndex = 0;
             this.headerLabel.Text = "This is the Person Form";
             // 
-            // Form1
+            // PersonForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(496, 266);
             this.Controls.Add(this.headerLabel);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "PersonForm";
+            this.Text = "Person Form";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
