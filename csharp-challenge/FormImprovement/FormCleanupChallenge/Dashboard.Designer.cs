@@ -1,4 +1,5 @@
-﻿namespace FormCleanupChallenge
+﻿
+namespace FormCleanupChallenge
 {
     partial class Dashboard
     {
@@ -29,6 +30,7 @@
         private void InitializeComponent()
         {
             this.headerLabel = new System.Windows.Forms.Label();
+            this.DashBoardButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // headerLabel
@@ -41,16 +43,25 @@
             this.headerLabel.TabIndex = 1;
             this.headerLabel.Text = "This is the Dashboard";
             // 
+            // DashBoardButton
+            //
+            this.DashBoardButton.Location = new System.Drawing.Point(152, 147);
+            this.DashBoardButton.Name = "DashBoardButton";
+            this.DashBoardButton.Size = new System.Drawing.Size(140, 45);
+            this.DashBoardButton.TabIndex = 2;
+            this.DashBoardButton.Text = "Show Person Form";
+            this.DashBoardButton.UseVisualStyleBackColor = true;
+            this.DashBoardButton.Click += new System.EventHandler(this.DashBoardButton_Click);
+            //
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(562, 244);
+            this.Controls.Add(this.DashBoardButton);
             this.Controls.Add(this.headerLabel);
             this.Name = "Dashboard";
             this.Text = "Dashboard";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
-            this.Load += new System.EventHandler(this.Dashboard_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -59,5 +70,6 @@
         #endregion
 
         private System.Windows.Forms.Label headerLabel;
+        private System.Windows.Forms.Button DashBoardButton;
     }
 }

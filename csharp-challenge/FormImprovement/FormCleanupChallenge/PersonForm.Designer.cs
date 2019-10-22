@@ -48,9 +48,7 @@
             this.ClientSize = new System.Drawing.Size(496, 266);
             this.Controls.Add(this.headerLabel);
             this.Name = "PersonForm";
-            this.Text = "Person Form";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Text = "PersonForm";
             this.ResumeLayout(false);
             this.PerformLayout();
 

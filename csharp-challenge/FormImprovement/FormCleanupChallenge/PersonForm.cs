@@ -15,18 +15,7 @@ namespace FormCleanupChallenge
         public PersonForm()
         {
             InitializeComponent();
-        }
-
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            // This pretend code executes when the form is closed. This
-            // could be data cleanup code or code to close down open
-            // connections.
-        }
-        
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
+            this.FormClosed += new FormClosedEventHandler(FormEvent.FormClosedHandler);
         }
     }
 }

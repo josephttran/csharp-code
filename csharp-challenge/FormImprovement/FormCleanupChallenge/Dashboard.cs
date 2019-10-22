@@ -15,18 +15,15 @@ namespace FormCleanupChallenge
         public Dashboard()
         {
             InitializeComponent();
+            this.FormClosed += new FormClosedEventHandler(FormEvent.FormClosedHandler);
         }
 
-        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        private void DashBoardButton_Click(object sender, EventArgs e)
         {
-            // This pretend code executes when the form is closed. This
-            // could be data cleanup code or code to close down open
-            // connections.
-        }
-
-        private void Dashboard_Load(object sender, EventArgs e)
-        {
-
+            using (PersonForm personForm = new PersonForm())
+            {
+                personForm.ShowDialog(this);
+            };
         }
     }
 }
