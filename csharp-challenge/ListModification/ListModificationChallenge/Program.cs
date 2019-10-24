@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ListModificationChallenge
 {
@@ -124,9 +125,11 @@ namespace ListModificationChallenge
             List<PersonModel> output;
             PersonModel newPerson = new PersonModel { FirstName = "Greg", LastName = "Brown" };
 
-            // TODO: Add a record to the end of the incoming list and return a new list that includes newPerson
-            // HACK: The following line is incorrect but is used to get this to compile
-            output = people;
+            // Add a record to the end of the incoming list and return a new list that includes newPerson
+            output = new List<PersonModel>(people)
+            {
+                newPerson
+            };
 
             return output;
         }
@@ -136,9 +139,16 @@ namespace ListModificationChallenge
             List<PersonModel> output;
             PersonModel newPerson = new PersonModel { FirstName = "Greg", LastName = "Brown" };
 
-            // TODO: Add a record to the beginning of the incoming list and return a new list that includes newPerson
-            // HACK: The following line is incorrect but is used to get this to compile
-            output = people;
+            // Add a record to the beginning of the incoming list and return a new list that includes newPerson
+            output = new List<PersonModel>
+            {
+                newPerson
+            };
+
+            foreach (var personModel in people)
+            {
+                output.Add(personModel);
+            }
 
             return output;
         }
@@ -147,10 +157,14 @@ namespace ListModificationChallenge
         {
             List<PersonModel> output;
             PersonModel newPerson = new PersonModel { FirstName = "Greg", LastName = "Brown" };
+            int middle = (people.Count % 2 == 0)
+                ? people.Count / 2
+                : people.Count / 2 + 1;
 
-            // TODO: Add a record after Paul Jones in the incoming list and return a new list that includes newPerson
-            // HACK: The following line is incorrect but is used to get this to compile
-            output = people;
+            // Add a record after Paul Jones in the incoming list and return a new list that includes newPerson
+            output = new List<PersonModel>(people);
+
+            output.Insert(middle, newPerson);
 
             return output;
         }
@@ -159,9 +173,8 @@ namespace ListModificationChallenge
         {
             List<PersonModel> output;
 
-            // TODO: Sort the incoming list values by fullname (ascending) and return a new list
-            // HACK: The following line is incorrect but is used to get this to compile
-            output = people;
+            // Sort the incoming list values by fullname (ascending) and return a new list
+            output = people.OrderBy(person => person.FullName).ToList();
 
             return output;
         }
