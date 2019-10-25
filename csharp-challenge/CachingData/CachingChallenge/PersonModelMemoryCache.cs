@@ -24,10 +24,14 @@ namespace CachingChallenge
                 .SetAbsoluteExpiration(TimeSpan.FromSeconds(30));
         }
 
-        public void AddPeopleCache(string key, List<PersonModel> people)
+        public void AddAllPeopleCache(string key, List<PersonModel> people)
         {
             PeopleKey = key;
             Cache.Set(PeopleKey, people, CacheEntryOptions);
+        }
+        public void AddPeopleCache(string key, List<PersonModel> people)
+        {
+            Cache.Set(key, people, CacheEntryOptions);
         }
 
         public void AddPersonCache(string personKey, PersonModel person)
@@ -35,7 +39,7 @@ namespace CachingChallenge
             Cache.Set(personKey, person, CacheEntryOptions);
         }
 
-        public List<PersonModel> GetPeopleCache()
+        public List<PersonModel> GetAllPeopleCache()
         {
             List<PersonModel> people = new List<PersonModel>();
 
@@ -46,6 +50,12 @@ namespace CachingChallenge
             }
 
             return people;
+        }
+
+        public List<PersonModel> GetPeopleCache(string lastNameKey)
+        {
+            Console.WriteLine("People data with last name from cache");
+            return (List<PersonModel>) CacheExtensions.Get(Cache, lastNameKey);
         }
 
         public PersonModel GetPersonCache(string key)

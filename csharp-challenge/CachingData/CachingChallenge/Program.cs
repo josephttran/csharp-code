@@ -33,7 +33,8 @@ namespace CachingChallenge
                             RunPersonById(personModelMemoryCache, id);
                             break;
                         case 3:
-                            Console.WriteLine("todo choice 3");
+                            string lastName = GetLastNameFromUser();
+                            RunPeopleWithLastName(personModelMemoryCache, lastName);
                             break;
                         default:
                             Console.WriteLine("Invalid choice!");
@@ -91,6 +92,30 @@ namespace CachingChallenge
 
             return id;
         }
+        static string GetLastNameFromUser()
+        {
+            bool isString = false;
+            string userInput = "";
+
+            while (!isString)
+            {
+                Console.Write("\nEnter last name: ");
+                userInput = Console.ReadLine();
+
+                foreach (char c in userInput)
+                {
+                    if (!char.IsLetter(c))
+                    {
+                        Console.WriteLine("Error: Last name should contain only letters!");
+                        break;
+                    }
+
+                    isString = true;
+                }
+            }
+
+            return userInput;
+        }
 
         static void RunPeople(PersonModelMemoryCache personModelMemoryCache)
         {
@@ -100,13 +125,13 @@ namespace CachingChallenge
             Console.WriteLine();
             if (personModelMemoryCache.IsCacheValid(key))
             {
-                people = personModelMemoryCache.GetPeopleCache();
+                people = personModelMemoryCache.GetAllPeopleCache();
             }
             else
             {
                 DataAccess dataAccess = new DataAccess();
                 people = dataAccess.SimulatedPersonListLookup();
-                personModelMemoryCache.AddPeopleCache(key, people);
+                personModelMemoryCache.AddAllPeopleCache(key, people);
             }
 
             DisplayPeople(people);
@@ -130,6 +155,33 @@ namespace CachingChallenge
             }
 
             Console.WriteLine(person.ToString());
+        }
+
+        static void RunPeopleWithLastName(PersonModelMemoryCache personModelMemoryCache, string lastName)
+        {
+            List<PersonModel> people;
+            string key = $"People { lastName }";
+
+            Console.WriteLine();
+            if (personModelMemoryCache.IsCacheValid(key))
+            {
+                people = personModelMemoryCache.GetPeopleCache(key);
+            }
+            else
+            {
+                DataAccess dataAccess = new DataAccess();
+                people = dataAccess.SimulatedPersonListByLastName(lastName);
+                personModelMemoryCache.AddPeopleCache(key, people);
+            }
+
+            if (people.Count > 0)
+            {
+                DisplayPeople(people);
+            }
+            else
+            {
+                Console.WriteLine($"No person with last name { lastName } exist");
+            }
         }
     }
 }
