@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace CachingChallenge
 {
@@ -9,52 +7,83 @@ namespace CachingChallenge
     {
         static void Main(string[] args)
         {
-            using (IMemoryCache memoryCache = new MemoryCache(
-                new MemoryCacheOptions
-                {
-                    SizeLimit = 6
-                }))
+            PersonModelMemoryCache personModelMemoryCache = new PersonModelMemoryCache(10);
+            bool askForData = false;
+            string userMenuInput;
+
+            while (!askForData)
             {
-                bool askForData = false;
-                string userInput;
-                DataAccess dataAccess = new DataAccess();
-                List<PersonModel> people = new List<PersonModel>();
+                DisplayMenu();
+                userMenuInput = Console.ReadLine();
 
-                while (!askForData)
+                if (userMenuInput.ToLower() == "quit")
                 {
-                    Console.Write("\nEnter quit to end the program else hit enter: ");
-                    userInput = Console.ReadLine();
+                    break;
+                }
 
-                    if (userInput.ToLower() == "quit")
+                if (Int32.TryParse(userMenuInput, out int choice))
+                {
+                    switch (choice)
                     {
-                        break;
+                        case 1:
+                            RunPeople(personModelMemoryCache);
+                            break;
+                        case 2:
+                            Console.WriteLine("todo choice 2");
+                            break;
+                        case 3:
+                            Console.WriteLine("todo choice 2");
+                            break;
+                        default:
+                            Console.WriteLine("Invalid choice!");
+                            break;
                     }
-
-                    if (memoryCache.TryGetValue("People Data", out List<PersonModel> cachePeople))
-                    {
-                        people = cachePeople;
-                        Console.WriteLine("Data from cache");
-                    }
-                    else
-                    {
-                        people = dataAccess.SimulatedPersonListLookup();
-
-                        MemoryCacheEntryOptions cacheEntryOptions = new MemoryCacheEntryOptions()
-                            .SetSize(1)
-                            .SetAbsoluteExpiration(TimeSpan.FromSeconds(10));
-
-                        memoryCache.Set("People Data", people, cacheEntryOptions);
-                    }
-
-                    foreach (var personModel in people)
-                    {
-                        Console.WriteLine(personModel.ToString());
-                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice!");
                 }
             }
 
             Console.WriteLine("Application has ended");
             Console.ReadLine();
+        }
+
+        static void DisplayMenu()
+        {
+            Console.WriteLine("\nEnter quit to end the program else choose from the options");
+            Console.WriteLine("1) Get People");
+            Console.WriteLine("2) Get person by ID");
+            Console.WriteLine("3) Get people by last name");
+            Console.Write("Your choice: ");
+        }
+
+        static void DisplayPeople(List<PersonModel> people)
+        {
+            foreach (var personModel in people)
+            {
+                Console.WriteLine(personModel.ToString());
+            }
+        }
+
+        static void RunPeople(PersonModelMemoryCache personModelMemoryCache)
+        {
+            List<PersonModel> people;
+            string key = "People Key";
+
+            Console.WriteLine();
+            if (personModelMemoryCache.IsCacheValid(key))
+            {
+                people = personModelMemoryCache.GetPeopleCache();
+            }
+            else
+            {
+                DataAccess dataAccess = new DataAccess();
+                people = dataAccess.SimulatedPersonListLookup();
+                personModelMemoryCache.AddPeopleCache(key, people);
+            }
+
+            DisplayPeople(people);
         }
     }
 }
