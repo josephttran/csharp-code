@@ -21,13 +21,18 @@ namespace CachingChallenge
 
             CacheEntryOptions = new MemoryCacheEntryOptions()
                 .SetSize(1)
-                .SetAbsoluteExpiration(TimeSpan.FromSeconds(10));
+                .SetAbsoluteExpiration(TimeSpan.FromSeconds(30));
         }
 
         public void AddPeopleCache(string key, List<PersonModel> people)
         {
             PeopleKey = key;
             Cache.Set(PeopleKey, people, CacheEntryOptions);
+        }
+
+        public void AddPersonCache(string personKey, PersonModel person)
+        {
+            Cache.Set(personKey, person, CacheEntryOptions);
         }
 
         public List<PersonModel> GetPeopleCache()
@@ -41,6 +46,12 @@ namespace CachingChallenge
             }
 
             return people;
+        }
+
+        public PersonModel GetPersonCache(string key)
+        {
+            Console.WriteLine("Person data from cache");
+            return (PersonModel) CacheExtensions.Get(Cache, key);
         }
 
         public bool IsCacheValid(string key)

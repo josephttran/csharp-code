@@ -29,10 +29,11 @@ namespace CachingChallenge
                             RunPeople(personModelMemoryCache);
                             break;
                         case 2:
-                            Console.WriteLine("todo choice 2");
+                            int id = GetIdFromUser();
+                            RunPersonById(personModelMemoryCache, id);
                             break;
                         case 3:
-                            Console.WriteLine("todo choice 2");
+                            Console.WriteLine("todo choice 3");
                             break;
                         default:
                             Console.WriteLine("Invalid choice!");
@@ -66,6 +67,31 @@ namespace CachingChallenge
             }
         }
 
+        static int GetIdFromUser()
+        {
+            bool isInteger = false;
+            string userInput;
+            int id = -1;
+
+            while (!isInteger)
+            {
+                Console.Write("\nEnter a user Id: ");
+                userInput = Console.ReadLine();
+
+                if (Int32.TryParse(userInput, out int value))
+                {
+                    id = value;
+                    isInteger = true;
+                }
+                else
+                {
+                    Console.WriteLine("Error: Id should be an integer!");
+                }
+            }
+
+            return id;
+        }
+
         static void RunPeople(PersonModelMemoryCache personModelMemoryCache)
         {
             List<PersonModel> people;
@@ -84,6 +110,26 @@ namespace CachingChallenge
             }
 
             DisplayPeople(people);
+        }
+
+        static void RunPersonById(PersonModelMemoryCache personModelMemoryCache, int id)
+        {
+            PersonModel person;
+            string key = $"Person { id }";
+
+            Console.WriteLine();
+            if (personModelMemoryCache.IsCacheValid(key))
+            {
+                person = personModelMemoryCache.GetPersonCache(key);
+            }
+            else
+            {
+                DataAccess dataAccess = new DataAccess();
+                person = dataAccess.SimulatedPersonById(id);
+                personModelMemoryCache.AddPersonCache(key, person);
+            }
+
+            Console.WriteLine(person.ToString());
         }
     }
 }
