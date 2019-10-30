@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace TemperatureLibrary
 {
-    public class Temperature
+    public class Temperature: ITemperature
     {
         public List<int> Temperatures { get; private set; }
         public double? Average { get; private set; } = null;
@@ -23,6 +23,34 @@ namespace TemperatureLibrary
             SetMinimum(temperature);
             SetMaximum(temperature);
             CalculateAverage();
+        }
+        public void Insert(string temperature)
+        {
+            Dictionary<string, int> wordToNumbers = new Dictionary<string, int>
+            {
+                { "one", 1 },
+                { "two", 2 },
+                { "three", 3 },
+                { "four", 4 },
+                { "five", 5 },
+                { "six", 6 },
+                { "seven", 7 },
+                { "eight", 8 },
+                { "nine", 9 },
+                { "ten", 10 }
+            };
+
+            if (wordToNumbers.ContainsKey(temperature))
+            {
+                Temperatures.Add(wordToNumbers[temperature]);
+                SetMinimum(wordToNumbers[temperature]);
+                SetMaximum(wordToNumbers[temperature]);
+                CalculateAverage();
+            }
+            else
+            {
+                Console.WriteLine("Cannot insert " + temperature);
+            }
         }
 
         private void CalculateAverage()

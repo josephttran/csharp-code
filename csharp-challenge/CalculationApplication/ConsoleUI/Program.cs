@@ -19,6 +19,11 @@ namespace ConsoleUI
                 temperature.Insert(randomTemperature);
             }
 
+            temperature.Insert("ten");
+            temperature.Insert("two");
+            temperature.Insert("four");
+            temperature.Insert("eight");
+
             Console.WriteLine("Temperature minimum: " + temperature.Minimum);
             Console.WriteLine("Temperature maximum: " + temperature.Maximum);
             Console.WriteLine("Temperature average: " + temperature.Average);
