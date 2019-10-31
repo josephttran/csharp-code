@@ -7,9 +7,45 @@ namespace TemperatureLibrary
     public class Temperature: ITemperature
     {
         public List<int> Temperatures { get; private set; }
-        public double? Average { get; private set; } = null;
-        public int? Maximum { get; private set; } = null;
-        public int? Minimum { get; private set; } = null;
+
+        public double? Average
+        {
+            get
+            {
+                if (Temperatures.Count == 0)
+                {
+                    return null;
+                }
+
+                return Math.Round((double)Temperatures.Sum() / Temperatures.Count, 2);
+            }
+        }
+
+        public int? Maximum
+        {
+            get
+            {
+                if (Temperatures.Count == 0)
+                {
+                    return null;
+                }
+
+                return Temperatures.Max();
+            }
+        }
+
+        public int? Minimum
+        {
+            get
+            {
+                if (Temperatures.Count == 0)
+                {
+                    return null;
+                }
+
+                return Temperatures.Min();
+            }
+        }
 
         public Temperature()
         {
@@ -18,12 +54,16 @@ namespace TemperatureLibrary
 
         public void Insert(int temperature)
         {
-            Temperatures.Add(temperature);
-
-            SetMinimum(temperature);
-            SetMaximum(temperature);
-            CalculateAverage();
+            if (temperature > 0 && temperature < 101)
+            {
+                Temperatures.Add(temperature);
+            }
+            else
+            {
+                Console.WriteLine("Cannot insert " + temperature);
+            }
         }
+
         public void Insert(string temperature)
         {
             Dictionary<string, int> wordToNumbers = new Dictionary<string, int>
@@ -43,48 +83,10 @@ namespace TemperatureLibrary
             if (wordToNumbers.ContainsKey(temperature))
             {
                 Temperatures.Add(wordToNumbers[temperature]);
-                SetMinimum(wordToNumbers[temperature]);
-                SetMaximum(wordToNumbers[temperature]);
-                CalculateAverage();
             }
             else
             {
                 Console.WriteLine("Cannot insert " + temperature);
-            }
-        }
-
-        private void CalculateAverage()
-        {
-            Average = Math.Round((double)Temperatures.Sum() / Temperatures.Count, 2);
-        }
-
-        private void SetMaximum(int temperature)
-        {
-            if (!Maximum.HasValue)
-            {
-                Maximum = temperature;
-            }
-            else
-            {
-                if (Temperatures.Count == 0 || Maximum.Value.CompareTo(temperature) < 0)
-                {
-                    Maximum = temperature;
-                }
-            }
-        }
-
-        private void SetMinimum(int temperature)
-        {
-            if (!Minimum.HasValue)
-            {
-                Minimum = temperature;
-            }
-            else
-            {
-                if (Minimum.Value.CompareTo(temperature) > 0)
-                {
-                    Minimum = temperature;
-                }
             }
         }
     }

@@ -12,7 +12,7 @@ namespace ConsoleUI
             Temperature temperature = new Temperature();
 
             // Insert 100 random between 1 and 100 inclusive
-            for (int i = 0; i < 101; i++)
+            for (int i = 0; i < 100; i++)
             {
                 int randomTemperature = random.Next(1, 101);
 
