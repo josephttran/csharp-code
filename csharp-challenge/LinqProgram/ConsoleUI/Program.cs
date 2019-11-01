@@ -17,9 +17,13 @@ namespace ConsoleUI
 
         static List<char> StringToOrderedLetters(string words)
         {
-            return words.Where(character => char.IsLetter(character))
-                        .OrderBy(character => character.ToString().ToLower())
-                        .ToList();
+            List<char> orderedLetters =
+                ( from character in words
+                  where char.IsLetter(character)
+                  orderby character.ToString().ToLower()
+                  select character ).ToList();
+
+            return orderedLetters;
         }
     }
 }
