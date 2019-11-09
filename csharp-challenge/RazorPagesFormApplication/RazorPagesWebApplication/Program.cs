@@ -18,6 +18,13 @@ namespace RazorPagesWebApplication
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureLogging((context, logger) =>
+                {
+                    logger.ClearProviders();
+                    logger.AddConfiguration(context.Configuration.GetSection("Logging"));
+                    logger.AddDebug();
+                    logger.AddConsole();
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

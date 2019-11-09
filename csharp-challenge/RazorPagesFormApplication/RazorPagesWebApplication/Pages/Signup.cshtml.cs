@@ -11,8 +11,15 @@ namespace RazorPagesWebApplication.Pages
 {
     public class SignupModel : PageModel
     {
+        private readonly ILogger _logger;
+
         [BindProperty]
         public new User User { get; set; }
+
+        public SignupModel(ILogger<SignupModel> logger)
+        {
+            _logger = logger;
+        }
 
         public void OnGet()
         {
@@ -20,6 +27,9 @@ namespace RazorPagesWebApplication.Pages
 
         public void OnPost()
         {
+            string userInfo = $"User: { User.FirstName }, { User.LastName }, { User.Email }, { User.Password }";
+
+            _logger.LogCritical(userInfo);
         }
     }
 }
