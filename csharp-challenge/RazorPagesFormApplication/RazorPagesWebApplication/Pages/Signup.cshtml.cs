@@ -16,13 +16,19 @@ namespace RazorPagesWebApplication.Pages
         [BindProperty]
         public new User User { get; set; }
 
+        public string Mode { get; set; }
+
         public SignupModel(ILogger<SignupModel> logger)
         {
             _logger = logger;
         }
 
-        public void OnGet()
+        public void OnGet(string mode)
         {
+            if (mode == "light" || mode == "dark")
+            {
+                Mode = mode;
+            }
         }
 
         public RedirectToPageResult OnPost()

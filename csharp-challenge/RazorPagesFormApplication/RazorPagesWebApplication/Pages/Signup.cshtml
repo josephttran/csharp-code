@@ -1,7 +1,12 @@
-﻿@page
+﻿@page "{mode?}"
 @model RazorPagesWebApplication.Pages.SignupModel
 @{
     ViewData["Title"] = "Signup";
+}
+
+@if (Model.Mode != null && ModelState.IsValid)
+{
+    <h4 class="text-center">This is @Model.Mode mode</h4>
 }
 
 <div class="container border border-primary rounded col-md-4">
