@@ -25,11 +25,19 @@ namespace RazorPagesWebApplication.Pages
         {
         }
 
-        public void OnPost()
+        public RedirectToPageResult OnPost()
         {
             string userInfo = $"User: { User.FirstName }, { User.LastName }, { User.Email }, { User.Password }";
 
             _logger.LogCritical(userInfo);
+
+            if (ModelState.IsValid)
+            {
+                int fakeId = 1234321;
+                return RedirectToPagePermanent("Thankyou", "SignupId", new { signinId = fakeId });
+            }
+
+            return null;
         }
     }
 }
