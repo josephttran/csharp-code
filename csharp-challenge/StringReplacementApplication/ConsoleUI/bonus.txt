@@ -1,0 +1,7 @@
+{FirstPerson} and {SecondPerson} were walking down the road when {ThirdPerson} met them at the end of his driveway. "Come join us" said {FirstPerson}. And so, {ThirdPerson} joined {FirstPerson} and {SecondPerson} and the three of them continued down the road. 
+
+After walking for almost five minutes in complete silence, {ThirdPerson} finally had had enough. "Why isn't anyone saying anything?"
+
+"Well", said {SecondPerson}, "we weren't sure what to say. I mean, we couldn't continue the conversation we were having before you joined us."
+
+"Yeah", said {FirstPerson}, "that would spoil the surprise."
