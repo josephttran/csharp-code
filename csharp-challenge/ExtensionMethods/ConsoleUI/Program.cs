@@ -8,6 +8,10 @@ namespace ConsoleUI
         {
             "Hello World.".Print();
             "Hello World.".Excite();
+
+            Person person = new Person();
+
+            person.Fill().Print();
         }
     }
 }
