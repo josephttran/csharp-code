@@ -54,5 +54,25 @@ namespace ConsoleUI
         {
             Console.WriteLine($"\nThis person is { person.FirstName } { person.LastName } ({ person.Age })");
         }
+
+        public static double Add(this double number, double secondNumber)
+        {
+            return number + secondNumber;
+        }
+
+        public static double Subtract(this double number, double secondNumber)
+        {
+            return number - secondNumber;
+        }
+
+        public static double MultiplyBy(this double number, double secondNumber)
+        {
+            return number * secondNumber;
+        }
+
+        public static double DivideBy(this double number, double secondNumber)
+        {
+            return number / secondNumber;
+        }
     }
 }
