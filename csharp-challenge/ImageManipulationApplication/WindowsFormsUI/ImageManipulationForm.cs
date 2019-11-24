@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -65,7 +66,8 @@ namespace WindowsFormsUI
                 ConvertImage(
                     openFileDialog.FileName,
                     ConvertImageComboBox.SelectedItem.ToString(),
-                    ChangeResolutionComboBox.SelectedItem.ToString());
+                    ChangeResolutionComboBox.Text.ToString());
+
                 Console.WriteLine("Done");
             }
         }
@@ -100,22 +102,35 @@ namespace WindowsFormsUI
                 }
                 else
                 {
-                    string[] widthHeight = resolutionSize.Split(',');
-                    int newWidth = int.Parse(widthHeight[0].Trim());
-                    int newHeight = int.Parse(widthHeight[1].Trim());
+                    string pattern = @"^\d{3,4},\s?\d{3,4}$";
 
-                    using (Bitmap bitmap = new Bitmap(image, new Size(newWidth, newHeight)))
+                    if (!Regex.IsMatch(resolutionSize, pattern))
                     {
-                        image.Dispose();
+                        errorProvider1.SetError(ChangeResolutionComboBox, "Invalid resolution format");
+                    }
+                    else
+                    {
+                        errorProvider1.SetError(ChangeResolutionComboBox, "");
 
-                        if (File.Exists(imagePath))
+                        string[] widthHeight = resolutionSize.Split(',');
+                        int newWidth = int.Parse(widthHeight[0].Trim());
+                        int newHeight = int.Parse(widthHeight[1].Trim());
+
+                        using (Bitmap bitmap = new Bitmap(image, new Size(newWidth, newHeight)))
                         {
-                            File.Delete(imagePath);
-                        }
+                            image.Dispose();
 
-                        bitmap.Save(imagePath);
+                            if (File.Exists(imagePath))
+                            {
+                                File.Delete(imagePath);
+                            }
+
+                            bitmap.Save(imagePath);
+                        }
                     }
                 }
+
+                image.Dispose();
             }
             catch (Exception exception)
             {

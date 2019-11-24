@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.OpenFileButton = new System.Windows.Forms.Button();
             this.ConvertImageComboBox = new System.Windows.Forms.ComboBox();
             this.ChooseFormatLabel = new System.Windows.Forms.Label();
             this.ConvertNowButton = new System.Windows.Forms.Button();
             this.ChnageResolutionLabel = new System.Windows.Forms.Label();
             this.ChangeResolutionComboBox = new System.Windows.Forms.ComboBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // OpenFileButton
@@ -108,6 +111,11 @@
             this.ChangeResolutionComboBox.Name = "ChangeResolutionComboBox";
             this.ChangeResolutionComboBox.Size = new System.Drawing.Size(185, 28);
             this.ChangeResolutionComboBox.TabIndex = 5;
+            this.ChangeResolutionComboBox.Text = "width, height";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // ImageManipulationForm
             // 
@@ -124,6 +132,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ImageManipulationForm";
             this.Text = "Image Manipulation Form";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,6 +146,7 @@
         private System.Windows.Forms.Button ConvertNowButton;
         private System.Windows.Forms.Label ChnageResolutionLabel;
         private System.Windows.Forms.ComboBox ChangeResolutionComboBox;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
 
