@@ -32,6 +32,8 @@
             this.ConvertImageComboBox = new System.Windows.Forms.ComboBox();
             this.ChooseFormatLabel = new System.Windows.Forms.Label();
             this.ConvertNowButton = new System.Windows.Forms.Button();
+            this.ChnageResolutionLabel = new System.Windows.Forms.Label();
+            this.ChangeResolutionComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // OpenFileButton
@@ -88,11 +90,32 @@
             this.ConvertNowButton.UseVisualStyleBackColor = true;
             this.ConvertNowButton.Click += new System.EventHandler(this.ConvertNowButton_Click);
             // 
+            // ChnageResolutionLabel
+            // 
+            this.ChnageResolutionLabel.AutoSize = true;
+            this.ChnageResolutionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChnageResolutionLabel.Location = new System.Drawing.Point(311, 262);
+            this.ChnageResolutionLabel.Name = "ChnageResolutionLabel";
+            this.ChnageResolutionLabel.Size = new System.Drawing.Size(128, 17);
+            this.ChnageResolutionLabel.TabIndex = 4;
+            this.ChnageResolutionLabel.Text = "Change Resolution";
+            // 
+            // ChangeResolutionComboBox
+            // 
+            this.ChangeResolutionComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChangeResolutionComboBox.FormattingEnabled = true;
+            this.ChangeResolutionComboBox.Location = new System.Drawing.Point(304, 301);
+            this.ChangeResolutionComboBox.Name = "ChangeResolutionComboBox";
+            this.ChangeResolutionComboBox.Size = new System.Drawing.Size(185, 28);
+            this.ChangeResolutionComboBox.TabIndex = 5;
+            // 
             // ImageManipulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ChangeResolutionComboBox);
+            this.Controls.Add(this.ChnageResolutionLabel);
             this.Controls.Add(this.ConvertNowButton);
             this.Controls.Add(this.ChooseFormatLabel);
             this.Controls.Add(this.ConvertImageComboBox);
@@ -112,6 +135,8 @@
         private System.Windows.Forms.ComboBox ConvertImageComboBox;
         private System.Windows.Forms.Label ChooseFormatLabel;
         private System.Windows.Forms.Button ConvertNowButton;
+        private System.Windows.Forms.Label ChnageResolutionLabel;
+        private System.Windows.Forms.ComboBox ChangeResolutionComboBox;
     }
 }
 

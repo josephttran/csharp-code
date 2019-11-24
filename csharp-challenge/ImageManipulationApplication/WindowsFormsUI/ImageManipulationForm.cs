@@ -16,6 +16,14 @@ namespace WindowsFormsUI
     public partial class ImageManipulationForm : Form
     {
         private readonly string[] formats = { "bmp", "png", "jpg" };
+        private readonly string[] resolutionSizes =
+        {
+            "No change",
+            "500, 500",
+            "640, 480", "800, 600",
+            "1280, 720", "1600, 900",
+            "1280,800", "1440,900",
+        };
         private readonly OpenFileDialog openFileDialog;
 
         public ImageManipulationForm()
@@ -30,6 +38,7 @@ namespace WindowsFormsUI
             };
 
             ConvertImageComboBox.Items.AddRange(formats);
+            ChangeResolutionComboBox.Items.AddRange(resolutionSizes);
         }
 
         private void OpenFileButton_Click(object sender, EventArgs e)
@@ -53,52 +62,58 @@ namespace WindowsFormsUI
             }
             else
             {
-                ConvertImage(openFileDialog.FileName, ConvertImageComboBox.SelectedItem.ToString());
+                ConvertImage(
+                    openFileDialog.FileName,
+                    ConvertImageComboBox.SelectedItem.ToString(),
+                    ChangeResolutionComboBox.SelectedItem.ToString());
                 Console.WriteLine("Done");
             }
         }
 
-        private void ConvertImage(string imagePath, string newFormat)
+        private void ConvertImage(string imagePath, string newFormat, string resolutionSize)
         {
+            string convertedImagePath = imagePath.Substring(0, imagePath.LastIndexOf(".") + 1) + newFormat;
+
+            ImageFormat format = GetImageFormat(newFormat);
+
             try
             {
                 Image image = Image.FromFile(imagePath);
 
-                if (ImageFormat.Jpeg.Equals(image.RawFormat) && newFormat == "jpg" ||
-                    ImageFormat.Png.Equals(image.RawFormat) && newFormat == "png" ||
-                    ImageFormat.Bmp.Equals(image.RawFormat) && newFormat == "bmp"
-                    )
+                if (resolutionSize == "No change")
                 {
-                    MessageBox.Show("Image is already in the selected format!");
-                }
-                else
-                { 
-                    if (ImageFormat.Jpeg.Equals(image.RawFormat) ||
-                        ImageFormat.Png.Equals(image.RawFormat) ||
-                        ImageFormat.Bmp.Equals(image.RawFormat)
-                        )
+                    if (ImageFormat.Jpeg.Equals(image.RawFormat) && newFormat != "jpg" ||
+                        ImageFormat.Png.Equals(image.RawFormat) && newFormat != "png" ||
+                        ImageFormat.Bmp.Equals(image.RawFormat) && newFormat != "bmp")
                     {
                         using (var memoryStream = new MemoryStream())
                         {
-                            switch (newFormat)
-                            {
-                                case "bmp":
-                                    image.Save(memoryStream, ImageFormat.Bmp);
-                                    break;
-                                case "jpg":
-                                    image.Save(memoryStream, ImageFormat.Jpeg);
-                                    break;
-                                case "png":
-                                    image.Save(memoryStream, ImageFormat.Png);
-                                    break;
-                                default:
-                                    break;
-                            }
-
+                            image.Save(memoryStream, format);
                             Image convertedImage = Image.FromStream(memoryStream);
-                            string convertedImagePath = imagePath.Substring(0, imagePath.LastIndexOf(".") + 1) + newFormat;
                             convertedImage.Save(convertedImagePath);
-                        };
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No changes");
+                    }
+                }
+                else
+                {
+                    string[] widthHeight = resolutionSize.Split(',');
+                    int newWidth = int.Parse(widthHeight[0].Trim());
+                    int newHeight = int.Parse(widthHeight[1].Trim());
+
+                    using (Bitmap bitmap = new Bitmap(image, new Size(newWidth, newHeight)))
+                    {
+                        image.Dispose();
+
+                        if (File.Exists(imagePath))
+                        {
+                            File.Delete(imagePath);
+                        }
+
+                        bitmap.Save(imagePath);
                     }
                 }
             }
@@ -106,6 +121,21 @@ namespace WindowsFormsUI
             {
                 Console.WriteLine("Error: " + exception);
                 throw;
+            }
+        }
+
+        private ImageFormat GetImageFormat(string selectedFormat)
+        {
+            switch (selectedFormat)
+            {
+                case "bmp":
+                    return ImageFormat.Bmp;
+                case "jpg":
+                    return ImageFormat.Jpeg;
+                case "png":
+                    return ImageFormat.Png;
+                default:
+                    return null;
             }
         }
     }
