@@ -16,5 +16,15 @@ namespace WindowsFormsUI
         {
             InitializeComponent();
         }
+
+        private void ButtonBonusSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ButtonPrimarySearch_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
