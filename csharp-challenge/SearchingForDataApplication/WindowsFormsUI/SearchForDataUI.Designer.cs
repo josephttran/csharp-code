@@ -36,14 +36,11 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.listBoxBonus = new System.Windows.Forms.ListBox();
-            this.textBoxBonus = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.ButtonBonusSearch = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBoxPrimary
@@ -104,9 +101,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.ButtonBonusSearch);
             this.tabPage2.Controls.Add(this.listBoxBonus);
-            this.tabPage2.Controls.Add(this.textBoxBonus);
-            this.tabPage2.Controls.Add(this.panel2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -123,28 +119,13 @@
             this.listBoxBonus.Size = new System.Drawing.Size(703, 277);
             this.listBoxBonus.TabIndex = 6;
             // 
-            // textBoxBonus
-            // 
-            this.textBoxBonus.Location = new System.Drawing.Point(22, 36);
-            this.textBoxBonus.Name = "textBoxBonus";
-            this.textBoxBonus.Size = new System.Drawing.Size(576, 20);
-            this.textBoxBonus.TabIndex = 4;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.ButtonBonusSearch);
-            this.panel2.Location = new System.Drawing.Point(22, 36);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(703, 20);
-            this.panel2.TabIndex = 5;
-            // 
             // ButtonBonusSearch
             // 
-            this.ButtonBonusSearch.Location = new System.Drawing.Point(574, 0);
+            this.ButtonBonusSearch.Location = new System.Drawing.Point(22, 32);
             this.ButtonBonusSearch.Name = "ButtonBonusSearch";
-            this.ButtonBonusSearch.Size = new System.Drawing.Size(129, 20);
+            this.ButtonBonusSearch.Size = new System.Drawing.Size(703, 20);
             this.ButtonBonusSearch.TabIndex = 2;
-            this.ButtonBonusSearch.Text = "Search";
+            this.ButtonBonusSearch.Text = "Search For Phone Number";
             this.ButtonBonusSearch.UseVisualStyleBackColor = true;
             this.ButtonBonusSearch.Click += new System.EventHandler(this.ButtonBonusSearch_Click);
             // 
@@ -161,8 +142,6 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -177,8 +156,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ListBox listBoxBonus;
-        private System.Windows.Forms.TextBox textBoxBonus;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button ButtonBonusSearch;
     }
 }
