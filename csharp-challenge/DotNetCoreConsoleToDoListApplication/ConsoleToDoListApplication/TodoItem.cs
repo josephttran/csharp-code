@@ -12,8 +12,9 @@ namespace ConsoleToDoListApplication
 
         public void Display()
         {
-            Console.WriteLine($"{Id} {Name}");
-            Console.WriteLine($"Done? {Done}");
+            Console.WriteLine($"Id: {Id} ");
+            Console.WriteLine($"Todo: {Name} ");
+            Console.WriteLine($"Done?: {Done} ");
         }
     }
 }

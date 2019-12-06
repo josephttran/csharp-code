@@ -9,34 +9,82 @@ namespace ConsoleToDoListApplication
 
         static void Main(string[] args)
         {
-            Menu();
+            while(true)
+            {
+                Menu();
+                HandleUserInput();
+            }
         }
 
         static void Add(TodoItem todoItem)
         {
+            todoItem.Id = todoList.Count;
             todoList.Add(todoItem);
+            Console.WriteLine($"{ todoItem.Name } added to todo list");
         }
 
         static void Clear()
         {
             todoList.Clear();
+            Console.WriteLine("Todo list is now empty");
         }
 
         static void Done(int id)
         {
-            if (todoList[id] != null)
+            if (id < todoList.Count && id > -1)
             {
                 todoList[id].Done = true;
             }
             else
             {
-                Console.WriteLine("\nInvalid Id");
+                Console.WriteLine($"\nItem with id { id } does not exist");
             }
         }
 
         static void Exit()
         {
             Environment.Exit(0);
+        }
+
+        static void HandleUserInput()
+        {
+            string userCommand = Console.ReadLine();
+
+            switch (userCommand.ToLower())
+            {
+                case string _ when userCommand.Length > 4 && userCommand.ToLower().Substring(0, 4) == "add ":
+                    TodoItem todoItem = new TodoItem { Name = userCommand.Substring(4) };
+                    Add(todoItem);
+                    break;
+                case "clear":
+                    Clear();
+                    break;
+                case string _ when userCommand.Length > 5 && userCommand.ToLower().Substring(0, 5).Equals("done "):
+                    if (int.TryParse(userCommand.Substring(5), out int id))
+                    {
+                        Done(id);
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nNot valid id number!");
+                    }
+                    break;
+                case "exit":
+                    Exit();
+                    break;
+                case "help":
+                    ShowHelp();
+                    break;
+                case "print":
+                    Print();
+                    break;
+                case "print all":
+                    PrintAll();
+                    break;
+                default:
+                    Console.WriteLine("\nNot valid command!");
+                    break;
+            }
         }
 
         static void Menu()
@@ -59,9 +107,19 @@ namespace ConsoleToDoListApplication
         {
             if (todoList.Count > 0)
             {
-                for (int i = 0; i < 3; i++)
+                if (todoList.Count < 3)
                 {
-                    todoList[i].Display();
+                    foreach (var item in todoList)
+                    {
+                        item.Display();
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        todoList[i].Display();
+                    }
                 }
             }
             else
