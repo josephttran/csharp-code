@@ -6,6 +6,7 @@ namespace ConsoleToDoListApplication
     class Program
     {
         static List<TodoItem> todoList = new List<TodoItem>();
+        static int simulateId = 1;
 
         static void Main(string[] args)
         {
@@ -18,9 +19,10 @@ namespace ConsoleToDoListApplication
 
         static void Add(TodoItem todoItem)
         {
-            todoItem.Id = todoList.Count;
+            todoItem.Id = simulateId;
             todoList.Add(todoItem);
             Console.WriteLine($"{ todoItem.Name } added to todo list");
+            simulateId += 1;
         }
 
         static void Clear()
@@ -31,13 +33,29 @@ namespace ConsoleToDoListApplication
 
         static void Done(int id)
         {
-            if (id < todoList.Count && id > -1)
+            bool found = false;
+
+            if (todoList.Count > 0)
             {
-                todoList[id].Done = true;
+                foreach (TodoItem todoItem in todoList)
+                {
+                    if (todoItem.Id == id)
+                    {
+                        todoItem.Done = true;
+                        found = true;
+                        Console.WriteLine($"{ todoItem.Name } is complete");
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    Console.WriteLine($"\nItem with id { id } does not exist");
+                }
             }
             else
             {
-                Console.WriteLine($"\nItem with id { id } does not exist");
+                Console.WriteLine("Todo list is empty");
             }
         }
 
@@ -169,9 +187,9 @@ namespace ConsoleToDoListApplication
 
         static void ReOrder(int fromPosition, int toPosition)
         {
-            if (fromPosition > 0 &&
+            if (fromPosition > -1 &&
                 fromPosition < todoList.Count &&
-                toPosition > 0 &&
+                toPosition > -1 &&
                 toPosition < todoList.Count
                 )
             {
@@ -197,7 +215,7 @@ namespace ConsoleToDoListApplication
             Console.WriteLine($"{"Exit", -15} Quit the program");
             Console.WriteLine($"{"Print", -15} Display top 3 task in todo list");
             Console.WriteLine($"{"Print all", -15} Display all tasks in todo list");
-            Console.WriteLine($"{"Reorder, -15"} Move item by position in todo list");
+            Console.WriteLine($"{"Reorder", -15} Move item by position in todo list");
         }
     }
 }
