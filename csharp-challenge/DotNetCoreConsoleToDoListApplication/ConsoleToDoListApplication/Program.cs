@@ -68,6 +68,7 @@ namespace ConsoleToDoListApplication
                     {
                         Console.WriteLine("\nNot valid id number!");
                     }
+
                     break;
                 case "exit":
                     Exit();
@@ -80,6 +81,28 @@ namespace ConsoleToDoListApplication
                     break;
                 case "print all":
                     PrintAll();
+                    break;
+                case string _ when userCommand.Length > 8 && userCommand.ToLower().Substring(0, 8).Equals("reorder "):
+                    string[] positions = userCommand.Substring(8).Split(" ");
+
+                    if (positions.Length == 2)
+                    {
+                        if (int.TryParse(positions[0], out int fromPosition) &&
+                            int.TryParse(positions[1], out int toPosition)
+                            )
+                        {
+                            ReOrder(fromPosition, toPosition);
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nArguments are not valid!");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nArguments are not valid!");
+                    }
+
                     break;
                 default:
                     Console.WriteLine("\nNot valid command!");
@@ -97,6 +120,7 @@ namespace ConsoleToDoListApplication
             Console.WriteLine("Print all");
             Console.WriteLine("Add <todo>");
             Console.WriteLine("Done <todo number>");
+            Console.WriteLine("Reorder <item position> <new position>");
             Console.WriteLine("Clear");
             Console.WriteLine("Help");
             Console.WriteLine("Exit");
@@ -143,6 +167,24 @@ namespace ConsoleToDoListApplication
             }
         }
 
+        static void ReOrder(int fromPosition, int toPosition)
+        {
+            if (fromPosition > 0 &&
+                fromPosition < todoList.Count &&
+                toPosition > 0 &&
+                toPosition < todoList.Count
+                )
+            {
+                TodoItem todoItem = todoList[fromPosition];
+                todoList.RemoveAt(fromPosition);
+                todoList.Insert(toPosition, todoItem);
+            }
+            else
+            {
+                Console.WriteLine("\nInvalid position");
+            }
+        }
+
         static void ShowHelp()
         {
             Console.WriteLine($"\n{"Command", -15} Command Information");
@@ -155,6 +197,7 @@ namespace ConsoleToDoListApplication
             Console.WriteLine($"{"Exit", -15} Quit the program");
             Console.WriteLine($"{"Print", -15} Display top 3 task in todo list");
             Console.WriteLine($"{"Print all", -15} Display all tasks in todo list");
+            Console.WriteLine($"{"Reorder, -15"} Move item by position in todo list");
         }
     }
 }
