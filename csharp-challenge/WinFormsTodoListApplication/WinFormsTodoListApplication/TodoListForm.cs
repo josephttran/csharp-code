@@ -12,6 +12,10 @@ namespace WinFormsTodoListApplication
         {
             InitializeComponent();
 
+            TodoCheckListBox.ItemCheck += (sender, e) => {
+                todoList[e.Index].IsCompleted = (e.NewValue != CheckState.Unchecked);
+            };
+
             TodoCheckListBox.DataSource = todoList;
             TodoCheckListBox.DisplayMember = "Name";
             TodoCheckListBox.ValueMember = "Name";
@@ -48,11 +52,6 @@ namespace WinFormsTodoListApplication
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            foreach (int indexChecked in TodoCheckListBox.CheckedIndices)
-            {
-                todoList[indexChecked].IsCompleted = true;
-            }
-
             if (!string.IsNullOrWhiteSpace(TodoTextBox.Text))
             {
                 TodoItem todoItem = new TodoItem
