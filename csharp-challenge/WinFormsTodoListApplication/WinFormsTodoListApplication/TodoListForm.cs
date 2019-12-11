@@ -65,5 +65,20 @@ namespace WinFormsTodoListApplication
 
             MarkCheckBoxComplete();
         }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RemoveButton_Click(object sender, EventArgs e)
+        {
+            if (TodoCheckBoxList.Items.Count > 0)
+            {
+                todoList.Remove((TodoItem) TodoCheckBoxList.SelectedItem);
+            }
+
+            MarkCheckBoxComplete();
+        }
     }
 }

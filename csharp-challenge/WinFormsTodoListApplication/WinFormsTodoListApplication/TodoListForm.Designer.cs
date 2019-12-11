@@ -32,6 +32,8 @@
             this.TodoCheckBoxList = new System.Windows.Forms.CheckedListBox();
             this.TodoTextBox = new System.Windows.Forms.TextBox();
             this.AddButton = new System.Windows.Forms.Button();
+            this.EditButton = new System.Windows.Forms.Button();
+            this.DeleteButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TodoHeading
@@ -72,11 +74,33 @@
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
+            // EditButton
+            // 
+            this.EditButton.Location = new System.Drawing.Point(672, 218);
+            this.EditButton.Name = "EditButton";
+            this.EditButton.Size = new System.Drawing.Size(105, 23);
+            this.EditButton.TabIndex = 5;
+            this.EditButton.Text = "Edit Selected Item";
+            this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Location = new System.Drawing.Point(672, 292);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(117, 23);
+            this.DeleteButton.TabIndex = 6;
+            this.DeleteButton.Text = "Delete Selected Item";
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.RemoveButton_Click);
+            // 
             // TodoListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(801, 450);
+            this.Controls.Add(this.DeleteButton);
+            this.Controls.Add(this.EditButton);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.TodoTextBox);
             this.Controls.Add(this.TodoCheckBoxList);
@@ -94,6 +118,8 @@
         private System.Windows.Forms.CheckedListBox TodoCheckBoxList;
         private System.Windows.Forms.TextBox TodoTextBox;
         private System.Windows.Forms.Button AddButton;
+        private System.Windows.Forms.Button EditButton;
+        private System.Windows.Forms.Button DeleteButton;
     }
 }
 
