@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TodoItem.cs" />
     <Compile Include="TodoListForm.cs">
       <SubType>Form</SubType>
     </Compile>

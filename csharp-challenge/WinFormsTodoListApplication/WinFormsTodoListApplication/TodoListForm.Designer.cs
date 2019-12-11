@@ -28,19 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.TodoHeading = new System.Windows.Forms.Label();
+            this.TodoCheckBoxList = new System.Windows.Forms.CheckedListBox();
+            this.TodoTextBox = new System.Windows.Forms.TextBox();
+            this.AddButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // listBox1
-            // 
-            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(51, 111);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(476, 264);
-            this.listBox1.TabIndex = 0;
             // 
             // TodoHeading
             // 
@@ -52,13 +44,44 @@
             this.TodoHeading.TabIndex = 1;
             this.TodoHeading.Text = "Todo Task";
             // 
+            // TodoCheckBoxList
+            // 
+            this.TodoCheckBoxList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TodoCheckBoxList.FormattingEnabled = true;
+            this.TodoCheckBoxList.Location = new System.Drawing.Point(57, 177);
+            this.TodoCheckBoxList.Name = "TodoCheckBoxList";
+            this.TodoCheckBoxList.Size = new System.Drawing.Size(595, 235);
+            this.TodoCheckBoxList.TabIndex = 2;
+            // 
+            // TodoTextBox
+            // 
+            this.TodoTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TodoTextBox.Location = new System.Drawing.Point(57, 112);
+            this.TodoTextBox.Name = "TodoTextBox";
+            this.TodoTextBox.Size = new System.Drawing.Size(488, 26);
+            this.TodoTextBox.TabIndex = 3;
+            // 
+            // AddButton
+            // 
+            this.AddButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddButton.Location = new System.Drawing.Point(544, 112);
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(108, 26);
+            this.AddButton.TabIndex = 4;
+            this.AddButton.Text = "Add Task";
+            this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
+            // 
             // TodoListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(801, 450);
+            this.Controls.Add(this.AddButton);
+            this.Controls.Add(this.TodoTextBox);
+            this.Controls.Add(this.TodoCheckBoxList);
             this.Controls.Add(this.TodoHeading);
-            this.Controls.Add(this.listBox1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "TodoListForm";
             this.Text = "Todo List Application";
             this.ResumeLayout(false);
@@ -67,9 +90,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label TodoHeading;
+        private System.Windows.Forms.CheckedListBox TodoCheckBoxList;
+        private System.Windows.Forms.TextBox TodoTextBox;
+        private System.Windows.Forms.Button AddButton;
     }
 }
 
