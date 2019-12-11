@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.TodoHeading = new System.Windows.Forms.Label();
-            this.TodoCheckBoxList = new System.Windows.Forms.CheckedListBox();
+            this.TodoCheckListBox = new System.Windows.Forms.CheckedListBox();
             this.TodoTextBox = new System.Windows.Forms.TextBox();
             this.AddButton = new System.Windows.Forms.Button();
             this.EditButton = new System.Windows.Forms.Button();
@@ -48,12 +48,12 @@
             // 
             // TodoCheckBoxList
             // 
-            this.TodoCheckBoxList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TodoCheckBoxList.FormattingEnabled = true;
-            this.TodoCheckBoxList.Location = new System.Drawing.Point(57, 177);
-            this.TodoCheckBoxList.Name = "TodoCheckBoxList";
-            this.TodoCheckBoxList.Size = new System.Drawing.Size(595, 235);
-            this.TodoCheckBoxList.TabIndex = 2;
+            this.TodoCheckListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TodoCheckListBox.FormattingEnabled = true;
+            this.TodoCheckListBox.Location = new System.Drawing.Point(57, 177);
+            this.TodoCheckListBox.Name = "TodoCheckBoxList";
+            this.TodoCheckListBox.Size = new System.Drawing.Size(595, 235);
+            this.TodoCheckListBox.TabIndex = 2;
             // 
             // TodoTextBox
             // 
@@ -103,7 +103,7 @@
             this.Controls.Add(this.EditButton);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.TodoTextBox);
-            this.Controls.Add(this.TodoCheckBoxList);
+            this.Controls.Add(this.TodoCheckListBox);
             this.Controls.Add(this.TodoHeading);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "TodoListForm";
@@ -115,7 +115,7 @@
 
         #endregion
         private System.Windows.Forms.Label TodoHeading;
-        private System.Windows.Forms.CheckedListBox TodoCheckBoxList;
+        private System.Windows.Forms.CheckedListBox TodoCheckListBox;
         private System.Windows.Forms.TextBox TodoTextBox;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button EditButton;

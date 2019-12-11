@@ -12,9 +12,9 @@ namespace WinFormsTodoListApplication
         {
             InitializeComponent();
 
-            TodoCheckBoxList.DataSource = todoList;
-            TodoCheckBoxList.DisplayMember = "Name";
-            TodoCheckBoxList.ValueMember = "Name";
+            TodoCheckListBox.DataSource = todoList;
+            TodoCheckListBox.DisplayMember = "Name";
+            TodoCheckListBox.ValueMember = "Name";
 
             AddOneCompletedToCheckBox();
         }
@@ -27,7 +27,7 @@ namespace WinFormsTodoListApplication
                 {
                     if (todoList[i].IsCompleted)
                     {
-                        TodoCheckBoxList.SetItemChecked(i, true);
+                        TodoCheckListBox.SetItemChecked(i, true);
                     }
                 }
             }
@@ -48,7 +48,7 @@ namespace WinFormsTodoListApplication
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            foreach (int indexChecked in TodoCheckBoxList.CheckedIndices)
+            foreach (int indexChecked in TodoCheckListBox.CheckedIndices)
             {
                 todoList[indexChecked].IsCompleted = true;
             }
@@ -73,9 +73,9 @@ namespace WinFormsTodoListApplication
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            if (TodoCheckBoxList.Items.Count > 0)
+            if (TodoCheckListBox.Items.Count > 0)
             {
-                todoList.Remove((TodoItem) TodoCheckBoxList.SelectedItem);
+                todoList.Remove((TodoItem) TodoCheckListBox.SelectedItem);
             }
 
             MarkCheckBoxComplete();
