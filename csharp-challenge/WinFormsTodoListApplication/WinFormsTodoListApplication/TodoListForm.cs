@@ -67,7 +67,12 @@ namespace WinFormsTodoListApplication
 
         private void EditButton_Click(object sender, EventArgs e)
         {
+            if (TodoCheckListBox.Items.Count > 0)
+            {
+                todoList[TodoCheckListBox.SelectedIndex].Name = EditTextBox.Text;
+            }
 
+            TodoCheckListBox.Refresh();
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
