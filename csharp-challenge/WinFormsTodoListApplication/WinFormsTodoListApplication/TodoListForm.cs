@@ -51,6 +51,9 @@ namespace WinFormsTodoListApplication
             MarkCheckBoxComplete();
         }
 
+        /*
+         * Priority number is set to index position + 1
+         */
         private void AddButton_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(TodoTextBox.Text))
@@ -81,7 +84,14 @@ namespace WinFormsTodoListApplication
         {
             if (TodoCheckListBox.Items.Count > 0)
             {
-                todoList.Remove((TodoItem) TodoCheckListBox.SelectedItem);
+                int index = TodoCheckListBox.SelectedIndex;
+                TodoItem item = (TodoItem)TodoCheckListBox.SelectedItem;
+                todoList.Remove(item);
+
+                for (int i = index; i < todoList.Count; i++)
+                {
+                    todoList[i].Priority -= 1;
+                }
             }
 
             MarkCheckBoxComplete();
