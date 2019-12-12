@@ -17,8 +17,8 @@ namespace WinFormsTodoListApplication
             };
 
             TodoCheckListBox.DataSource = todoList;
-            TodoCheckListBox.DisplayMember = "Name";
-            TodoCheckListBox.ValueMember = "Name";
+            TodoCheckListBox.DisplayMember = "DisplayTodo";
+            TodoCheckListBox.ValueMember = "Priority";
 
             AddOneCompletedToCheckBox();
         }
@@ -41,6 +41,7 @@ namespace WinFormsTodoListApplication
         {
             TodoItem todoItem = new TodoItem
             {
+                Priority = 1,
                 Name = "Add first item",
                 IsCompleted = true
             };
@@ -56,6 +57,7 @@ namespace WinFormsTodoListApplication
             {
                 TodoItem todoItem = new TodoItem
                 {
+                    Priority = TodoCheckListBox.Items.Count + 1,
                     Name = TodoTextBox.Text
                 };
 
