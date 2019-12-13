@@ -6,20 +6,27 @@ namespace WinFormsTodoListApplication
 {
     public partial class TodoListForm : Form
     {
-        BindingList<TodoItem> todoList = new BindingList<TodoItem>();
+        private readonly BindingList<TodoItem> todoList = new BindingList<TodoItem>();
 
         public TodoListForm()
         {
             InitializeComponent();
 
-            TodoCheckListBox.ItemCheck += (sender, e) => {
-                todoList[e.Index].IsCompleted = (e.NewValue != CheckState.Unchecked);
-            };
-
+            /*
+             * Set BindingList of TodoItem as data source
+             * Set the TodoItem property to be displayed
+             */
             TodoCheckListBox.DataSource = todoList;
             TodoCheckListBox.DisplayMember = "DisplayTodo";
             TodoCheckListBox.ValueMember = "Priority";
 
+            // CleckListBox item check event
+            TodoCheckListBox.ItemCheck += (sender, e) => todoList[e.Index].IsCompleted = (e.NewValue != CheckState.Unchecked);
+
+            // BindingList list changed event
+            todoList.ListChanged += (sender, e) => MarkCheckBoxComplete();
+
+            // Add first test item
             AddOneCompletedToCheckBox();
         }
 
@@ -47,8 +54,7 @@ namespace WinFormsTodoListApplication
             };
 
             todoList.Add(todoItem);
-
-            MarkCheckBoxComplete();
+            TodoCheckListBox.SetItemChecked(0, true);
         }
 
         /*
@@ -66,7 +72,6 @@ namespace WinFormsTodoListApplication
 
                 todoList.Add(todoItem);
                 TodoTextBox.Text = "";
-                MarkCheckBoxComplete();
             }
         }
 
@@ -92,8 +97,6 @@ namespace WinFormsTodoListApplication
                 {
                     todoList[i].Priority -= 1;
                 }
-
-                MarkCheckBoxComplete();
             }
         }
 
@@ -128,8 +131,6 @@ namespace WinFormsTodoListApplication
                     TodoCheckListBox.SetSelected(index, true);
                 }
             }
-
-            MarkCheckBoxComplete();
         }
     }
 }
