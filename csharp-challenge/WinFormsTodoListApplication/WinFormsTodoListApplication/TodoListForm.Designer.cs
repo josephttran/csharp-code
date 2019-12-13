@@ -55,6 +55,7 @@
             this.TodoCheckListBox.Name = "TodoCheckListBox";
             this.TodoCheckListBox.Size = new System.Drawing.Size(595, 235);
             this.TodoCheckListBox.TabIndex = 2;
+            this.TodoCheckListBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TodoCheckListBox_KeyDown);
             // 
             // TodoTextBox
             // 

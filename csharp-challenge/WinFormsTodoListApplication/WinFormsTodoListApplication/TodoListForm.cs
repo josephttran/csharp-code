@@ -65,9 +65,9 @@ namespace WinFormsTodoListApplication
                 };
 
                 todoList.Add(todoItem);
+                TodoTextBox.Text = "";
+                MarkCheckBoxComplete();
             }
-
-            MarkCheckBoxComplete();
         }
 
         private void EditButton_Click(object sender, EventArgs e)
@@ -75,9 +75,9 @@ namespace WinFormsTodoListApplication
             if (TodoCheckListBox.Items.Count > 0)
             {
                 todoList[TodoCheckListBox.SelectedIndex].Name = EditTextBox.Text;
-            }
 
-            TodoCheckListBox.Refresh();
+                TodoCheckListBox.Refresh();
+            }
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
@@ -91,6 +91,41 @@ namespace WinFormsTodoListApplication
                 for (int i = index; i < todoList.Count; i++)
                 {
                     todoList[i].Priority -= 1;
+                }
+
+                MarkCheckBoxComplete();
+            }
+        }
+
+        private void TodoCheckListBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up)
+            {
+                int index = TodoCheckListBox.SelectedIndex;
+
+                if (index > 0)
+                {
+                    TodoItem item = (TodoItem) TodoCheckListBox.SelectedItem;
+                    todoList.Remove(item);
+                    todoList.Insert(index - 1, item);
+                    todoList[index - 1].Priority -= 1;
+                    todoList[index].Priority += 1;
+                    TodoCheckListBox.SetSelected(index, true);
+                }
+            }
+
+            if (e.KeyCode == Keys.Down)
+            {
+                int index = TodoCheckListBox.SelectedIndex;
+
+                if (index < todoList.Count - 1)
+                {
+                    TodoItem item = (TodoItem) TodoCheckListBox.SelectedItem;
+                    todoList.Remove(item);
+                    todoList.Insert(index + 1, item);
+                    todoList[index + 1].Priority += 1;
+                    todoList[index].Priority -= 1;
+                    TodoCheckListBox.SetSelected(index, true);
                 }
             }
 
