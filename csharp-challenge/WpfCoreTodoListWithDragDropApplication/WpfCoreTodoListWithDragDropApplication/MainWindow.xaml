@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="Todo Application" Height="450" Width="800" FontSize="16">
 
+    <Window.Resources>
+        <Style x:Key="ConditionalStrike" TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsComplete}" Value="true">
+                    <Setter Property="TextBlock.TextDecorations" Value="StrikeThrough" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"></ColumnDefinition>
@@ -31,7 +40,7 @@
         <ListBox Name="todoListBox" Grid.Column="1" Grid.Row="2" Margin="0 10" ItemsSource="{Binding}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Path=Title}"></TextBlock>
+                    <TextBlock Text="{Binding Path=Title}" Style="{DynamicResource ConditionalStrike}"></TextBlock>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
