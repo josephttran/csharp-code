@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using WpfCoreTodoListWithDragDropApplication.Models;
+
 namespace WpfCoreTodoListWithDragDropApplication
 {
     /// <summary>
@@ -20,9 +22,19 @@ namespace WpfCoreTodoListWithDragDropApplication
     /// </summary>
     public partial class MainWindow : Window
     {
+        public List<TodoItem> TodoList { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            TodoList = new List<TodoItem>
+            {
+                new TodoItem { Title = "First Item", IsComplete = true },
+                new TodoItem { Title = "Next Item", IsComplete = false }
+            };
+
+            DataContext = TodoList;
         }
     }
 }
