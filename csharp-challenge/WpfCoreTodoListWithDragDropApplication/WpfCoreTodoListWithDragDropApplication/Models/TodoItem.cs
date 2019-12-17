@@ -6,7 +6,7 @@ namespace WpfCoreTodoListWithDragDropApplication.Models
     public class TodoItem : INotifyPropertyChanged
     {
         private string TitleValue;
-        private bool IsCompleteValue;
+        private bool IsCompleteValue = false;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string Title

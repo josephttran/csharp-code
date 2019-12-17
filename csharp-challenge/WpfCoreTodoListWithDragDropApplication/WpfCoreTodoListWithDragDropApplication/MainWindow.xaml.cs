@@ -72,5 +72,22 @@ namespace WpfCoreTodoListWithDragDropApplication
                 TodoList[index].IsComplete = true;
             }
         }
+
+        private void EditTodoButton_Click(object sender, RoutedEventArgs e)
+        {
+            int index = todoListBox.SelectedIndex;
+
+            if (index > -1 && index < TodoList.Count)
+            {
+                EditTodoItemDialog editTodoItemDialog = new EditTodoItemDialog(TodoList[index]);
+
+                if (editTodoItemDialog.ShowDialog() == true)
+                {
+                    TodoList[index].Title = editTodoItemDialog.TodoItem.Title;
+                    TodoList[index].IsComplete = editTodoItemDialog.TodoItem.IsComplete;
+                }
+            }
+
+        }
     }
 }

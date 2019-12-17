@@ -53,7 +53,7 @@
                     <Setter Property="Padding" Value="0, 10"/>
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Edit Todo"></Button>
+            <Button x:Name="editTodoButton" Click="EditTodoButton_Click" Content="Edit Todo"></Button>
             <Button x:Name="removeTodoButton" Click="RemoveTodoButton_Click" Content="Remove Todo"></Button>
         </StackPanel>
     </Grid>
