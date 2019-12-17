@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using WpfCoreTodoListWithDragDropApplication.Diag;
 using WpfCoreTodoListWithDragDropApplication.Models;
 
 namespace WpfCoreTodoListWithDragDropApplication
@@ -22,19 +23,34 @@ namespace WpfCoreTodoListWithDragDropApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        public List<TodoItem> TodoList { get; set; }
+        public ObservableCollection<TodoItem> TodoList { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
 
-            TodoList = new List<TodoItem>
+            DataContext = this;
+
+            TodoList = new ObservableCollection<TodoItem>
             {
                 new TodoItem { Title = "First Item", IsComplete = true },
                 new TodoItem { Title = "Next Item", IsComplete = false }
             };
+        }
 
-            DataContext = TodoList;
+        private void AddTodoButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddTodoItemDialog addTodoItemDialog = new AddTodoItemDialog();
+
+            if (addTodoItemDialog.ShowDialog() == true)
+            {
+                string text = addTodoItemDialog.TodoItemText;
+
+                if (!string.IsNullOrEmpty(text))
+                {
+                    TodoList.Add(new TodoItem { Title = text });
+                }
+            }
         }
     }
 }
