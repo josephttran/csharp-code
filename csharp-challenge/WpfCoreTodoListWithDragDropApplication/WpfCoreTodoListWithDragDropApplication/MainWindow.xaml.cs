@@ -62,5 +62,17 @@ namespace WpfCoreTodoListWithDragDropApplication
                 TodoList.RemoveAt(index);
             }
         }
+
+        private void ListBox_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int index = todoListBox.SelectedIndex;
+
+            if (index > -1 && index < TodoList.Count)
+            {
+                TodoList[index].IsComplete = true;
+
+                todoListBox.Items.Refresh();
+            }
+        }
     }
 }

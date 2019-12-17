@@ -37,7 +37,7 @@
                FontSize="24"
                Content="List of Todo">
         </Label>
-        <ListBox x:Name="todoListBox" Grid.Column="1" Grid.Row="2" Margin="0 10" ItemsSource="{Binding TodoList}">
+        <ListBox x:Name="todoListBox" Grid.Column="1" Grid.Row="2" Margin="0 10" ItemsSource="{Binding TodoList}" MouseDoubleClick="ListBox_DoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=Title}" Style="{StaticResource ConditionalStrike}"></TextBlock>
