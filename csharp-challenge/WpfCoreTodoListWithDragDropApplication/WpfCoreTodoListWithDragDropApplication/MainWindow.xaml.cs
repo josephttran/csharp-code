@@ -52,5 +52,15 @@ namespace WpfCoreTodoListWithDragDropApplication
                 }
             }
         }
+
+        private void RemoveTodoButton_Click(object sender, RoutedEventArgs e)
+        {
+            int index = todoListBox.SelectedIndex;
+
+            if (index > -1 && index < TodoList.Count)
+            {
+                TodoList.RemoveAt(index);
+            }
+        }
     }
 }
