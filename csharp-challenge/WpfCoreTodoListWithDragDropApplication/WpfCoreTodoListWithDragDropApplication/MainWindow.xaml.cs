@@ -70,8 +70,6 @@ namespace WpfCoreTodoListWithDragDropApplication
             if (index > -1 && index < TodoList.Count)
             {
                 TodoList[index].IsComplete = true;
-
-                todoListBox.Items.Refresh();
             }
         }
     }
