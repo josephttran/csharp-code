@@ -36,6 +36,14 @@ namespace WpfCoreTodoListWithDragDropApplication
                 new TodoItem { Title = "First Item", IsComplete = true },
                 new TodoItem { Title = "Next Item", IsComplete = false }
             };
+
+            for (int index = 0; index < TodoList.Count; index++)
+            {
+                if (TodoList[index].IsComplete == true)
+                {
+                    MoveToEnd(index);
+                }
+            }
         }
 
         private void AddTodoButton_Click(object sender, RoutedEventArgs e)
@@ -67,9 +75,10 @@ namespace WpfCoreTodoListWithDragDropApplication
         {
             int index = todoListBox.SelectedIndex;
 
-            if (index > -1 && index < TodoList.Count)
+            if (index > -1 && index < TodoList.Count && TodoList[index].IsComplete == false)
             {
                 TodoList[index].IsComplete = true;
+                MoveToEnd(index);
             }
         }
 
@@ -85,9 +94,21 @@ namespace WpfCoreTodoListWithDragDropApplication
                 {
                     TodoList[index].Title = editTodoItemDialog.TodoItem.Title;
                     TodoList[index].IsComplete = editTodoItemDialog.TodoItem.IsComplete;
+
+                    if (TodoList[index].IsComplete == true)
+                    {
+                        MoveToEnd(index);
+                    }
                 }
             }
+        }
 
+        private void MoveToEnd(int index)
+        {
+            TodoItem todoItem = TodoList[index];
+
+            TodoList.RemoveAt(index);
+            TodoList.Insert(TodoList.Count, todoItem);
         }
     }
 }
