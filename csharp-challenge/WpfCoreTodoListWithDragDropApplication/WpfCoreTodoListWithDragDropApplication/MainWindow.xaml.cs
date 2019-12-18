@@ -110,5 +110,42 @@ namespace WpfCoreTodoListWithDragDropApplication
             TodoList.RemoveAt(index);
             TodoList.Insert(TodoList.Count, todoItem);
         }
+
+        private void TodoListBox_PreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                if (e.Source != null)
+                {
+                    DragDrop.DoDragDrop((ListBox)e.Source, (ListBox)e.Source, DragDropEffects.Move);
+                }
+            }
+        }
+
+        private void TodoListBox_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data != null && e.Data.GetDataPresent("System.Windows.Controls.ListBox"))
+            {
+                if (e.Data.GetData("System.Windows.Controls.ListBox") is ListBox source)
+                {
+                    var todoItemIndex = source.SelectedIndex;
+
+                    if (todoItemIndex != -1)
+                    {
+                        TodoItem todoItemSelected = source.SelectedItem as TodoItem;
+                        Border controlBorder = e.OriginalSource as Border;
+
+                        if (controlBorder?.DataContext != null)
+                        {
+                            TodoItem target = controlBorder.DataContext as TodoItem;
+                            int newIndex = todoListBox.Items.IndexOf(target);
+
+                            TodoList.RemoveAt(todoItemIndex);
+                            TodoList.Insert(newIndex, todoItemSelected);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
