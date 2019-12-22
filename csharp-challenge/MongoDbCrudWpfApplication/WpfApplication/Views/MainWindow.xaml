@@ -5,8 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication.Views"
         mc:Ignorable="d"
-        Title="MongoDB CRUD Operation" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="MongoDB CRUD Operation" Height="450" Width="800" FontSize="16" WindowStartupLocation="CenterScreen">
+    <StackPanel Margin="20 20">
+        <Label>Person List</Label>
+        <ComboBox ItemsSource="{Binding People}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding FirstName}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ComboBoxItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Grid x:Name="comboBoxItem">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Margin="5" Grid.Column="0" Text="{Binding FirstName}"/>
+                                    <TextBlock Margin="5" Grid.Column="1" Text="{Binding LastName}"/>
+                                    <TextBlock Margin="5" Grid.Column="2" Text="{Binding Email}"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+        </ComboBox>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content=""></Label>
+            <Label Grid.Row="1" Grid.Column="0">First Name</Label>
+            <TextBox Grid.Row="1" Grid.Column="1"></TextBox>
+            <Label Grid.Row="2" Grid.Column="0">Last Name</Label>
+            <TextBox Grid.Row="2" Grid.Column="1"></TextBox>
+            <Label Grid.Row="3" Grid.Column="0">Email</Label>
+            <TextBox Grid.Row="3" Grid.Column="1"></TextBox>
+            <Button Grid.Row="4" Grid.ColumnSpan="2" Margin="0 20 0 0" Padding="10">Create</Button>
+            <Button Grid.Row="5" Grid.ColumnSpan="2" Margin="0 20 0 0" Padding="10">Update</Button>
+        </Grid>
+    </StackPanel>
 </Window>
