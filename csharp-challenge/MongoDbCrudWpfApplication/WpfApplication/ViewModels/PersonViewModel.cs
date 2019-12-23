@@ -10,6 +10,7 @@ namespace WpfApplication.ViewModels
     public class PersonViewModel : ViewModelBase
     {
         public ObservableCollection<PersonModel> People { get; set; }
+        public ICommand AllowCreateCommand { get; set; }
         public ICommand CreateCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public bool IsPersonModelSelected => (SelectedPersonModel == null) ? false : true;
@@ -62,6 +63,7 @@ namespace WpfApplication.ViewModels
             People = new ObservableCollection<PersonModel>();
             InitializePeople();
 
+            AllowCreateCommand = new RelayCommand(ExecuteAllowCreate, CanExecuteAllowCreate);
             CreateCommand = new RelayCommand(ExecuteCreate, CanExecuteCreate);
             UpdateCommand = new RelayCommand(ExecuteUpdate, CanExecuteUpdate);
         }
@@ -103,9 +105,22 @@ namespace WpfApplication.ViewModels
             return IsPersonModelSelected == false;
         }
 
+        private bool CanExecuteAllowCreate(object parameter)
+        {
+            return IsPersonModelSelected == true;
+        }
+
         private bool CanExecuteUpdate(object parameter)
         {
             return IsPersonModelSelected == true;
+        }
+
+        private void ExecuteAllowCreate(object parameter)
+        {
+            SelectedPersonModel = null;
+            SetProperty(ref _firstName, "", "FirstName");
+            SetProperty(ref _lastName, "", "LastName");
+            SetProperty(ref _email, "", "Email");
         }
 
         private void ExecuteCreate(object parameter)

@@ -53,6 +53,7 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Content=""></Label>
             <Label Grid.Row="1" Grid.Column="0">First Name</Label>
@@ -72,6 +73,12 @@
                     Margin="0 20 0 0" Padding="10"
                     Command="{Binding UpdateCommand}">
                 Update
+            </Button>
+            <Button x:Name="AllowCreateButton"
+                    Grid.Row="6" Grid.ColumnSpan="2"
+                    Margin="0 20 0 0" Padding="10"
+                    Command="{Binding AllowCreateCommand}">
+                Allow Create
             </Button>
         </Grid>
     </StackPanel>
