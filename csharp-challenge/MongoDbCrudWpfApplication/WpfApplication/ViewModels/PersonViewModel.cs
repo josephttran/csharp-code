@@ -12,6 +12,7 @@ namespace WpfApplication.ViewModels
         public ObservableCollection<PersonModel> People { get; set; }
         public ICommand AllowCreateCommand { get; set; }
         public ICommand CreateCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public bool IsPersonModelSelected => (SelectedPersonModel == null) ? false : true;
 
@@ -74,6 +75,7 @@ namespace WpfApplication.ViewModels
 
             AllowCreateCommand = new RelayCommand(ExecuteAllowCreate, CanExecuteAllowCreate);
             CreateCommand = new RelayCommand(ExecuteCreate, CanExecuteCreate);
+            DeleteCommand = new RelayCommand(ExecuteDelete, CanExecuteDelete);
             UpdateCommand = new RelayCommand(ExecuteUpdate, CanExecuteUpdate);
         }
         #endregion
@@ -112,6 +114,11 @@ namespace WpfApplication.ViewModels
         private bool CanExecuteCreate(object parameter)
         {
             return IsPersonModelSelected == false;
+        }
+
+        private bool CanExecuteDelete(object parameter)
+        {
+            return IsPersonModelSelected == true;
         }
 
         private bool CanExecuteAllowCreate(object parameter)
@@ -157,6 +164,22 @@ namespace WpfApplication.ViewModels
             }
         }
 
+        private void ExecuteDelete(object parameter)
+        {
+            PeopleRepository peopleRepository = new PeopleRepository();
+
+            bool success = peopleRepository.DeletePerson(SelectedPersonModel);
+            if (success)
+            {
+                UpdatePeople();
+                SetProperty(ref _firstName, "", "FirstName");
+                SetProperty(ref _lastName, "", "LastName");
+                SetProperty(ref _email, "", "Email");
+                SetProperty(ref _phoneNumber, "", "PhoneNumber");
+                MessageBox.Show("Record Delete");
+            }
+        }
+
         private void ExecuteUpdate(object parameter)
         {
             if (string.IsNullOrEmpty(PhoneNumber))
@@ -176,7 +199,6 @@ namespace WpfApplication.ViewModels
                 PeopleRepository peopleRepository = new PeopleRepository();
 
                 bool success = peopleRepository.UpdatePerson(personModel);
-
                 if (success)
                 {
                     UpdatePeople();

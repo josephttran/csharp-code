@@ -43,6 +43,15 @@ namespace WpfApplication.DataAccess
             }
         }
 
+        public bool DeletePerson(PersonModel person)
+        {
+            var builder = Builders<PersonModel>.Filter;
+            var filter = builder.Eq("_id", person.Id);
+            var result = peopleCollection.DeleteOne(filter);
+
+            return result.DeletedCount != 0;
+        }
+
         public bool UpdatePerson(PersonModel person)
         {
             var builder = Builders<PersonModel>.Filter;

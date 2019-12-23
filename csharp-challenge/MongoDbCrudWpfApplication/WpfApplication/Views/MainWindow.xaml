@@ -5,7 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication.Views"
         mc:Ignorable="d"
-        Title="MongoDB CRUD Operation" Height="450" Width="800" FontSize="16" WindowStartupLocation="CenterScreen">
+        Title="MongoDB CRUD Operation" Height="480" Width="800" FontSize="16" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Padding">
+                <Setter.Value>
+                    5
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <StackPanel Margin="20 20">
         <Label>Person List</Label>
         <ComboBox x:Name="comboBox" ItemsSource="{Binding People}" SelectedItem="{Binding SelectedPersonModel, Mode=OneWayToSource}">
@@ -70,24 +79,31 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Button x:Name="createButton"
                     Grid.Row="0"
-                    Margin="0 20 0 0" Padding="10"
+                    Margin="0 20 0 0"
                     Command="{Binding CreateCommand}">
                 Create
             </Button>
             <Button x:Name="UpdateButton"
                     Grid.Row="1"
-                    Margin="0 10 0 0" Padding="10"
+                    Margin="0 10 0 0"
                     Command="{Binding UpdateCommand}">
                 Update
             </Button>
             <Button x:Name="AllowCreateButton"
                     Grid.Row="2"
-                    Margin="0 10 0 0" Padding="10"
+                    Margin="0 10 0 0"
                     Command="{Binding AllowCreateCommand}">
                 Allow Create
+            </Button>
+            <Button x:Name="DeleteButton"
+                    Grid.Row="3"
+                    Margin="0 10 0 0"
+                    Command="{Binding DeleteCommand}">
+                Delete Selected
             </Button>
         </Grid>
     </StackPanel>
