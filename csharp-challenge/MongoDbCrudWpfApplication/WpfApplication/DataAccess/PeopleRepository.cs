@@ -22,6 +22,11 @@ namespace WpfApplication.DataAccess
             return await peopleCollection.Find(new BsonDocument()).ToListAsync();
         }
 
+        public void CreatePerson(PersonModel person)
+        {
+            peopleCollection.InsertOne(person);
+        }
+
         public bool UpdatePerson(PersonModel person)
         {
             var builder = Builders<PersonModel>.Filter;

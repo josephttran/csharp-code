@@ -62,6 +62,7 @@ namespace WpfApplication.ViewModels
             People = new ObservableCollection<PersonModel>();
             InitializePeople();
 
+            CreateCommand = new RelayCommand(ExecuteCreate, CanExecuteCreate);
             UpdateCommand = new RelayCommand(ExecuteUpdate, CanExecuteUpdate);
         }
         #endregion
@@ -82,9 +83,30 @@ namespace WpfApplication.ViewModels
             }
         }
 
+        private bool CanExecuteCreate(object parameter)
+        {
+            return IsPersonModelSelected == false;
+        }
+
         private bool CanExecuteUpdate(object parameter)
         {
             return IsPersonModelSelected == true;
+        }
+
+        private void ExecuteCreate(object parameter)
+        {
+            PersonModel personModel = new PersonModel
+            {
+                FirstName = FirstName,
+                LastName = LastName,
+                Email = Email
+            };
+
+            PeopleRepository peopleRepository = new PeopleRepository();
+
+            peopleRepository.CreatePerson(personModel);
+
+            MessageBox.Show("Record created");
         }
 
         private void ExecuteUpdate(object parameter)

@@ -63,7 +63,8 @@
             <TextBox x:Name="emailTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Email}"></TextBox>
             <Button x:Name="createButton"
                     Grid.Row="4" Grid.ColumnSpan="2"
-                    Margin="0 20 0 0" Padding="10">
+                    Margin="0 20 0 0" Padding="10"
+                    Command="{Binding CreateCommand}">
                 Create
             </Button>
             <Button x:Name="UpdateButton"
