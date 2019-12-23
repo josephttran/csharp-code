@@ -8,7 +8,7 @@
         Title="MongoDB CRUD Operation" Height="450" Width="800" FontSize="16" WindowStartupLocation="CenterScreen">
     <StackPanel Margin="20 20">
         <Label>Person List</Label>
-        <ComboBox ItemsSource="{Binding People}">
+        <ComboBox x:Name="comboBox" ItemsSource="{Binding People}" SelectedItem="{Binding SelectedPersonModel, Mode=OneWayToSource}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding FirstName}" />
@@ -19,16 +19,22 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate>
-                                <Grid x:Name="comboBoxItem">
+                                <Grid x:Name="comboBoxItem" TextElement.Foreground="Black">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Margin="5" Grid.Column="0" Text="{Binding FirstName}"/>
-                                    <TextBlock Margin="5" Grid.Column="1" Text="{Binding LastName}"/>
-                                    <TextBlock Margin="5" Grid.Column="2" Text="{Binding Email}"/>
+                                    <TextBlock Margin="10" Grid.Column="0" Text="{Binding FirstName}"/>
+                                    <TextBlock Margin="10" Grid.Column="1" Text="{Binding LastName}"/>
+                                    <TextBlock Margin="10" Grid.Column="2" Text="{Binding Email}"/>
                                 </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="ComboBoxItem.IsSelected" Value="True">
+                                        <Setter TargetName="comboBoxItem"  Property="Background" Value="Gray"></Setter>
+                                        <Setter TargetName="comboBoxItem"  Property="TextElement.Foreground" Value="White"></Setter>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -50,13 +56,22 @@
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Content=""></Label>
             <Label Grid.Row="1" Grid.Column="0">First Name</Label>
-            <TextBox Grid.Row="1" Grid.Column="1"></TextBox>
+            <TextBox x:Name="fistNameTextBox" Grid.Row="1" Grid.Column="1" Text="{Binding FirstName}"></TextBox>
             <Label Grid.Row="2" Grid.Column="0">Last Name</Label>
-            <TextBox Grid.Row="2" Grid.Column="1"></TextBox>
+            <TextBox x:Name="lastNameTextBox" Grid.Row="2" Grid.Column="1" Text="{Binding LastName}"></TextBox>
             <Label Grid.Row="3" Grid.Column="0">Email</Label>
-            <TextBox Grid.Row="3" Grid.Column="1"></TextBox>
-            <Button Grid.Row="4" Grid.ColumnSpan="2" Margin="0 20 0 0" Padding="10">Create</Button>
-            <Button Grid.Row="5" Grid.ColumnSpan="2" Margin="0 20 0 0" Padding="10">Update</Button>
+            <TextBox x:Name="emailTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Email}"></TextBox>
+            <Button x:Name="createButton"
+                    Grid.Row="4" Grid.ColumnSpan="2"
+                    Margin="0 20 0 0" Padding="10">
+                Create
+            </Button>
+            <Button x:Name="UpdateButton"
+                    Grid.Row="5" Grid.ColumnSpan="2"
+                    Margin="0 20 0 0" Padding="10"
+                    Command="{Binding UpdateCommand}">
+                Update
+            </Button>
         </Grid>
     </StackPanel>
 </Window>

@@ -1,10 +1,8 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
-
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+
 using WpfApplication.Models;
 
 namespace WpfApplication.DataAccess
@@ -22,6 +20,15 @@ namespace WpfApplication.DataAccess
         public async Task<List<PersonModel>> GetAll()
         {
             return await peopleCollection.Find(new BsonDocument()).ToListAsync();
+        }
+
+        public bool UpdatePerson(PersonModel person)
+        {
+            var builder = Builders<PersonModel>.Filter;
+            var filter = builder.Eq("_id", person.Id);
+            var result = peopleCollection.ReplaceOne(filter, person);
+
+            return result.ModifiedCount != 0;
         }
     }
 }
