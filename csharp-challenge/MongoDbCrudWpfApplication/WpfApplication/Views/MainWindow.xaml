@@ -24,10 +24,12 @@
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Margin="10" Grid.Column="0" Text="{Binding FirstName}"/>
                                     <TextBlock Margin="10" Grid.Column="1" Text="{Binding LastName}"/>
                                     <TextBlock Margin="10" Grid.Column="2" Text="{Binding Email}"/>
+                                    <TextBlock Margin="10" Grid.Column="3" Text="{Binding PhoneNumber}"/>
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="ComboBoxItem.IsSelected" Value="True">
@@ -52,8 +54,6 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.Column="0" Content=""></Label>
             <Label Grid.Row="1" Grid.Column="0">First Name</Label>
@@ -62,21 +62,30 @@
             <TextBox x:Name="lastNameTextBox" Grid.Row="2" Grid.Column="1" Text="{Binding LastName}"></TextBox>
             <Label Grid.Row="3" Grid.Column="0">Email</Label>
             <TextBox x:Name="emailTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding Email}"></TextBox>
+            <Label Grid.Row="4" Grid.Column="0">Phone Number</Label>
+            <TextBox x:Name="phoneNumberTextBox" Grid.Row="4" Grid.Column="1" Text="{Binding PhoneNumber}"></TextBox>
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
             <Button x:Name="createButton"
-                    Grid.Row="4" Grid.ColumnSpan="2"
+                    Grid.Row="0"
                     Margin="0 20 0 0" Padding="10"
                     Command="{Binding CreateCommand}">
                 Create
             </Button>
             <Button x:Name="UpdateButton"
-                    Grid.Row="5" Grid.ColumnSpan="2"
-                    Margin="0 20 0 0" Padding="10"
+                    Grid.Row="1"
+                    Margin="0 10 0 0" Padding="10"
                     Command="{Binding UpdateCommand}">
                 Update
             </Button>
             <Button x:Name="AllowCreateButton"
-                    Grid.Row="6" Grid.ColumnSpan="2"
-                    Margin="0 20 0 0" Padding="10"
+                    Grid.Row="2"
+                    Margin="0 10 0 0" Padding="10"
                     Command="{Binding AllowCreateCommand}">
                 Allow Create
             </Button>

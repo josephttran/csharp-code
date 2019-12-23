@@ -27,6 +27,7 @@ namespace WpfApplication.ViewModels
                     SetProperty(ref _firstName, value.FirstName, "FirstName");
                     SetProperty(ref _lastName, value.LastName, "LastName");
                     SetProperty(ref _email, value.Email, "Email");
+                    SetProperty(ref _phoneNumber, value.PhoneNumber, "PhoneNumber");
                 }
 
                 SetProperty(ref _selectedPersonModel, value);
@@ -55,6 +56,14 @@ namespace WpfApplication.ViewModels
         {
             get => _email;
             set => _email = value;
+        }
+
+        private string _phoneNumber;
+
+        public string PhoneNumber
+        {
+            get => _phoneNumber;
+            set => _phoneNumber = value;
         }
 
         #region Constructor
@@ -121,42 +130,58 @@ namespace WpfApplication.ViewModels
             SetProperty(ref _firstName, "", "FirstName");
             SetProperty(ref _lastName, "", "LastName");
             SetProperty(ref _email, "", "Email");
+            SetProperty(ref _phoneNumber, "", "PhoneNumber");
         }
 
         private void ExecuteCreate(object parameter)
         {
-            PersonModel personModel = new PersonModel
+            if (string.IsNullOrEmpty(PhoneNumber))
             {
-                FirstName = FirstName,
-                LastName = LastName,
-                Email = Email
-            };
+                MessageBox.Show("Phone number is required");
+            }
+            else
+            {
+                PersonModel personModel = new PersonModel
+                {
+                    FirstName = FirstName,
+                    LastName = LastName,
+                    Email = Email,
+                    PhoneNumber = PhoneNumber
+                };
 
-            PeopleRepository peopleRepository = new PeopleRepository();
+                PeopleRepository peopleRepository = new PeopleRepository();
 
-            string resultMessage = peopleRepository.CreateOrUpdatePerson(personModel);
-            UpdatePeople();
-            MessageBox.Show("Record " + resultMessage);
+                string resultMessage = peopleRepository.CreateOrUpdatePerson(personModel);
+                UpdatePeople();
+                MessageBox.Show("Record " + resultMessage);
+            }
         }
 
         private void ExecuteUpdate(object parameter)
         {
-            PersonModel personModel = new PersonModel
+            if (string.IsNullOrEmpty(PhoneNumber))
             {
-                Id = SelectedPersonModel.Id,
-                FirstName = FirstName,
-                LastName = LastName,
-                Email = Email
-            };
-
-            PeopleRepository peopleRepository = new PeopleRepository();
-
-            bool success = peopleRepository.UpdatePerson(personModel);
-
-            if (success)
+                MessageBox.Show("Phone number is required");
+            }
+            else
             {
-                UpdatePeople();
-                MessageBox.Show("Update successful");
+                PersonModel personModel = new PersonModel
+                {
+                    Id = SelectedPersonModel.Id,
+                    FirstName = FirstName,
+                    LastName = LastName,
+                    Email = Email
+                };
+
+                PeopleRepository peopleRepository = new PeopleRepository();
+
+                bool success = peopleRepository.UpdatePerson(personModel);
+
+                if (success)
+                {
+                    UpdatePeople();
+                    MessageBox.Show("Update successful");
+                }
             }
         }
         #endregion

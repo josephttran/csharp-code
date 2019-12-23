@@ -16,5 +16,8 @@ namespace WpfApplication.Models
 
         [BsonElement("email")]
         public string Email { get; set; }
+
+        [BsonElement("phoneNumber")]
+        public string PhoneNumber { get; set; }
     }
 }
