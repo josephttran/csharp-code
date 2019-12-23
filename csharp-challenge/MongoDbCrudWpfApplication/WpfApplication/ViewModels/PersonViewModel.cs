@@ -83,6 +83,21 @@ namespace WpfApplication.ViewModels
             }
         }
 
+        private async void UpdatePeople()
+        {
+            PeopleRepository peopleRepository = new PeopleRepository();
+            List<PersonModel> personList = await peopleRepository.GetAll();
+
+            People.Clear();
+            if (personList.Count > 0)
+            {
+                foreach (var person in personList)
+                {
+                    People.Add(person);
+                }
+            }
+        }
+
         private bool CanExecuteCreate(object parameter)
         {
             return IsPersonModelSelected == false;
@@ -105,7 +120,7 @@ namespace WpfApplication.ViewModels
             PeopleRepository peopleRepository = new PeopleRepository();
 
             peopleRepository.CreatePerson(personModel);
-
+            UpdatePeople();
             MessageBox.Show("Record created");
         }
 
@@ -125,6 +140,7 @@ namespace WpfApplication.ViewModels
 
             if (success)
             {
+                UpdatePeople();
                 MessageBox.Show("Update successful");
             }
         }
