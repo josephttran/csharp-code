@@ -134,9 +134,9 @@ namespace WpfApplication.ViewModels
 
             PeopleRepository peopleRepository = new PeopleRepository();
 
-            peopleRepository.CreatePerson(personModel);
+            string resultMessage = peopleRepository.CreateOrUpdatePerson(personModel);
             UpdatePeople();
-            MessageBox.Show("Record created");
+            MessageBox.Show("Record " + resultMessage);
         }
 
         private void ExecuteUpdate(object parameter)
