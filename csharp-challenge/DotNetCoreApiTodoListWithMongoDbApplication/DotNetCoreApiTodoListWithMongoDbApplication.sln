@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetCoreApiTodoListWithMongoDbApplication", "DotNetCoreApiTodoListWithMongoDbApplication\DotNetCoreApiTodoListWithMongoDbApplication.csproj", "{F8253E9E-3BFF-4B6B-B970-61937D77F079}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8253E9E-3BFF-4B6B-B970-61937D77F079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8253E9E-3BFF-4B6B-B970-61937D77F079}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8253E9E-3BFF-4B6B-B970-61937D77F079}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8253E9E-3BFF-4B6B-B970-61937D77F079}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {84959507-5736-43B6-9BF5-EA307CE095C5}
+	EndGlobalSection
+EndGlobal
