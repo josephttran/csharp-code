@@ -26,6 +26,13 @@ namespace DotNetCoreApiTodoListWithMongoDbApplication.Controllers
             return Ok(result);
         }
 
+        // GET: api/<controller>/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<TodoItem>> Get(string id)
+        {
+            return  await _dataService.GetOneById(id);
+        }
+
         // POST api/<controller>
         [HttpPost]
         public void Post([FromBody]string value)
@@ -39,9 +46,10 @@ namespace DotNetCoreApiTodoListWithMongoDbApplication.Controllers
         }
 
         // PATCH api/<controller>/5
-        [HttpPatch]
+        [HttpPatch("{id}")]
         public void Patch(int id, [FromBody]string value)
         {
+
         }
 
         // DELETE api/<controller>/5

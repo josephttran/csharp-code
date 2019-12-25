@@ -21,5 +21,10 @@ namespace DotNetCoreApiTodoListWithMongoDbApplication.DataServices
         {
             return await _todosCollection.Find(new BsonDocument()).ToListAsync();
         }
+
+        public async Task<TodoItem> GetOneById(string id)
+        {
+            return await _todosCollection.Find(todoItem => todoItem.Id == id).FirstOrDefaultAsync();
+        }
     }
 }
