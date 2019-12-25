@@ -18,7 +18,7 @@ namespace DotNetCoreApiTodoListWithMongoDbApplication.Controllers
         }
 
         // GET: api/<controller>
-        [HttpGet]
+        [HttpGet("List")]
         public async Task<ActionResult<IEnumerable<TodoItem>>> Get()
         {
             var result = await _dataService.GetAll();
@@ -27,34 +27,34 @@ namespace DotNetCoreApiTodoListWithMongoDbApplication.Controllers
         }
 
         // GET: api/<controller>/5
-        [HttpGet("{id}")]
+        [HttpGet("List/{id:length(24)}")]
         public async Task<ActionResult<TodoItem>> Get(string id)
         {
             return  await _dataService.GetOneById(id);
         }
 
         // POST api/<controller>
-        [HttpPost]
+        [HttpPost("Create")]
         public void Post([FromBody]string value)
         {
         }
 
         // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPut("Complete/{id:length(24)}")]
+        public void Put(string id, [FromBody]string value)
         {
         }
 
         // PATCH api/<controller>/5
-        [HttpPatch("{id}")]
-        public void Patch(int id, [FromBody]string value)
+        [HttpPatch("Update/{id:length(24)}")]
+        public void Patch(string id, [FromBody]string value)
         {
 
         }
 
         // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("Delete/{id:length(24)}")]
+        public void Delete(string id)
         {
         }
     }
