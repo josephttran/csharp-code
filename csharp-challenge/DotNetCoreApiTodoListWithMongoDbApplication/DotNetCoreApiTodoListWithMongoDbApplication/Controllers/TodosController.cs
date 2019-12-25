@@ -1,16 +1,29 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+
+using DotNetCoreApiTodoListWithMongoDbApplication.DataServices;
+using DotNetCoreApiTodoListWithMongoDbApplication.Models;
 
 namespace DotNetCoreApiTodoListWithMongoDbApplication.Controllers
 {
     [Route("api/[controller]")]
     public class TodosController : ControllerBase
     {
+        private readonly DataService _dataService;
+
+        public TodosController(DataService dataService)
+        {
+            _dataService = dataService;
+        }
+
         // GET: api/<controller>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult<IEnumerable<TodoItem>>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var result = await _dataService.GetAll();
+
+            return Ok(result);
         }
 
         // POST api/<controller>

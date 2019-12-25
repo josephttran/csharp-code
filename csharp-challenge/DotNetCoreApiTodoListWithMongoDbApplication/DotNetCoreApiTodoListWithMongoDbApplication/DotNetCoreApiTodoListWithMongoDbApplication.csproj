@@ -4,4 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>ea5d47d4-95dc-4f98-9cb9-ec5c61568891</UserSecretsId>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.10.0" />
+  </ItemGroup>
 </Project>
