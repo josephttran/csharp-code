@@ -8,6 +8,7 @@ namespace DotNetCoreApiTodoListWithMongoDbApplication.Models
     public class TodoItem
     {
         [BsonId]
+        [BsonIgnoreIfDefault]
         [BsonRepresentation(BsonType.ObjectId)]
         [JsonPropertyName("id")]
         public string Id { get; set; }

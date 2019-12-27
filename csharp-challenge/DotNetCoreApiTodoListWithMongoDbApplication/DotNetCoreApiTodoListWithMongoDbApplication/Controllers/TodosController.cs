@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 
 using DotNetCoreApiTodoListWithMongoDbApplication.DataServices;
 using DotNetCoreApiTodoListWithMongoDbApplication.Models;
+using Microsoft.AspNetCore.Http;
+using System.Text.RegularExpressions;
 
 namespace DotNetCoreApiTodoListWithMongoDbApplication.Controllers
 {
@@ -27,35 +29,86 @@ namespace DotNetCoreApiTodoListWithMongoDbApplication.Controllers
         }
 
         // GET: api/<controller>/5
-        [HttpGet("List/{id:length(24)}")]
+        [HttpGet("List/{id:regex(^[[0-9a-z]]{{24}}$)}", Name = "GetTodoItem")]
         public async Task<ActionResult<TodoItem>> Get(string id)
         {
-            return  await _dataService.GetOneById(id);
+            return await _dataService.GetOneById(id);
         }
 
         // POST api/<controller>
         [HttpPost("Create")]
-        public void Post([FromBody]string value)
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<TodoItem>> Create([FromBody]TodoItem todoItem)
         {
+            if (todoItem.Id != null)
+            {
+                if (!Regex.IsMatch(todoItem.Id, "^[0-9a-zA-F]{24}$"))
+                {
+                    return BadRequest();
+                }
+            }
+
+            bool result = await _dataService.Create(todoItem);
+
+            if (!result)
+            {
+                return BadRequest("Id already exist");
+            }
+
+            return CreatedAtRoute("GetTodoItem", new { id = todoItem.Id.ToString() }, todoItem);
         }
 
         // PUT api/<controller>/5
-        [HttpPut("Complete/{id:length(24)}")]
-        public void Put(string id, [FromBody]string value)
+        [HttpPut("Complete/{id:regex(^[[0-9a-z]]{{24}}$)}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Complete(string id, [FromBody]TodoItem todoItem)
         {
+            if (Regex.IsMatch(id, "^[0-9a-zA-F]{24}$") &&
+                todoItem.Id != null &&
+                id != todoItem.Id
+                )
+            {
+                return BadRequest("Object id cannot be modified");
+            }
+
+            var found = await _dataService.GetOneById(id);
+
+            if (found == null)
+            {
+                return NotFound();
+            }
+
+            await _dataService.Complete(id, todoItem);
+
+            return NoContent();
         }
 
         // PATCH api/<controller>/5
-        [HttpPatch("Update/{id:length(24)}")]
-        public void Patch(string id, [FromBody]string value)
+        [HttpPatch("Update/{id:regex(^[[0-9a-z]]{{24}}$)}")]
+        public async Task<IActionResult> Update(string id, [FromBody]string value)
         {
-
+            return NoContent();
         }
 
         // DELETE api/<controller>/5
-        [HttpDelete("Delete/{id:length(24)}")]
-        public void Delete(string id)
+        [HttpDelete("Delete/{id:regex(^[[0-9a-z]]{{24}}$)}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete(string id)
         {
+            var found = await _dataService.GetOneById(id);
+
+            if (found == null)
+            {
+                return NotFound();
+            }
+
+            await _dataService.Delete(id);
+
+            return NoContent();
         }
     }
 }
