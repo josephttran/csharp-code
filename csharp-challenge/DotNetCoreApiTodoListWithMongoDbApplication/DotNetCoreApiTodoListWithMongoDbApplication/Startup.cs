@@ -28,7 +28,8 @@ namespace DotNetCoreApiTodoListWithMongoDbApplication
 
             services.AddSingleton<DataService>();
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>

@@ -51,6 +51,21 @@ namespace DotNetCoreApiTodoListWithMongoDbApplication.DataServices
             return replaceOneResult.ModifiedCount != 0;
         }
 
+        public async Task<bool> Update(string id, TodoItem todoItem)
+        {
+            var filter = Builders<TodoItem>.Filter.Eq(document => document.Id, id);
+            var updateDefinition = Builders<TodoItem>.Update.Set(document => document.IsDone, todoItem.IsDone);
+
+            if (!string.IsNullOrWhiteSpace(todoItem.Name))
+            {
+                updateDefinition = updateDefinition.Set(document => document.Name, todoItem.Name);
+            }
+
+            UpdateResult updateResult = await _todosCollection.UpdateOneAsync(filter, updateDefinition);
+
+            return updateResult.ModifiedCount != 0;
+        }
+
         public async Task<bool> Delete(string id)
         {
             DeleteResult deleteResult = await _todosCollection.DeleteOneAsync(todoItem => todoItem.Id == id);

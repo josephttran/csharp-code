@@ -6,6 +6,7 @@ using DotNetCoreApiTodoListWithMongoDbApplication.DataServices;
 using DotNetCoreApiTodoListWithMongoDbApplication.Models;
 using Microsoft.AspNetCore.Http;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace DotNetCoreApiTodoListWithMongoDbApplication.Controllers
 {
@@ -88,9 +89,38 @@ namespace DotNetCoreApiTodoListWithMongoDbApplication.Controllers
 
         // PATCH api/<controller>/5
         [HttpPatch("Update/{id:regex(^[[0-9a-z]]{{24}}$)}")]
-        public async Task<IActionResult> Update(string id, [FromBody]string value)
+        public async Task<IActionResult> Update(string id, [FromBody] JsonPatchDocument<TodoItem> patchDoc)
         {
-            return NoContent();
+            if (patchDoc != null)
+            {
+                var todoItem = await _dataService.GetOneById(id);
+
+                if (todoItem == null)
+                {
+                    return NotFound();
+                }
+
+                patchDoc.ApplyTo(todoItem, ModelState);
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                bool result = await _dataService.Update(id, todoItem);
+
+                if(!result)
+                {
+                    return BadRequest("Name null or empty");
+                }
+
+                return new ObjectResult(todoItem);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+
         }
 
         // DELETE api/<controller>/5
