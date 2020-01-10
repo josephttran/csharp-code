@@ -60,9 +60,19 @@
     <Folder Include="Dbo\Tables" />
     <Folder Include="Dbo\Views" />
     <Folder Include="Dbo\StoredProcedures" />
+    <Folder Include="Dbo\Triggers" />
+    <Folder Include="Publish" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Dbo\Tables\Person.sql" />
     <Build Include="Dbo\Tables\TodoItem.sql" />
+    <Build Include="Dbo\Tables\TodoDeletedHistory.sql" />
+    <Build Include="Dbo\Triggers\TodoItemDeletedTrigger.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Publish\SqlTodoDatabaseProject.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="SqlTodoDatabaseProject.refactorlog" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="7109439e-56a2-423e-975a-e634f2e9d78a" ChangeDateTime="01/10/2020 03:41:22">
+    <Property Name="ElementName" Value="[dbo].[TodoDeletedHistory].[Name]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[TodoDeletedHistory]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TodoItemName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fed854e5-c9bd-4230-bc53-9f90de859590" ChangeDateTime="01/10/2020 03:41:57">
+    <Property Name="ElementName" Value="[dbo].[TodoItem].[Name]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[TodoItem]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ItemName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c14f54d1-51aa-4fd7-b522-0d336694188e" ChangeDateTime="01/10/2020 03:42:21">
+    <Property Name="ElementName" Value="[dbo].[TodoDeletedHistory].[TodoItemName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[TodoDeletedHistory]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ItemName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="03768f4f-9460-4c01-b7da-fe3cd40e665d" ChangeDateTime="01/10/2020 03:43:08">
+    <Property Name="ElementName" Value="[dbo].[TodoDeletedHistory].[ItemName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[TodoDeletedHistory]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TodoItemName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="61f37fb4-8c96-4f56-883e-d1be336302e9" ChangeDateTime="01/10/2020 03:43:28">
+    <Property Name="ElementName" Value="[dbo].[TodoDeletedHistory].[BelongsTo]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[TodoDeletedHistory]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TodoItemBelongsTo" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bc044bde-069b-42de-92a2-27507a7a73e6" ChangeDateTime="01/10/2020 03:43:32">
+    <Property Name="ElementName" Value="[dbo].[TodoDeletedHistory].[IsCompleted]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[TodoDeletedHistory]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TodoItemIsCompleted" />
+  </Operation>
+</Operations>
