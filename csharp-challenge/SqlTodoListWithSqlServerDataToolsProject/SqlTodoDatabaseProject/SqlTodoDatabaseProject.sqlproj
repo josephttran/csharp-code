@@ -68,6 +68,11 @@
     <Build Include="Dbo\Tables\TodoItem.sql" />
     <Build Include="Dbo\Tables\TodoDeletedHistory.sql" />
     <Build Include="Dbo\Triggers\TodoItemDeletedTrigger.sql" />
+    <Build Include="Dbo\Tables\RecurringTodoItem.sql" />
+    <Build Include="Dbo\Tables\RecurringTodoItemCompletedHistory.sql" />
+    <Build Include="Dbo\StoredProcedures\spLookup.sql" />
+    <Build Include="Dbo\StoredProcedures\spHistory.sql" />
+    <Build Include="Dbo\Triggers\TR_RecurringTodoItemIsCompletedHistory.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\SqlTodoDatabaseProject.publish.xml" />

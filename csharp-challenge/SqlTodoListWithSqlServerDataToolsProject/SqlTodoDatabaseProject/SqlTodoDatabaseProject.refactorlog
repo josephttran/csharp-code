@@ -42,4 +42,88 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="TodoItemIsCompleted" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="65130197-309a-44be-8102-4c811ee20129" ChangeDateTime="01/10/2020 05:47:33">
+    <Property Name="ElementName" Value="[dbo].[RecurringTodoItemCompletedHistory]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[RecurringTodoCompletedHistory]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ffb7c6cc-da76-4f5b-b059-03fb081a7bd2" ChangeDateTime="01/10/2020 05:54:41">
+    <Property Name="ElementName" Value="[dbo].[RecurringTodoItem].[StartDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RecurringTodoItem]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StartDay" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d3c111e5-e872-455b-8798-b9323bb01eef" ChangeDateTime="01/10/2020 05:54:49">
+    <Property Name="ElementName" Value="[dbo].[RecurringTodoItem].[StartDay]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RecurringTodoItem]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StartDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="20139d47-d735-4cc3-96d4-aabd2253098e" ChangeDateTime="01/10/2020 05:58:47">
+    <Property Name="ElementName" Value="[dbo].[RecurringTodoItem].[StartDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RecurringTodoItem]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DueDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c4a2ee64-fade-4075-af74-844dc42a4e95" ChangeDateTime="01/10/2020 06:30:10">
+    <Property Name="ElementName" Value="[dbo].[RecurringTodoItem].[FreqType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RecurringTodoItem]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FrequencyType" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f89db7b9-be54-4454-91e0-6de7a8f10e9e" ChangeDateTime="01/10/2020 06:35:45">
+    <Property Name="ElementName" Value="[dbo].[RecurringTodoItem].[ItemName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RecurringTodoItem]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ItemDescription" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4cecf01b-75e0-49ac-81c5-efda5c72441a" ChangeDateTime="01/10/2020 23:26:37">
+    <Property Name="ElementName" Value="[dbo].[RecurringTodoItem].[DueDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RecurringTodoItem]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="nextCreated" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="31dd532f-fdc5-4543-8ae2-15ad8619767e" ChangeDateTime="01/10/2020 23:26:47">
+    <Property Name="ElementName" Value="[dbo].[RecurringTodoItem].[nextCreated]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RecurringTodoItem]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="nextCreateDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7e1f5893-f0f4-487d-a049-af253957d139" ChangeDateTime="01/10/2020 23:27:07">
+    <Property Name="ElementName" Value="[dbo].[RecurringTodoItem].[nextCreateDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RecurringTodoItem]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="NextCreateDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bd8d639b-6698-4210-add7-6fc2669ff56a" ChangeDateTime="01/11/2020 04:21:28">
+    <Property Name="ElementName" Value="[dbo].[RecurringTodoItem].[DateCreated]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RecurringTodoItem]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StartDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="492be0fb-812d-4ecd-8f5f-7f6e18d10483" ChangeDateTime="01/11/2020 06:37:41">
+    <Property Name="ElementName" Value="[dbo].[RecurringTodoItemIsCompletedHistory]" />
+    <Property Name="ElementType" Value="SqlDmlTrigger" />
+    <Property Name="ParentElementName" Value="[dbo].[RecurringTodoItem]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[TR_RecurringTodoItemIsCompletedHistory]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ba1d5cad-c145-4585-b03a-de9216c99301" ChangeDateTime="01/11/2020 07:32:39">
+    <Property Name="ElementName" Value="[dbo].[RecurringTodoItem].[Frequency]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RecurringTodoItem]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FrequencyType" />
+  </Operation>
 </Operations>
