@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using RazorPagesTodoApplication.Models;
 
 namespace RazorPagesTodoApplication.Data
 {
@@ -12,5 +10,6 @@ namespace RazorPagesTodoApplication.Data
             : base(options)
         {
         }
+        public DbSet<Todo> Todo { get; set; }
     }
 }
