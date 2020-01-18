@@ -8,6 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Threading.Tasks;
+using RazorPagesWithAdminPages.Models;
 
 namespace RazorPagesWithAdminPages
 {
@@ -23,11 +26,15 @@ namespace RazorPagesWithAdminPages
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDbContext<ApplicationDbContext>(options => 
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            services.AddDefaultIdentity<ApplicationUser>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddRazorPages();
 
             services.AddControllers(config =>
@@ -42,7 +49,7 @@ namespace RazorPagesWithAdminPages
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -68,6 +75,42 @@ namespace RazorPagesWithAdminPages
             {
                 endpoints.MapRazorPages();
             });
+
+            CreateRoles(serviceProvider).Wait();
+        }
+
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            bool adminRoleExist = await RoleManager.RoleExistsAsync("Admin");
+
+            if (!adminRoleExist)
+            {
+                // Create admin role and seed it to the database
+                _ = await RoleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+
+            var adminUser = new ApplicationUser
+            {
+                UserName = Configuration.GetSection("UserSettings")["UserEmail"],
+                Email = Configuration.GetSection("UserSettings")["UserEmail"]
+            };
+
+            string UserPassword = Configuration.GetSection("UserSettings")["UserPassword"];
+
+            var _user = await UserManager.FindByEmailAsync(Configuration.GetSection("UserSettings")["UserEmail"]);
+
+            if (_user == null)
+            {
+                var createAdminUser = await UserManager.CreateAsync(adminUser, UserPassword);
+
+                if (createAdminUser.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(adminUser, "Admin");
+                }
+            }
         }
     }
 }
