@@ -1,0 +1,41 @@
+﻿@page
+@model RazorPagesWithAdminPages.AdminModel
+@{
+    ViewData["Title"] = "Admin Page";
+}
+
+<h1>Admin Page</h1>
+
+<p>
+    <a asp-page="AdminCreate">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AdminPages[0].UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdminPages[0].MaxTodoIsIncompleted)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.AdminPages)
+        {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.UserId)
+
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.MaxTodoIsIncompleted)
+            </th>
+            <td>
+                <a asp-page="./AdminEdit" asp-route-id="@item.UserId">Edit</a> |
+                <a asp-page="./AdminDelete" asp-route-id="@item.UserId">Delete</a>
+            </td>
+        </tr>
+        }
+    </thead>
+</table>

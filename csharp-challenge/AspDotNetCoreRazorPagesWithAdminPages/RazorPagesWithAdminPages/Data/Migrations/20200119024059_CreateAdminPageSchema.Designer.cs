@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RazorPagesWithAdminPages.Data;
 
 namespace RazorPagesWithAdminPages.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200119024059_CreateAdminPageSchema")]
+    partial class CreateAdminPageSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,6 +162,9 @@ namespace RazorPagesWithAdminPages.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("MaxTodoIsIncompleted")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfTodoIsIncompleted")
                         .HasColumnType("int");
 
                     b.HasKey("UserId");

@@ -1,0 +1,34 @@
+﻿@page
+@model RazorPagesWithAdminPages.AdminDeleteModel
+
+@{
+    ViewData["Title"] = "AdminDelete";
+}
+
+<h1>AdminDelete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>AdminPage</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AdminPage.ApplicationUser)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AdminPage.ApplicationUser.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AdminPage.MaxTodoIsIncompleted)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AdminPage.MaxTodoIsIncompleted)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="AdminPage.UserId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Admin">Back to List</a>
+    </form>
+</div>

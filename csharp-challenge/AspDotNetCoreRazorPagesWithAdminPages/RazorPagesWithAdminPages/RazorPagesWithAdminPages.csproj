@@ -5,6 +5,13 @@
     <UserSecretsId>aspnet-RazorPagesWithAdminPages-910C496D-ECE0-4F88-97E6-37DE6889C937</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20200119035226_UpdateAdminPageSchema.cs" />
+    <Compile Remove="Data\Migrations\20200119035226_UpdateAdminPageSchema.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200119035330_UpdateAdminPageSchema.cs" />
+    <Compile Remove="Data\Migrations\20200119035330_UpdateAdminPageSchema.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />

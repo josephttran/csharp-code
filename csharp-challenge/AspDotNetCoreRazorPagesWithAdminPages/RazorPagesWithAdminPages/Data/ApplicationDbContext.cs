@@ -12,5 +12,6 @@ namespace RazorPagesWithAdminPages.Data
         {
         }
         public DbSet<Todo> Todo { get; set; }
+        public DbSet<RazorPagesWithAdminPages.Models.AdminPage> AdminPage { get; set; }
     }
 }
