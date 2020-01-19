@@ -56,6 +56,8 @@ namespace RazorPagesWithAdminPages
                     policy.Requirements.Add(new OperationAuthorizationRequirement());
                 });
             });
+
+            services.AddTransient<IAuthorizationHandler, CreateTodoAuthorizationHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
