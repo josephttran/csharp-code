@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Threading.Tasks;
 using RazorPagesWithAdminPages.Models;
+using RazorPagesWithAdminPages.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 namespace RazorPagesWithAdminPages
 {
@@ -45,6 +47,14 @@ namespace RazorPagesWithAdminPages
                                  .RequireAuthenticatedUser()
                                  .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("IsNotCompletedMax", policy =>
+                {
+                    policy.Requirements.Add(new OperationAuthorizationRequirement());
+                });
             });
         }
 

@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorPagesWithAdminPages.Data;
@@ -7,6 +8,7 @@ using RazorPagesWithAdminPages.Models;
 
 namespace RazorPagesWithAdminPages
 {
+    [Authorize(Policy = "IsNotCompletedMax")]
     public class CreateModel : PageModel
     {
         private readonly ApplicationDbContext _context;
