@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -49,6 +50,7 @@ namespace RazorPagesWithAdminPages
 
             try
             {
+                Todo.OwnerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
