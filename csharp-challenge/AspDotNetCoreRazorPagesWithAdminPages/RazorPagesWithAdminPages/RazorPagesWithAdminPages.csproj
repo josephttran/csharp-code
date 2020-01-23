@@ -10,6 +10,8 @@
     <Compile Remove="Data\Migrations\20200119035226_UpdateAdminPageSchema.Designer.cs" />
     <Compile Remove="Data\Migrations\20200119035330_UpdateAdminPageSchema.cs" />
     <Compile Remove="Data\Migrations\20200119035330_UpdateAdminPageSchema.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200119201527_TodoOwnerFK.cs" />
+    <Compile Remove="Data\Migrations\20200119201527_TodoOwnerFK.Designer.cs" />
   </ItemGroup>
 
 
