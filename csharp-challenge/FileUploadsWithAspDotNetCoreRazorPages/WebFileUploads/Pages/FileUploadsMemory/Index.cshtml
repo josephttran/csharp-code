@@ -1,0 +1,37 @@
+﻿@page
+@model WebFileUploads.Pages.FileUploadsMemory.IndexModel
+@{
+}
+
+<h2 class="text-center">File Uploads Memory Page</h2>
+
+<form enctype="multipart/form-data" method="post">
+    <dl>
+        <dt>
+            <label asp-for="FileUpload.FormFile"></label>
+        </dt>
+        <dd>
+            <input asp-for="FileUpload.FormFile" type="file" />
+            <span asp-validation-for="FileUpload.FormFile"></span>
+        </dd>
+    </dl>
+    <input asp-page-handler="Upload" class="btn btn-outline-primary" type="submit" value="Upload" />
+</form>
+
+@if (Model.People != null)
+{
+    @foreach (var person in Model.People)
+    {
+        <div class="card m-2 p-2">
+            <div>
+                <strong>First name: </strong> @person.FirstName
+            </div>
+            <div>
+                <strong>Last name: </strong> @person.LastName
+            </div>
+            <div>
+                <strong>Email: </strong> @person.Email
+            </div>
+        </div>
+    }
+}
