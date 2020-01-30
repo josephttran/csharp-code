@@ -4,13 +4,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using WebFileUploads.Models;
 
 namespace WebFileUploads.Pages.FileUploads
 {
     public class IndexModel : PageModel
     {
+        [BindProperty]
+        public FileUpload FileUpload { get; set; }
         public void OnGet()
         {
+        }
+
+        public async Task<IActionResult> OnPostUploadAsync()
+        {
+            return Page();
         }
     }
 }
