@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.Text.RegularExpressions;
 
 namespace ConsoleApplication
 {
@@ -16,9 +15,19 @@ namespace ConsoleApplication
 
         public static string ReplaceExact(string text, string search, string replaceWith)
         {
-            string pattern = $"\\b{search}\\b";
+            string[] words = text.Split(" ");
 
-            return Regex.Replace(text, pattern, replaceWith, RegexOptions.IgnoreCase);
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (words[i].ToLower() == search.ToLower())
+                {
+                    words[i] = replaceWith;
+                }
+            }
+
+            string replaceString = string.Join(" ", words);
+
+            return replaceString;
         }
     }
 }
