@@ -1,5 +1,11 @@
 ## .NET Core Command line
 
+Create folder
+
+```mkdir folderName```
+
+#### dotnet options
+
 | Options | Description |
 | ------ | ------ |
 | -n, --name | The name for the output being created. If no name is specified, the name of the current directory is used. |
@@ -26,4 +32,23 @@
 5. Add reference of the class library to project and solution
 
 ```dotnet sln add myLib```
+
 ```dotnet add myWebAppName reference myLib```
+
+#### Create Azure function using dotnet new
+
+Install azure project template
+
+```dotnet new --install "Microsoft.Azure.WebJobs.ProjectTemplates"```
+
+Create Azure function project
+
+```dotnet new func```
+
+Install collection of templates for Azure Functions
+
+```dotnet new --install "Microsoft.Azure.WebJobs.ItemTemplates"```
+
+Create timer trigger
+
+```dotnet new timer```
