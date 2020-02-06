@@ -4,7 +4,13 @@ using System.Text;
 
 namespace SampleDataLibrary
 {
-    class SampleData
+    public class SampleData
     {
+        public static bool CreateRandomBoolean()
+        {
+            Random random = new Random();
+            bool randomBool = random.NextDouble() > 0.5;
+            return randomBool;
+        }
     }
 }
