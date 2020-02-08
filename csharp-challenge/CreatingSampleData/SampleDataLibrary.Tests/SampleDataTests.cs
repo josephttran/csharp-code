@@ -52,7 +52,7 @@ namespace SampleDataLibrary.Tests
         [Test]
         public void TestCreateRandomBool()
         {
-            var randomBool = SampleData.CreateRandomBoolean();
+            bool randomBool = SampleData.CreateRandomBoolean();
 
             if (randomBool == true || randomBool == false)
             {
@@ -64,12 +64,22 @@ namespace SampleDataLibrary.Tests
             }
         }
 
+        [TestCase(50, 100)]
+        [TestCase(-1.9, 1.9)]
+        [TestCase(0.01, 0.99)]
+        public void TestCreateRandomDoubleGivenMinMaxRange(double min, double max)
+        {
+            double randomDouble = SampleData.CreateRandomDouble(min, max);
+            Console.WriteLine(randomDouble);
+            Assert.IsTrue(randomDouble > min && randomDouble < max);
+        }
+
         [TestCase(1, 100)]
         [TestCase(-1, 1)]
         [TestCase(0, 1)]
         public void TestCreateRandomIntegerGivenMinMaxRange(int min, int max)
         {
-            var randomInteger = SampleData.CreateRandomInteger(min, max);
+            int randomInteger = SampleData.CreateRandomInteger(min, max);
 
             Assert.IsTrue(randomInteger >= min && randomInteger <= max);
         }

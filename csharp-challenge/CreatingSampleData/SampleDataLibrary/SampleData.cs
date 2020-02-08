@@ -22,6 +22,15 @@ namespace SampleDataLibrary
             return randomBool;
         }
 
+        // Max exclusive
+        public static double CreateRandomDouble(double minRange, double maxRange)
+        {
+            Random random = new Random();
+            double randomDouble = random.NextDouble() * (maxRange - minRange) + minRange;
+            return randomDouble;
+        }
+
+        // Max inclusive
         public static int CreateRandomInteger(int minRange, int maxRange)
         {
             Random random = new Random();
