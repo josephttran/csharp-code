@@ -80,6 +80,26 @@ namespace SampleDataLibrary
             return randomZipcode.ToString();
         }
 
+        public static string GenerateRandomFormatNumber(string formatPattern)
+        {
+            StringBuilder randomFormatNumber = new StringBuilder();
+            Random random = new Random();
+
+            for (int index = 0; index < formatPattern.Length; index++)
+            {
+                if (char.IsDigit(formatPattern[index]))
+                {
+                    randomFormatNumber.Append(random.Next(0, 10));
+                }
+                else
+                {
+                    randomFormatNumber.Append(formatPattern[index]);
+                }
+            }
+
+            return randomFormatNumber.ToString();
+        }
+
         public static string GetRandomFirstName()
         {
             string firstNamePath = @".\TextData\firstName.txt";

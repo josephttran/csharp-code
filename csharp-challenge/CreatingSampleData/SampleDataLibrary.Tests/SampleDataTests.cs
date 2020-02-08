@@ -97,6 +97,20 @@ namespace SampleDataLibrary.Tests
             Assert.IsTrue(Regex.IsMatch(zipcode, pattern));
         }
 
+        [TestCase("(123) 123-1234")]
+        [TestCase("123-45-6789")]
+        [TestCase("12345-1234")]
+        public void TestGenerateRandomFormatNumber(string formatPattern)
+        {
+            string randomFormatNumber = SampleData.GenerateRandomFormatNumber(formatPattern);
+            string regexPattern = Regex.Replace(Regex.Escape(formatPattern), @"\d", "\\d"); 
+
+            Console.WriteLine(randomFormatNumber);
+            Console.WriteLine(regexPattern);
+
+            Assert.IsTrue(Regex.IsMatch(randomFormatNumber, regexPattern));
+        }
+
         [Test]
         public void TestGetRandomFirstName()
         {
