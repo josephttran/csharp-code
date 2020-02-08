@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace SampleDataLibrary.Tests
 {
@@ -82,6 +83,16 @@ namespace SampleDataLibrary.Tests
             int randomInteger = SampleData.CreateRandomInteger(min, max);
 
             Assert.IsTrue(randomInteger >= min && randomInteger <= max);
+        }
+
+        [Test]
+        public void TestCreateRandomPhoneNumber()
+        {
+            string phoneNumber = SampleData.CreateRandomPhoneNumber();
+            Console.WriteLine(phoneNumber);
+            string pattern = @"\(\d{3}\) \d{3}-\d{4}";
+
+            Assert.IsTrue(Regex.IsMatch(phoneNumber, pattern));
         }
 
         [Test]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace SampleDataLibrary
 {
@@ -36,6 +37,28 @@ namespace SampleDataLibrary
             Random random = new Random();
             int randomInteger = random.Next(minRange, maxRange + 1);
             return randomInteger;
+        }
+
+        public static string CreateRandomPhoneNumber()
+        {
+            string phoneNumberPattern = "(###) ###-####";
+            StringBuilder randomPhoneNumber = new StringBuilder();
+            Random random = new Random();
+
+            for (int index = 0; index < phoneNumberPattern.Length; index++)
+            {
+                if (phoneNumberPattern[index].Equals('#'))
+                {
+                    randomPhoneNumber.Append(random.Next(0, 10));
+                }
+                else
+                {
+                    randomPhoneNumber.Append(phoneNumberPattern[index]);
+                }
+
+            }
+
+            return randomPhoneNumber.ToString();
         }
 
         public static string GetRandomFirstName()
