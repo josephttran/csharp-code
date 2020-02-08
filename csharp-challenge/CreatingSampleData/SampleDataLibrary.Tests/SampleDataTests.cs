@@ -55,14 +55,7 @@ namespace SampleDataLibrary.Tests
         {
             bool randomBool = SampleData.CreateRandomBoolean();
 
-            if (randomBool == true || randomBool == false)
-            {
-                Assert.Pass();
-            }
-            else
-            {
-                Assert.Fail();
-            }
+            Assert.IsTrue(randomBool | !randomBool);
         }
 
         [TestCase(50, 100)]
