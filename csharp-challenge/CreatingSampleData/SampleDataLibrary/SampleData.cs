@@ -1,11 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
 
 namespace SampleDataLibrary
 {
-    public class SampleData
+    public static class SampleData
     {
+        public static string CreateFullName()
+        {
+            string firstName = GetRandomFirstName();
+            string lastName = GetRandomLastName();
+
+            string fullName = $"{ firstName } { lastName }";
+
+            return fullName;
+        }
+
         public static bool CreateRandomBoolean()
         {
             Random random = new Random();
@@ -19,5 +28,32 @@ namespace SampleDataLibrary
             int randomInteger = random.Next(minRange, maxRange + 1);
             return randomInteger;
         }
+
+        public static string GetRandomFirstName()
+        {
+            string firstNamePath = @".\TextData\firstName.txt";
+
+            string[] firstNames = File.ReadAllLines(firstNamePath);
+
+            Random random = new Random();
+            int randomIndex = random.Next(firstNames.Length);
+            string randomFirstName = firstNames[randomIndex];
+
+            return randomFirstName;
+        }
+
+        public static string GetRandomLastName()
+        {
+            string lastNamePath = @".\TextData\lastName.txt";
+
+            string[] lastNames = File.ReadAllLines(lastNamePath);
+
+            Random random = new Random();
+            int randomIndex = random.Next(lastNames.Length);
+            string randomLastName = lastNames[randomIndex];
+
+            return randomLastName;
+        }
+
     }
 }
