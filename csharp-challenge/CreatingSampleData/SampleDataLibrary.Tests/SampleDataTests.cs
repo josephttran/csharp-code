@@ -94,6 +94,15 @@ namespace SampleDataLibrary.Tests
 
             Assert.IsTrue(Regex.IsMatch(phoneNumber, pattern));
         }
+        [Test]
+        public void TestCreateRandomZipcode()
+        {
+            string zipcode = SampleData.CreateRandomZipcode();
+            Console.WriteLine(zipcode);
+            string pattern = @"\d{5}-\d{4}";
+
+            Assert.IsTrue(Regex.IsMatch(zipcode, pattern));
+        }
 
         [Test]
         public void TestGetRandomFirstName()

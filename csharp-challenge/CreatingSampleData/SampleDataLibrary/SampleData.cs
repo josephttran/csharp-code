@@ -60,6 +60,25 @@ namespace SampleDataLibrary
 
             return randomPhoneNumber.ToString();
         }
+        public static string CreateRandomZipcode()
+        {
+            StringBuilder randomZipcode = new StringBuilder();
+            Random random = new Random();
+
+            for (int index = 0; index < 5; index++)
+            {
+                randomZipcode.Append(random.Next(0, 10));
+            }
+
+            randomZipcode.Append("-");
+
+            for (int index = 0; index < 4; index++)
+            {
+                randomZipcode.Append(random.Next(0, 10));
+            }
+
+            return randomZipcode.ToString();
+        }
 
         public static string GetRandomFirstName()
         {
