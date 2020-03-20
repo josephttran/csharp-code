@@ -1,0 +1,29 @@
+############
+# Features #
+############
+Takes coins and bills
+Multiple soda options
+Dispense the soda
+Has an inventory of soda
+Has a way to indicate out of stock
+Tracks how much money a user puts in
+Make change
+Tracks overall income
+Only charges one price
+Has a coin inventory for change
+
+###########
+# Methods #
+###########
+ListTypesOfSoda
+MoneyInserted
+GetSodaPrice
+RequestSoda
+IssueFullRefund
+GetMoneyInsertedTotal
+AddToInventory
+EmptyMoneyFromMachine
+GetCoinInventory
+AddToCoinInventory
+GetCurrentIncome
+GetTotalIncome 
