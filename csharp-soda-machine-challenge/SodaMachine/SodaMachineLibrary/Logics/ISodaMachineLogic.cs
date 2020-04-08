@@ -17,6 +17,6 @@ namespace SodaMachine.Logics
         decimal IssueFullRefund();
         List<SodaModel> ListTypesOfSoda();
         decimal MoneyInserted(string userId, decimal amount);
-        (SodaModel soda, List<CoinModel> coins, string message) RequestSoda(SodaModel);
+        (SodaModel soda, List<CoinModel> coins, string message) RequestSoda(SodaModel soda);
     }
 }
