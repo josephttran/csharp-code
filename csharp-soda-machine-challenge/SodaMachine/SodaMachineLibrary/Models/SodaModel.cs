@@ -1,4 +1,4 @@
-﻿namespace SodaMachine.Models
+﻿namespace SodaMachineLibrary.Models
 {
 	public class SodaModel
     {

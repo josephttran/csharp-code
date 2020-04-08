@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using SodaMachine.Models;
+using SodaMachineLibrary.Models;
 
-namespace SodaMachine.Logics
+namespace SodaMachineLibrary.Logics
 {
     public interface ISodaMachineLogic
     {

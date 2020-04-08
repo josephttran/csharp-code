@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using SodaMachine.Models;
+using SodaMachineLibrary.Models;
 
-namespace SodaMachine.DataAccess
+namespace SodaMachineLibrary.DataAccess
 {
     public interface IDataAccess
     {
@@ -20,6 +20,5 @@ namespace SodaMachine.DataAccess
         void UserCreditDeposit(string userId);
         void UserCreditInsert(string userId, decimal amount);
         decimal UserCreditTotal(string userId);
-
     }
 }
