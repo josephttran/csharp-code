@@ -20,7 +20,7 @@ namespace SodaMachineLibrary.Tests.Mocks
                 new CoinModel { Name = "Dollar", Amount = 1.00M },
             };
 
-            MachineInfo = (10.00M, 1.00M, 50.00M);
+            MachineInfo = (1.25M, 1.00M, 50.00M);
 
             SodaInventory = new List<SodaModel>()
             {
@@ -33,7 +33,7 @@ namespace SodaMachineLibrary.Tests.Mocks
 
             UserCredit = new Dictionary<string, decimal>()
             {
-                { "1234", 1.50M }
+                { "user1234", 0.50M }
             };
         }
 
@@ -49,7 +49,16 @@ namespace SodaMachineLibrary.Tests.Mocks
 
         public List<CoinModel> CoinInventoryWithdrawCoins(decimal coinValue, int quantity) 
         {
-            return new List<CoinModel>();
+            List<CoinModel> coins = new List<CoinModel>();
+
+            for (int num = 0; num < quantity; num++)
+            {
+                coins.Add(CoinInventory.Find(x => x.Amount == coinValue));
+
+                CoinInventory.Remove(coins[num]);
+            }
+
+            return coins;
         }
 
         public decimal MachineInfoCashOnHand() 
@@ -62,6 +71,7 @@ namespace SodaMachineLibrary.Tests.Mocks
             decimal totalCash = MachineInfo.cashOnHand;
 
             MachineInfo = (0, MachineInfo.sodaPrice, MachineInfo.totalIncome);
+            CoinInventory = new List<CoinModel>();
 
             return totalCash;
         }
