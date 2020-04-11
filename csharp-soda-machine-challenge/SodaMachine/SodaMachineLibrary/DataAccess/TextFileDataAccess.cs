@@ -1,4 +1,5 @@
-﻿using SodaMachineLibrary.Models;
+﻿using Microsoft.Extensions.Configuration;
+using SodaMachineLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,12 +14,12 @@ namespace SodaMachineLibrary.DataAccess
         private string _machineInfoPath;
         private string _userCreditPath;
 
-        public TextFileDataAccess()
+        public TextFileDataAccess(IConfiguration configuration)
         {
-            _coinInventoryPath = @"..\Data\CoinInventory.txt";
-            _machineInfoPath = @"..\Data\MachineInfo.txt";
-            _sodaInventoryPath = @"..\Data\SodaInventory.txt";
-            _userCreditPath = @"..\Data\UserCredit.txt";
+            _coinInventoryPath = configuration.GetSection("coinInventoryPath").Value;
+            _machineInfoPath = configuration.GetSection("machineInfoPath").Value;
+            _sodaInventoryPath = configuration.GetSection("sodaInventoryPath").Value;
+            _userCreditPath = configuration.GetSection("userCreditPath").Value;
         }
 
         public void CoinInventoryAddCoins(List<CoinModel> coins)
