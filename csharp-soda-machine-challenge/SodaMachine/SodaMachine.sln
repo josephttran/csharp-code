@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SodaMachineLibrary", "SodaMachineLibrary\SodaMachineLibrary.csproj", "{02879399-2D55-4DCF-B2B3-5999913083A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SodaMachineLibrary.Tests", "SodaMachineLibrary.Tests\SodaMachineLibrary.Tests.csproj", "{C95E956A-6D2A-4C0C-864F-F88A0C99714B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SodaMachineLibrary.Tests", "SodaMachineLibrary.Tests\SodaMachineLibrary.Tests.csproj", "{C95E956A-6D2A-4C0C-864F-F88A0C99714B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SodaMachineConsoleUI", "SodaMachineConsoleUI\SodaMachineConsoleUI.csproj", "{4EE64802-5899-4611-8C16-6EAFD9207E44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C95E956A-6D2A-4C0C-864F-F88A0C99714B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C95E956A-6D2A-4C0C-864F-F88A0C99714B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C95E956A-6D2A-4C0C-864F-F88A0C99714B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EE64802-5899-4611-8C16-6EAFD9207E44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EE64802-5899-4611-8C16-6EAFD9207E44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EE64802-5899-4611-8C16-6EAFD9207E44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EE64802-5899-4611-8C16-6EAFD9207E44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

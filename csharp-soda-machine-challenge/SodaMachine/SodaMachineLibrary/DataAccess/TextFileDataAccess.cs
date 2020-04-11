@@ -7,19 +7,19 @@ using System.Linq;
 
 namespace SodaMachineLibrary.DataAccess
 {
-    class TextFileDataAccess : IDataAccess
+    public class TextFileDataAccess : IDataAccess
     {
-        private string _coinInventoryPath;
-        private string _sodaInventoryPath;
-        private string _machineInfoPath;
-        private string _userCreditPath;
+        private readonly string _coinInventoryPath;
+        private readonly string _sodaInventoryPath;
+        private readonly string _machineInfoPath;
+        private readonly string _userCreditPath;
 
         public TextFileDataAccess(IConfiguration configuration)
         {
-            _coinInventoryPath = configuration.GetSection("coinInventoryPath").Value;
-            _machineInfoPath = configuration.GetSection("machineInfoPath").Value;
-            _sodaInventoryPath = configuration.GetSection("sodaInventoryPath").Value;
-            _userCreditPath = configuration.GetSection("userCreditPath").Value;
+            _coinInventoryPath = configuration.GetSection("TextFileDataAccessPath:CoinInventoryPath").Value;
+            _machineInfoPath = configuration.GetSection("TextFileDataAccessPath:MachineInfoPath").Value;
+            _sodaInventoryPath = configuration.GetSection("TextFileDataAccessPath:SodaInventoryPath").Value;
+            _userCreditPath = configuration.GetSection("TextFileDataAccessPath:UserCreditPath").Value;
         }
 
         public void CoinInventoryAddCoins(List<CoinModel> coins)
