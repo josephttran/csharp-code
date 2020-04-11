@@ -17,7 +17,8 @@ namespace SodaMachineConsoleUI
                 "2) List soda in stock",
                 "3) Get soda price",
                 "4) Insert money",
-                "5) Buy a soda"
+                "5) Current amount of money inserted",
+                "6) Buy a soda"
             };
         }
 
@@ -46,7 +47,7 @@ namespace SodaMachineConsoleUI
 
         private void PromptUserForChoice()
         {
-            Console.Write($"Enter your choice(1 - { MenuItems.Count + 1 }): ");
+            Console.Write($"Enter your choice(1 - { MenuItems.Count }): ");
         }
     }
 }

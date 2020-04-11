@@ -279,7 +279,12 @@ namespace SodaMachineLibrary.DataAccess
 
             userCredit = UserCreditGetAll();
 
-            return userCredit[userId];
+            if (userCredit.ContainsKey(userId))
+            {      
+                return userCredit[userId];
+            }
+
+            return 0;
         }
 
         private Dictionary<string, decimal> UserCreditGetAll()

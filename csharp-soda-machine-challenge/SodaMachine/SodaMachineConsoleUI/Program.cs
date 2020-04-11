@@ -4,6 +4,9 @@ using System.IO;
 
 using SodaMachineLibrary.DataAccess;
 using SodaMachineLibrary.Logics;
+using System;
+using SodaMachineLibrary.Models;
+using System.Collections.Generic;
 
 namespace SodaMachineConsoleUI
 {
@@ -15,9 +18,87 @@ namespace SodaMachineConsoleUI
         {
             ConfigureServices();
             SodaMachineLogic sodaMachineLogic = ActivatorUtilities.CreateInstance<SodaMachineLogic>(ServiceProvider);
-
             Menu menu = new Menu();
-            menu.PrintMenu();
+            SodaMachineDisplay sodaMachineDisplay = new SodaMachineDisplay();
+
+            string userId = "user12";
+
+            while (true)
+            {
+                menu.PrintMenu();
+                string userChoice = Console.ReadLine();
+                Console.WriteLine();
+
+                switch (userChoice)
+                {
+                    case "1":
+                        sodaMachineDisplay.PrintTypesOfSoda(sodaMachineLogic.ListTypesOfSoda());
+                        break;
+                    case "2":
+                        sodaMachineDisplay.PrintSodaInStock(sodaMachineLogic.GetSodaInventory());
+                        break;
+                    case "3":
+                        sodaMachineDisplay.PrintSodaPrice(sodaMachineLogic.GetSodaPrice());
+                        break;
+                    case "4":
+                        sodaMachineDisplay.PrintInsertMoneyChoice(sodaMachineLogic.AccaptedCoinValues);
+                        string userMoneyInput = Console.ReadLine();
+
+                        if (decimal.TryParse(userMoneyInput, out decimal moneyResult))
+                        {
+                            decimal moneyInserted = sodaMachineLogic.MoneyInserted(userId, moneyResult);
+
+                            if (moneyInserted != 0)
+                            {
+                                sodaMachineDisplay.PrintAmountInserted(moneyInserted);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid currency");
+                        }
+
+                        break;
+                    case "5":
+                        sodaMachineDisplay.PrintAmountInserted(sodaMachineLogic.GetMoneyInsertedTotal(userId));
+                        break;
+                    case "6":
+                        List<SodaModel> availableSodas = sodaMachineLogic.ListTypesOfSoda();
+                        sodaMachineDisplay.PrintSodaToBuyChoice(availableSodas);
+                        string userSodaInput = Console.ReadLine();
+
+                        if (int.TryParse(userSodaInput, out int sodaResult))
+                        {
+                            if (sodaResult >= 0 && sodaResult < availableSodas.Count)
+                            {
+                                SodaModel sodaInput = availableSodas[sodaResult];
+                                var (soda,_, message) = sodaMachineLogic.RequestSoda(sodaInput);
+
+                                if (string.IsNullOrEmpty(soda.Name))
+                                {
+                                    Console.WriteLine(message);
+                                }
+                                else
+                                {
+                                    sodaMachineDisplay.PrintSuccessMessage(soda);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid soda choice");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid soda choice");
+                        }
+
+                        break;
+                    default:
+                        Console.WriteLine("Invalid Choice");
+                        break;
+                }
+            }
         }
 
         static void ConfigureServices()
