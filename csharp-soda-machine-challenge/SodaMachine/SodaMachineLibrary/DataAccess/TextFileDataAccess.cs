@@ -24,7 +24,7 @@ namespace SodaMachineLibrary.DataAccess
 
         public void CoinInventoryAddCoins(List<CoinModel> coins)
         {
-            List<CoinModel> coinInventory = new List<CoinModel>();
+            List<CoinModel> coinInventory;
             List<string> output = new List<string>();
 
             coinInventory = CoinInventoryGetAll();
@@ -161,7 +161,7 @@ namespace SodaMachineLibrary.DataAccess
 
         public void SodaInventoryAddSodas(List<SodaModel> sodas)
         {
-            List<SodaModel> sodaInventory = new List<SodaModel>();
+            List<SodaModel> sodaInventory;
             List<string> output = new List<string>();
 
             sodaInventory = SodaInventoryGetAll();
@@ -217,7 +217,7 @@ namespace SodaMachineLibrary.DataAccess
 
         public void UserCreditClear(string userId)
         {
-            Dictionary<string, decimal> userCredit = new Dictionary<string, decimal>();
+            Dictionary<string, decimal> userCredit;
             List<string> output = new List<string>();
 
             userCredit = UserCreditGetAll();
@@ -233,7 +233,7 @@ namespace SodaMachineLibrary.DataAccess
 
         public void UserCreditDeposit(string userId)
         {
-            Dictionary<string, decimal> userCredit = new Dictionary<string, decimal>();
+            Dictionary<string, decimal> userCredit;
             List<string> output = new List<string>();
 
             userCredit = UserCreditGetAll();
@@ -249,7 +249,7 @@ namespace SodaMachineLibrary.DataAccess
 
         public void UserCreditInsert(string userId, decimal amount)
         {
-            Dictionary<string, decimal> userCredit = new Dictionary<string, decimal>();
+            Dictionary<string, decimal> userCredit;
             List<string> output = new List<string>();
 
             userCredit = UserCreditGetAll();
@@ -275,8 +275,7 @@ namespace SodaMachineLibrary.DataAccess
 
         public decimal UserCreditTotal(string userId)
         {
-            Dictionary<string, decimal> userCredit = new Dictionary<string, decimal>();
-            List<string> output = new List<string>();
+            Dictionary<string, decimal> userCredit;
 
             userCredit = UserCreditGetAll();
 

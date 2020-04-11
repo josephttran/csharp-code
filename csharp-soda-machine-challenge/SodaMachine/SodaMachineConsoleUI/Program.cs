@@ -10,8 +10,8 @@ namespace SodaMachineConsoleUI
     class Program
     {
         private static ServiceProvider ServiceProvider { get; set; }
-        
-        static void Main(string[] args)
+
+        static void Main()
         {
             ConfigureServices();
             SodaMachineLogic sodaMachineLogic = ActivatorUtilities.CreateInstance<SodaMachineLogic>(ServiceProvider);
