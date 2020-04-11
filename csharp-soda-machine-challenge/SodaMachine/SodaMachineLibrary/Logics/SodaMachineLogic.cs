@@ -10,12 +10,18 @@ namespace SodaMachineLibrary.Logics
     {
         private readonly IDataAccess _dataAccess;
         private string _userId;
+        public List<decimal> AccaptedCoinValues { get; set; }
 
         public SodaMachineLogic(IDataAccess dataAccess)
         {
             _dataAccess = dataAccess;
             _userId = "user1234";
 
+            AccaptedCoinValues = new List<decimal>()
+            {
+                0.25M,
+                1.00M
+            };
         }
 
         public void AddToCoinInventory(List<CoinModel> coins)
@@ -84,6 +90,14 @@ namespace SodaMachineLibrary.Logics
         public decimal MoneyInserted(string userId, decimal amount)
         {
             _userId = userId;
+
+            if (!AccaptedCoinValues.Contains(amount))
+            {
+                Console.WriteLine("Invalid currency!");
+                _dataAccess.UserCreditInsert(userId, 0);
+                return _dataAccess.UserCreditTotal(userId);
+            }
+
             _dataAccess.UserCreditInsert(userId, amount);
             return _dataAccess.UserCreditTotal(userId);
         }
@@ -122,8 +136,6 @@ namespace SodaMachineLibrary.Logics
                 {
                     quarterQuantity++;
                     change = decimal.Subtract(change, 0.25M);
-                    Console.WriteLine("ghjk" + machineSoda.Name);
-
                 }
 
                 coins.AddRange(_dataAccess.CoinInventoryWithdrawCoins(1.00M, dollarQuantity));

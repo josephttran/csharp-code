@@ -172,10 +172,11 @@ namespace SodaMachineLibrary.Tests
         public void MoneyInserted_SingleUserShouldHaveCorrectAmount()
         {
             string userId = "user789";
-            decimal expectedAmount = 0.50M;
+            decimal expectedAmount = 0;
+            decimal insertedAmount = 0.50M;
             decimal actualAmount;
 
-            sodaMachineLogic.MoneyInserted(userId, expectedAmount);
+            sodaMachineLogic.MoneyInserted(userId, insertedAmount);
             actualAmount = mockDataAccess.UserCreditTotal(userId);
 
             Assert.AreEqual(expectedAmount, actualAmount);
@@ -188,7 +189,9 @@ namespace SodaMachineLibrary.Tests
             decimal expectedAmount = 1.50M;
             decimal actualAmount;
 
-            sodaMachineLogic.MoneyInserted(userId, expectedAmount);
+            sodaMachineLogic.MoneyInserted(userId, 1.00M);
+            sodaMachineLogic.MoneyInserted(userId, 0.25M);
+            sodaMachineLogic.MoneyInserted(userId, 0.25M);
             actualAmount = mockDataAccess.UserCreditTotal(userId);
 
             Assert.AreEqual(expectedAmount, actualAmount);
@@ -198,12 +201,13 @@ namespace SodaMachineLibrary.Tests
         public void RequestSoda_ShouldReturnSodaWithChange()
         {
             string userId = "user2468";
-            decimal amount = 2.00M;
+            decimal amount = 1.00M;
             SodaModel actualSoda;
             int coinCount;
             SodaModel requestedSoda = new SodaModel { Name = "Pepsi", SlotOccupied = "A1" };
             (SodaModel soda, List<CoinModel> coins, string message) result;
 
+            sodaMachineLogic.MoneyInserted(userId, amount);
             sodaMachineLogic.MoneyInserted(userId, amount);
             result = sodaMachineLogic.RequestSoda(requestedSoda);
             actualSoda = result.soda;
