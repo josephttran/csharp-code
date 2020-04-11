@@ -121,7 +121,15 @@ namespace SodaMachineLibrary.Tests.Mocks
 
         public void UserCreditInsert(string userId, decimal amount) 
         {
-            UserCredit[userId] += amount;
+            if (UserCredit.ContainsKey(userId))
+            {
+                UserCredit[userId] += amount;
+            }
+            else
+            {
+                UserCreditDeposit(userId);
+                UserCredit[userId] += amount;
+            }
         }
 
         public decimal UserCreditTotal(string userId) 

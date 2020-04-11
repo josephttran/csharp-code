@@ -97,7 +97,7 @@ namespace SodaMachineLibrary.Tests
         [Test]
         public void GetMoneyInsertedTotal_ShouldWork()
         {
-            string userId = "1234";
+            string userId = "user1234";
             decimal expectedMoneyInsertedTotal;
             decimal actualMoneyInsertedTotal;
 
@@ -151,7 +151,7 @@ namespace SodaMachineLibrary.Tests
             decimal actualRefundAmount;
 
             expectedRefundAmount = sodaMachineLogic.GetMoneyInsertedTotal(userId);
-            actualRefundAmount = sodaMachineLogic.IssueFullRefund();
+            actualRefundAmount = sodaMachineLogic.IssueFullRefund(userId);
 
             Assert.AreEqual(expectedRefundAmount, actualRefundAmount);
         }
@@ -171,7 +171,7 @@ namespace SodaMachineLibrary.Tests
         [Test]
         public void MoneyInserted_SingleUserShouldHaveCorrectAmount()
         {
-            string userId = "user123";
+            string userId = "user789";
             decimal expectedAmount = 0.50M;
             decimal actualAmount;
 
@@ -184,7 +184,7 @@ namespace SodaMachineLibrary.Tests
         [Test]
         public void MoneyInserted_User2ShouldHaveCorrectAmount()
         {
-            string userId = "user789";
+            string userId = "user456";
             decimal expectedAmount = 1.50M;
             decimal actualAmount;
 
@@ -197,7 +197,7 @@ namespace SodaMachineLibrary.Tests
         [Test]
         public void RequestSoda_ShouldReturnSodaWithChange()
         {
-            string userId = "user789";
+            string userId = "user2468";
             decimal amount = 2.00M;
             SodaModel actualSoda;
             int coinCount;
@@ -209,9 +209,11 @@ namespace SodaMachineLibrary.Tests
             actualSoda = result.soda;
             coinCount = result.coins.Count;
 
+            System.Console.WriteLine(result.coins.Count.ToString() + coinCount);
             Assert.Multiple(() =>
             {
-                Assert.AreEqual(requestedSoda, actualSoda);
+                Assert.AreEqual(requestedSoda.Name, actualSoda.Name);
+                Assert.AreEqual(requestedSoda.SlotOccupied, actualSoda.SlotOccupied);
                 Assert.That(coinCount, Is.GreaterThan(0));
             });
         }

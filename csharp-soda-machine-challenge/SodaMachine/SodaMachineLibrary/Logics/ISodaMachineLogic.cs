@@ -14,7 +14,7 @@ namespace SodaMachineLibrary.Logics
         List<SodaModel> GetSodaInventory();
         decimal GetSodaPrice();
         decimal GetTotalIncome();
-        decimal IssueFullRefund();
+        decimal IssueFullRefund(string userId);
         List<SodaModel> ListTypesOfSoda();
         decimal MoneyInserted(string userId, decimal amount);
         (SodaModel soda, List<CoinModel> coins, string message) RequestSoda(SodaModel soda);
