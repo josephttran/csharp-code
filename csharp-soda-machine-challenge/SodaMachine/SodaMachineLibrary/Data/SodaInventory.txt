@@ -1,0 +1,5 @@
+﻿Pepsi,A1
+Cola,A2
+Sprite,B1
+Mug,B2
+Cola,D4
