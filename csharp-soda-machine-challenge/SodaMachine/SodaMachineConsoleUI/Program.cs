@@ -72,7 +72,7 @@ namespace SodaMachineConsoleUI
                             if (sodaResult >= 0 && sodaResult < availableSodas.Count)
                             {
                                 SodaModel sodaInput = availableSodas[sodaResult];
-                                var (soda,_, message) = sodaMachineLogic.RequestSoda(sodaInput);
+                                var (soda, coins, message) = sodaMachineLogic.RequestSoda(sodaInput);
 
                                 if (string.IsNullOrEmpty(soda.Name))
                                 {
@@ -80,6 +80,18 @@ namespace SodaMachineConsoleUI
                                 }
                                 else
                                 {
+                                    if (coins.Count > 0)
+                                    {
+                                        decimal change = 0;
+
+                                        foreach(CoinModel coin in coins)
+                                        {
+                                            change += coin.Amount;
+                                        }
+
+                                        Console.WriteLine($"returned { change }");
+                                    }
+
                                     sodaMachineDisplay.PrintSuccessMessage(soda);
                                 }
                             }
@@ -93,6 +105,10 @@ namespace SodaMachineConsoleUI
                             Console.WriteLine("Invalid soda choice");
                         }
 
+                        break;
+                    case "7":
+                        decimal refund = sodaMachineLogic.IssueFullRefund(userId);
+                        sodaMachineDisplay.PrintRefundAmount(refund);
                         break;
                     default:
                         Console.WriteLine("Invalid Choice");

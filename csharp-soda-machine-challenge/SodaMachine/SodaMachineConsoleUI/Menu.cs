@@ -18,7 +18,8 @@ namespace SodaMachineConsoleUI
                 "3) Get soda price",
                 "4) Insert money",
                 "5) Current amount of money inserted",
-                "6) Buy a soda"
+                "6) Buy a soda",
+                "7) Issuse refund"
             };
         }
 

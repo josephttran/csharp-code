@@ -79,6 +79,11 @@ namespace SodaMachineLibrary.Logics
         {
             decimal totalRefund = _dataAccess.UserCreditTotal(userId);
 
+            if (totalRefund != 0)
+            {
+                _dataAccess.UserCreditClear(userId);
+            }
+
             return totalRefund;
         }
 
@@ -98,7 +103,21 @@ namespace SodaMachineLibrary.Logics
                 return _dataAccess.UserCreditTotal(userId);
             }
 
+            List<CoinModel> coins = new List<CoinModel>();
+
+            if (amount == 1.00M)
+            {
+                coins.Add(new CoinModel() { Name = "Dollar", Amount = 1.00M });           
+            }
+
+            if (amount == 0.25M)
+            {
+                coins.Add(new CoinModel() { Name = "Quarter", Amount = 0.25M });
+            }
+
+            _dataAccess.CoinInventoryAddCoins(coins);
             _dataAccess.UserCreditInsert(userId, amount);
+
             return _dataAccess.UserCreditTotal(userId);
         }
 
@@ -140,6 +159,8 @@ namespace SodaMachineLibrary.Logics
 
                 coins.AddRange(_dataAccess.CoinInventoryWithdrawCoins(1.00M, dollarQuantity));
                 coins.AddRange(_dataAccess.CoinInventoryWithdrawCoins(0.25M, quarterQuantity));
+
+                _dataAccess.UserCreditClear(_userId);
 
                 return (machineSoda, coins, "Enjoy the refreshment");
             }

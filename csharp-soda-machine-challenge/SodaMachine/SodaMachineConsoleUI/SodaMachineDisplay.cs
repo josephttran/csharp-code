@@ -29,6 +29,12 @@ namespace SodaMachineConsoleUI
             Console.WriteLine();
             Console.Write("Enter a value: ");
         }
+        public void PrintRefundAmount(decimal amount)
+        {
+            Console.WriteLine("---------------------------");
+            Console.WriteLine($"Refunded { amount }");
+            Console.WriteLine("---------------------------");
+        }
 
         public void PrintSodaInStock(List<SodaModel> sodas)
         {
