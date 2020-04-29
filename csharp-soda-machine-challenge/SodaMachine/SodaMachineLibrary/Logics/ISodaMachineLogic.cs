@@ -5,6 +5,7 @@ namespace SodaMachineLibrary.Logics
 {
     public interface ISodaMachineLogic
     {
+        public List<decimal> AcceptedCoinValues { get; set; }
         void AddToCoinInventory(List<CoinModel> coins);
         void AddToSodaInventory(List<SodaModel> sodas);
         decimal EmptyMoneyFromMachine();

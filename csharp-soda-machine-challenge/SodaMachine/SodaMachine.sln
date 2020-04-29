@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SodaMachineLibrary.Tests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SodaMachineConsoleUI", "SodaMachineConsoleUI\SodaMachineConsoleUI.csproj", "{4EE64802-5899-4611-8C16-6EAFD9207E44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SodaMachineRazorPages", "SodaMachineRazorPages\SodaMachineRazorPages.csproj", "{A537445E-A998-40C1-98B0-5F0706FE10C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SodaMachineRazorPages", "SodaMachineRazorPages\SodaMachineRazorPages.csproj", "{A537445E-A998-40C1-98B0-5F0706FE10C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
