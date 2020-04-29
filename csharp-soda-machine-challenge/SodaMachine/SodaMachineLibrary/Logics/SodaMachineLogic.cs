@@ -10,14 +10,14 @@ namespace SodaMachineLibrary.Logics
     {
         private readonly IDataAccess _dataAccess;
         private string _userId;
-        public List<decimal> AccaptedCoinValues { get; set; }
+        public List<decimal> AcceptedCoinValues { get; set; }
 
         public SodaMachineLogic(IDataAccess dataAccess)
         {
             _dataAccess = dataAccess;
             _userId = "user1234";
 
-            AccaptedCoinValues = new List<decimal>()
+            AcceptedCoinValues = new List<decimal>()
             {
                 0.25M,
                 1.00M
@@ -96,7 +96,7 @@ namespace SodaMachineLibrary.Logics
         {
             _userId = userId;
 
-            if (!AccaptedCoinValues.Contains(amount))
+            if (!AcceptedCoinValues.Contains(amount))
             {
                 Console.WriteLine("Invalid currency!");
                 _dataAccess.UserCreditInsert(userId, 0);

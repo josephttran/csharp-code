@@ -41,7 +41,7 @@ namespace SodaMachineConsoleUI
                         sodaMachineDisplay.PrintSodaPrice(sodaMachineLogic.GetSodaPrice());
                         break;
                     case "4":
-                        sodaMachineDisplay.PrintInsertMoneyChoice(sodaMachineLogic.AccaptedCoinValues);
+                        sodaMachineDisplay.PrintInsertMoneyChoice(sodaMachineLogic.AcceptedCoinValues);
                         string userMoneyInput = Console.ReadLine();
 
                         if (decimal.TryParse(userMoneyInput, out decimal moneyResult))
