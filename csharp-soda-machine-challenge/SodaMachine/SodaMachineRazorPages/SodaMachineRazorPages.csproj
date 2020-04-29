@@ -17,4 +17,19 @@
     <ProjectReference Include="..\SodaMachineLibrary\SodaMachineLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TextFileData\CoinInventory.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TextFileData\MachineInfo.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TextFileData\SodaInventory.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TextFileData\UserCredit.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
