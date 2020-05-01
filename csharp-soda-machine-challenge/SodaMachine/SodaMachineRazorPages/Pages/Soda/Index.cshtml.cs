@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using SodaMachineLibrary.Logics;
@@ -7,6 +8,7 @@ using SodaMachineLibrary.Models;
 
 namespace SodaMachineRazorPages.Pages.Soda
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly ISodaMachineLogic _sodaMachineLogic;
@@ -48,6 +50,8 @@ namespace SodaMachineRazorPages.Pages.Soda
 
         public void OnPostEjectMoneyInserted()
         {
+            UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             ChangeReturned = _sodaMachineLogic.IssueFullRefund(UserId);
             UserCredit = 0;
         }
@@ -81,7 +85,6 @@ namespace SodaMachineRazorPages.Pages.Soda
         private void Initialize()
         {
             AcceptedCoinValues = _sodaMachineLogic.AcceptedCoinValues;
-            SelectedCoinValue = 0;
             SodaPrice = _sodaMachineLogic.GetSodaPrice();
             SodasInStock = _sodaMachineLogic.GetSodaInventory();
             TypesOfSoda = _sodaMachineLogic.ListTypesOfSoda();

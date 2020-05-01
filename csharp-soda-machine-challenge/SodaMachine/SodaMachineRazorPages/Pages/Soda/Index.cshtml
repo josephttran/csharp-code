@@ -1,4 +1,64 @@
 ﻿@page
 @model SodaMachineRazorPages.Pages.Soda.IndexModel
 @{
+    var acceptedCoinsList = @Model.AcceptedCoinValues.Select(x => new SelectListItem { Value = x.ToString(), Text = x.ToString() });
 }
+
+<div style="height: 600px;">
+    <div class="h-100 border rounded-lg">
+        <div class="h-25 d-flex flex-column align-content-center">
+            <h1 class="text-center">
+                @ViewData["Title"]
+            </h1>
+            <h4 class="text-center">
+                User @Model.UserId
+            </h4>
+        </div>
+        <div class="mx-2 h-75 d-flex flex-row">
+            <div class="px-4 h-100 d-flex flex-column flex-grow-1 border">
+                <div class="py-4 d-flex flex-row align-items-center">
+                    <h6>
+                        TYPES OF SODA
+                    </h6>
+                    @foreach (var sodaModel in Model.TypesOfSoda)
+                    {
+                        <div class="ml-4 p-2 border rounded-circle text-info">@sodaModel.Name</div>
+                    }
+                </div>
+                <h6>
+                    SODA PRICE: <span class="text-info">@Model.SodaPrice</span>
+                </h6>
+                <form asp-page-handler="requestsoda" method="post">
+                    <div class="d-flex border">
+                        <select asp-for="SelectedSoda" class="d-flex flex-grow-1">
+                            @foreach (var sodaModel in Model.SodasInStock)
+                            {
+                                <option>@sodaModel.Name, @sodaModel.SlotOccupied</option>
+                            }
+                        </select>
+                        <button class="ml-2 btn btn-primary">Request Soda</button>
+                    </div>
+                </form>
+                @if (@Model.RequestSodaMessage != null)
+                {
+                    <span>@Model.RequestSodaMessage</span>
+                }
+            </div>
+            <div class="ml-2 h-50 d-flex flex-column justify-content-between">
+                <h6 class="p-2 border rounded">
+                    USER CREDIT: <span class="text-success">@Model.UserCredit</span>
+                </h6>
+                <form asp-page-handler="depositcoins" method="post">
+                    <select asp-for="SelectedCoinValue" asp-items="@acceptedCoinsList" class="w-100 rounded-lg">
+                        <option>Choose coin to insert</option>
+                    </select>
+                    <button class="btn btn-outline-primary w-100 mt-2">Deposit</button>
+                </form>
+                <form asp-page-handler="ejectmoneyinserted" method="post">
+                    <button class="btn btn-outline-primary w-100">Eject Money Inserted</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
