@@ -3,6 +3,7 @@ using SodaMachineLibrary.CustomException;
 using SodaMachineLibrary.Models;
 using System.Collections.Generic;
 using SodaMachineLibrary.DataAccess;
+using System.Linq;
 
 namespace SodaMachineLibrary.Logics
 {
@@ -79,12 +80,37 @@ namespace SodaMachineLibrary.Logics
         {
             decimal totalRefund = _dataAccess.UserCreditTotal(userId);
 
+            List<CoinModel> coins = new List<CoinModel>();
+
             if (totalRefund != 0)
             {
+                int dollarQuantity = 0;
+                int quarterQuantity = 0;
+
+                while (totalRefund >= 1.00M)
+                {
+                    dollarQuantity++;
+                    totalRefund = decimal.Subtract(totalRefund, 1.00M);
+                }
+
+                while (totalRefund >= 0.25M)
+                {
+                    quarterQuantity++;
+                    totalRefund = decimal.Subtract(totalRefund, 0.25M);
+                }
+
+                coins.AddRange(_dataAccess.CoinInventoryWithdrawCoins(1.00M, dollarQuantity));
+                coins.AddRange(_dataAccess.CoinInventoryWithdrawCoins(0.25M, quarterQuantity));
                 _dataAccess.UserCreditClear(userId);
+
             }
 
-            return totalRefund;
+            if (coins.Count > 0)
+            {
+                return coins.Sum(coinModel => coinModel.Amount);
+            }
+
+            return 0;
         }
 
         public List<SodaModel> ListTypesOfSoda()

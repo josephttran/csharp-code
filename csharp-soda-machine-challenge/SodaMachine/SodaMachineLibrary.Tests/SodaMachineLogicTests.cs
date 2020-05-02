@@ -146,9 +146,12 @@ namespace SodaMachineLibrary.Tests
         [Test]
         public void IssueFullRefund_ShouldWork()
         {
-            string userId = "user1234";
+            string userId = "user12341234";
             decimal expectedRefundAmount;
             decimal actualRefundAmount;
+
+            sodaMachineLogic.MoneyInserted(userId, 0.25M);
+            sodaMachineLogic.MoneyInserted(userId, 0.25M);
 
             expectedRefundAmount = sodaMachineLogic.GetMoneyInsertedTotal(userId);
             actualRefundAmount = sodaMachineLogic.IssueFullRefund(userId);
