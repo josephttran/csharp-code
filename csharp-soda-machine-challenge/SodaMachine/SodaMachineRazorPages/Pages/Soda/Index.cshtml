@@ -1,7 +1,6 @@
 ﻿@page
 @model SodaMachineRazorPages.Pages.Soda.IndexModel
 @{
-    var acceptedCoinsList = @Model.AcceptedCoinValues.Select(x => new SelectListItem { Value = x.ToString(), Text = x.ToString() });
 }
 
 <div style="height: 600px;">
@@ -30,26 +29,23 @@
                 </h6>
                 <form asp-page-handler="requestsoda" method="post">
                     <div class="d-flex border">
-                        <select asp-for="SelectedSoda" class="d-flex flex-grow-1">
-                            @foreach (var sodaModel in Model.SodasInStock)
-                            {
-                                <option>@sodaModel.Name, @sodaModel.SlotOccupied</option>
-                            }
+                        <select asp-for="SelectedSodaIndex" asp-items=@Model.SodaSelectList class="d-flex flex-grow-1">
+                            <option>Choose Soda</option>
                         </select>
                         <button class="ml-2 btn btn-primary">Request Soda</button>
                     </div>
                 </form>
                 @if (@Model.RequestSodaMessage != null)
                 {
-                    <span>@Model.RequestSodaMessage</span>
+                    <span class="text-danger">@Model.RequestSodaMessage</span>
                 }
             </div>
             <div class="ml-2 h-50 d-flex flex-column justify-content-between">
-                <h6 class="p-2 border rounded">
+                <h6 class="p-2 border rounded-lg">
                     USER CREDIT: <span class="text-success">@Model.UserCredit</span>
                 </h6>
                 <form asp-page-handler="depositcoins" method="post">
-                    <select asp-for="SelectedCoinValue" asp-items="@acceptedCoinsList" class="w-100 rounded-lg">
+                    <select asp-for="SelectedCoinValue" asp-items="@(new SelectList(Model.AcceptedCoinsValue))" class="w-100 rounded-lg">
                         <option>Choose coin to insert</option>
                     </select>
                     <button class="btn btn-outline-primary w-100 mt-2">Deposit</button>
