@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -40,6 +39,7 @@ namespace SodaMachineRazorPages.Pages.Soda
         {
             ViewData["Title"] = "Soda";
             UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             AcceptedCoinsValue = _sodaMachineLogic.AcceptedCoinValues;
             SodaPrice = _sodaMachineLogic.GetSodaPrice();
             SodasInStock = _sodaMachineLogic.GetSodaInventory();
@@ -51,11 +51,13 @@ namespace SodaMachineRazorPages.Pages.Soda
                 return new SelectListItem($"{sodaModel.Name} {sodaModel.SlotOccupied}", index.ToString());
             }).ToList();
 
+
             return Page();
         }
 
         public IActionResult OnPostDepositCoins()
         {
+            UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             AcceptedCoinsValue = _sodaMachineLogic.AcceptedCoinValues;
 
             if (AcceptedCoinsValue.Contains(SelectedCoinValue))
@@ -85,6 +87,9 @@ namespace SodaMachineRazorPages.Pages.Soda
 
                 if (sodaIndex > -1 && sodaIndex < SodasInStock.Count)
                 {
+                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    _sodaMachineLogic.MoneyInserted(UserId, 0);
+
                     SodaModel requestSoda = SodasInStock[sodaIndex];
 
                     var (soda, coins, message) = _sodaMachineLogic.RequestSoda(requestSoda);
