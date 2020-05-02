@@ -28,8 +28,10 @@
                     SODA PRICE: <span class="text-info">@Model.SodaPrice</span>
                 </h6>
                 <form asp-page-handler="requestsoda" method="post">
-                    <div class="d-flex border">
-                        <select asp-for="SelectedSodaIndex" asp-items=@Model.SodaSelectList class="d-flex flex-grow-1">
+                    <div class="d-flex">
+                        <select asp-for="SelectedSodaIndex" 
+                                asp-items=@Model.SodaSelectList 
+                                class="d-flex flex-grow-1 rounded-lg">
                             <option>Choose Soda</option>
                         </select>
                         <button class="ml-2 btn btn-primary">Request Soda</button>
@@ -52,13 +54,15 @@
                     USER CREDIT: <span class="text-success">@Model.UserCredit</span>
                 </h6>
                 <form asp-page-handler="depositcoins" method="post">
-                    <select asp-for="SelectedCoinValue" asp-items="@(new SelectList(Model.AcceptedCoinsValue))" class="w-100 rounded-lg">
+                    <select asp-for="SelectedCoinValue" 
+                            asp-items="@(new SelectList(Model.AcceptedCoinsValue))" 
+                            class="w-100 form-control rounded-lg">
                         <option>Choose coin to insert</option>
                     </select>
-                    <button class="btn btn-outline-primary w-100 mt-2">Deposit</button>
+                    <button class="btn btn-outline-primary btn-block mt-2">Deposit</button>
                 </form>
                 <form asp-page-handler="ejectmoneyinserted" method="post">
-                    <button class="btn btn-outline-primary w-100">Eject Money Inserted</button>
+                    <button class="btn btn-outline-primary btn-block">Eject Money Inserted</button>
                 </form>
             </div>
         </div>
