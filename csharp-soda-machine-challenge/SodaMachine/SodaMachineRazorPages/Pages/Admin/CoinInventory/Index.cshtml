@@ -1,0 +1,29 @@
+﻿@page
+@model SodaMachineRazorPages.Pages.Admin.CoinInventory.IndexModel
+@{
+    ViewData["Title"] = "Admin Coin Inventory";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Coin Name</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kv in Model.CoinsQuantity)
+        {
+            <tr>
+                <td>
+                    @kv.Key
+                </td>
+                <td>
+                    @kv.Value
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
