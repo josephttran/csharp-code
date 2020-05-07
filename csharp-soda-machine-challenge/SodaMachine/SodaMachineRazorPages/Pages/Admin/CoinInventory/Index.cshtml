@@ -6,24 +6,47 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Coin Name</th>
-            <th>Quantity</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var kv in Model.CoinsQuantity)
-        {
-            <tr>
-                <td>
-                    @kv.Key
-                </td>
-                <td>
-                    @kv.Value
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Coin Name</th>
+                        <th scope="col">Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var kv in Model.CoinsQuantity)
+                    {
+                        <tr scope="row">
+                            <td>
+                                @kv.Key
+                            </td>
+                            <td>
+                                @kv.Value
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-4">
+            <form method="post" asp-page-handler="AddCoin" class="ml-4">
+                <div class="d-flex flex-row">
+                    <select class="flex-grow-1" asp-for="SelectedCoin" asp-items="Model.CoinAddList">
+                        <option value="">Select a coin</option>
+                    </select>
+                    <input class="ml-2 w-25" asp-for="SelectedCoinQuantity" placeholder="Quantity" />
+                </div>
+                <button class="mt-4 btn btn-block btn-outline-primary">ADD TO COIN INVENTORY</button>
+
+                @if (@Model.Message != null)
+                {
+                    <span class="text-success">@Model.Message</span>
+                }
+            </form>
+        </div>
+    </div>
+</div>
+
