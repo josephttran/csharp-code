@@ -69,13 +69,15 @@ namespace SodaMachineRazorPages.Pages.AdminRole
 
                 if (adminUser == null)
                 {
+                    string password = adminRoleEmail.UserFirstPassword;
                     IdentityUser identityUser = new IdentityUser
                     {
                         UserName = adminRoleEmail.UserFirst,                   
-                        Email = adminRoleEmail.UserFirst
+                        Email = adminRoleEmail.UserFirst,
+                        EmailConfirmed = true
                     };
 
-                    IdentityResult resultUser = await _userManager.CreateAsync(identityUser, adminRoleEmail.UserFirstPassword);
+                    IdentityResult resultUser = await _userManager.CreateAsync(identityUser, password);
 
 
                     if (!resultUser.Succeeded)
