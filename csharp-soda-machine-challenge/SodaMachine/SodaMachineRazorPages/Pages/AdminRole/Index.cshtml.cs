@@ -71,16 +71,23 @@ namespace SodaMachineRazorPages.Pages.AdminRole
                 {
                     IdentityUser identityUser = new IdentityUser
                     {
-                        UserName = adminRoleEmail.UserFirst,
+                        UserName = adminRoleEmail.UserFirst,                   
                         Email = adminRoleEmail.UserFirst
                     };
 
-                    IdentityResult resultUser = await _userManager.CreateAsync(identityUser);
+                    IdentityResult resultUser = await _userManager.CreateAsync(identityUser, adminRoleEmail.UserFirstPassword);
 
 
                     if (!resultUser.Succeeded)
                     {
-                        throw new Exception("Fail create user");
+                        string errorMessage = "";
+
+                        foreach (IdentityError error in resultUser.Errors)
+                        {
+                            errorMessage = errorMessage + " " + error.Description ;
+                        }
+
+                        throw new Exception("Fail create user: " + errorMessage);
                     }
 
                     adminUser = _context.Users.FirstOrDefault(user => user.Email == adminRoleEmail.UserFirst);
