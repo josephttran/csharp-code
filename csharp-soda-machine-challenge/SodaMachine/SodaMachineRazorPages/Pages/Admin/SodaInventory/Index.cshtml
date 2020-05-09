@@ -1,0 +1,52 @@
+﻿@page
+@model SodaMachineRazorPages.Pages.Admin.SodaInventory.IndexModel
+@{
+    ViewData["Title"] = "Soda Inventory";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Soda Name</th>
+                        <th scope="col">Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var kv in Model.SodaQuantity)
+                    {
+                        <tr scope="row">
+                            <td>
+                                @kv.Key
+                            </td>
+                            <td>
+                                @kv.Value
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-4">
+            <form method="post" asp-page-handler="AddSoda" class="ml-4">
+                <div class="d-flex flex-row">
+                    <select class="flex-grow-1" asp-for="SelectedSoda" asp-items="Model.SodaAddList">
+                        <option value="">Select a soda</option>
+                    </select>
+                    <input class="ml-2 w-25" asp-for="SelectedSodaQuantity" placeholder="Quantity" />
+                </div>
+                <button class="mt-4 btn btn-block btn-outline-primary">ADD TO SODA INVENTORY</button>
+
+                @if (@Model.Message != null)
+                {
+                    <span class="text-success">@Model.Message</span>
+                }
+            </form>
+        </div>
+    </div>
+</div>
+
