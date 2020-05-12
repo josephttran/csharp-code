@@ -39,6 +39,8 @@ namespace SodaMachineRazorPages.Pages.Admin.Income
                 return Page();
             }
 
+            _dataAccess.MachineInfoEmptyCash();
+
             return OnGet();
         }
     }

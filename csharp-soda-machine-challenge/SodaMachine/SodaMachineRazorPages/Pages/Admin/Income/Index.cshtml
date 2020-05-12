@@ -17,7 +17,9 @@
             </dl>
         </div>
         <div class="col-4">
-            <button asp-page-handler="EmptyMachine">EMPTY COIN FROM MACHINE</button>
+            <form asp-page-handler="EmptyMachine" method="post">
+                <button class="btn btn-block btn-primary">EMPTY COIN FROM MACHINE</button>
+            </form>
         </div>
     </div>
 </div>
