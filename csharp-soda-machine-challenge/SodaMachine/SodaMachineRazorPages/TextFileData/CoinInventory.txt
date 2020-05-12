@@ -1,6 +1,7 @@
-﻿Quarter,0.25
 Dollar,1.00
 Quarter,0.25
-Quarter,0.25
+Dollar,1.00
+Dollar,1.00
+Dollar,1.00
 Quarter,0.25
 Quarter,0.25

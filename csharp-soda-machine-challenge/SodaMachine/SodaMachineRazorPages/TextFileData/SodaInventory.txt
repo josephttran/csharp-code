@@ -1,4 +1,4 @@
-﻿Pepsi,A1
+Pepsi,A1
 Cola,A2
 Sprite,B1
 Mug,B2
@@ -6,3 +6,8 @@ Cola,D4
 Pepsi,A1
 Pepsi,A1
 Pepsi,A1
+Cola,D4
+Cola,A2
+Sprite,B1
+Sprite,B1
+Sprite,B1
