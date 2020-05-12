@@ -260,7 +260,7 @@ namespace SodaMachineLibrary.DataAccess
             }
             else
             {
-                userCredit[userId] = 0;
+                userCredit[userId] = amount;
             }
 
             foreach (var keyValuePair in userCredit)
@@ -270,7 +270,17 @@ namespace SodaMachineLibrary.DataAccess
 
             File.WriteAllLines(_userCreditPath, output);
 
+            // Update income
+            string[] machineInfoEntry = File.ReadLines(_machineInfoPath).First().Split(',');
+            decimal cashOnHand = decimal.Parse(machineInfoEntry[0]);
+            decimal sodaPrice = decimal.Parse(machineInfoEntry[1]);
+            decimal totalIncome = decimal.Parse(machineInfoEntry[2]);
 
+            cashOnHand += amount;
+            totalIncome += amount;
+            string machineInfoUpdated = $"{cashOnHand},{ sodaPrice },{ totalIncome }";
+
+            File.WriteAllText(_machineInfoPath, machineInfoUpdated);
         }
 
         public decimal UserCreditTotal(string userId)

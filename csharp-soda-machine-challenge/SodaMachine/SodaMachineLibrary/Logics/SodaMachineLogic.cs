@@ -78,9 +78,10 @@ namespace SodaMachineLibrary.Logics
 
         public decimal IssueFullRefund(string userId)
         {
+            List<CoinModel> coins = new List<CoinModel>();
             decimal totalRefund = _dataAccess.UserCreditTotal(userId);
 
-            List<CoinModel> coins = new List<CoinModel>();
+            _dataAccess.UserCreditInsert(userId, -totalRefund);
 
             if (totalRefund != 0)
             {
@@ -101,8 +102,8 @@ namespace SodaMachineLibrary.Logics
 
                 coins.AddRange(_dataAccess.CoinInventoryWithdrawCoins(1.00M, dollarQuantity));
                 coins.AddRange(_dataAccess.CoinInventoryWithdrawCoins(0.25M, quarterQuantity));
-                _dataAccess.UserCreditClear(userId);
 
+                _dataAccess.UserCreditClear(userId);
             }
 
             if (coins.Count > 0)
@@ -167,6 +168,8 @@ namespace SodaMachineLibrary.Logics
 
                 List<CoinModel> coins = new List<CoinModel>();
                 decimal change = userCredit - sodaPrice;
+
+                _dataAccess.UserCreditInsert(_userId, -change);
 
                 int dollarQuantity = 0;
                 int quarterQuantity = 0;
