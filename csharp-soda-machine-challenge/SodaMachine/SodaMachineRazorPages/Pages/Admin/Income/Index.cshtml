@@ -1,0 +1,23 @@
+﻿@page
+@model SodaMachineRazorPages.Pages.Admin.Income.IndexModel
+@{
+    ViewData["Title"] = "Admin Income";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <dl class="row">
+                <dt class="col-sm-3">Total income</dt>
+                <dd class="col-sm-9">@Model.TotalIncome</dd>
+                <dt class="col-sm-3">Current income</dt>
+                <dd class="col-sm-9">@Model.CurrentIncome</dd>
+            </dl>
+        </div>
+        <div class="col-4">
+            <button asp-page-handler="EmptyMachine">EMPTY COIN FROM MACHINE</button>
+        </div>
+    </div>
+</div>
