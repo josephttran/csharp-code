@@ -29,8 +29,8 @@
                 </h6>
                 <form asp-page-handler="requestsoda" method="post">
                     <div class="d-flex">
-                        <select asp-for="SelectedSodaIndex" 
-                                asp-items=@Model.SodaSelectList 
+                        <select asp-for="SelectedSodaIndex"
+                                asp-items=@Model.SodaSelectList
                                 class="d-flex flex-grow-1 rounded-lg">
                             <option>Choose Soda</option>
                         </select>
@@ -40,12 +40,19 @@
 
                 @if (@Model.RequestSodaMessage != null)
                 {
-                    <span class="text-danger">@Model.RequestSodaMessage</span>
-                }
+                    @if (@Model.RequestSodaMessage.Contains("Enjoy"))
+                    {
+                        <span class="text-success">@Model.RequestSodaMessage</span>
 
-                @if (@Model.ChangeReturned != 0)
-                {
-                    <span class="text-info">Take your change of @Model.ChangeReturned</span>
+                        @if (@Model.ChangeReturned != 0)
+                        {
+                            <span class="text-info">Take your change of @Model.ChangeReturned</span>
+                        }
+                    }
+                    else
+                    {
+                        <span class="text-danger">@Model.RequestSodaMessage</span>
+                    }
                 }
 
             </div>
