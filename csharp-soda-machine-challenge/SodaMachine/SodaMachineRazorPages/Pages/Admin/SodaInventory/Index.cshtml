@@ -43,7 +43,14 @@
 
                 @if (@Model.Message != null)
                 {
-                    <span class="text-success">@Model.Message</span>
+                    @if (@Model.Message.Contains("Successfully"))
+                    {
+                        <span class="text-success">@Model.Message</span>
+                    }
+                    else
+                    {
+                        <span class="text-danger">@Model.Message</span>
+                    }
                 }
             </form>
         </div>

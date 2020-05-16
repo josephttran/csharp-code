@@ -86,6 +86,8 @@ namespace SodaMachineRazorPages.Pages.Admin.SodaInventory
                         }
 
                         _dataAccess.SodaInventoryAddSodas(sodas);
+
+                        Message = $"Successfully added { quantity } { sodaNameSlot[0] } at slot { sodaNameSlot[1] }";
                     }
                     else
                     {
