@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30330.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreDockerHttps", "AspNetCoreDockerHttps\AspNetCoreDockerHttps.csproj", "{C3CAAE49-D320-420E-81B4-7202E7D7EAC9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C3CAAE49-D320-420E-81B4-7202E7D7EAC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3CAAE49-D320-420E-81B4-7202E7D7EAC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3CAAE49-D320-420E-81B4-7202E7D7EAC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3CAAE49-D320-420E-81B4-7202E7D7EAC9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7297D16E-5DA1-4A93-8421-7761333BC244}
+	EndGlobalSection
+EndGlobal
