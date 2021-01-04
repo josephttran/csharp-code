@@ -4,6 +4,7 @@ services:
     build: 
       context: ../
       dockerfile: ./AspNetCoreDockerHttps/Dockerfile
+    image: aspnetcoredockerhttps:latest
     ports:
     - "8001:443"
     - "8000:80"
@@ -14,3 +15,4 @@ services:
       ASPNETCORE_Kestrel__Certificates__Default__Path: "/root/.aspnet/https/cert-aspnetcore.pfx"
     volumes:
       - $USERPROFILE\\.aspnet\\https\\:/root/.aspnet/https/:ro
+    container_name: aspnetcoredockerhttps
