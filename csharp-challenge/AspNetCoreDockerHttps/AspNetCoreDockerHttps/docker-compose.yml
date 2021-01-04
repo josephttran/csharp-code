@@ -1,0 +1,16 @@
+﻿version: "3.9"
+services:
+  web:
+    build: 
+      context: ../
+      dockerfile: ./AspNetCoreDockerHttps/Dockerfile
+    ports:
+    - "8001:443"
+    - "8000:80"
+    environment:
+      ASPNETCORE_URLS: "https://+:443;http://+:80"
+      ASPNETCORE_HTTPS_PORT: "8001"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "Pwd12345"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/root/.aspnet/https/cert-aspnetcore.pfx"
+    volumes:
+      - $USERPROFILE\\.aspnet\\https\\:/root/.aspnet/https/:ro
